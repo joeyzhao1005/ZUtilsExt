@@ -1,4 +1,4 @@
-package com.kit.app.model;
+package com.kit.imagelib;
 
 import java.util.ArrayList;
 import java.util.List;

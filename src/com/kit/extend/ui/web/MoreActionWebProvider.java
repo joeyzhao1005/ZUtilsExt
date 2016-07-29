@@ -12,7 +12,7 @@ import com.kit.utils.BrowserUtils;
 import com.kit.utils.ClipboardUtils;
 import com.kit.utils.StringUtils;
 import com.kit.utils.ToastUtils;
-import com.kit.utils.ZogUtils;
+import com.kit.utils.log.ZogUtils;
 
 public class MoreActionWebProvider extends ActionProvider {
 
@@ -28,7 +28,7 @@ public class MoreActionWebProvider extends ActionProvider {
     public void setActivity(WebActivity activity) {
         this.activity = activity;
 
-        ZogUtils.i(MoreActionWebProvider.class, "activity:" + activity);
+        ZogUtils.i( "activity:" + activity);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MoreActionWebProvider extends ActionProvider {
                 .setOnMenuItemClickListener(new OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        ZogUtils.e(MoreActionWebProvider.class, "activity.webFragment.loadingUrl:" + activity.webFragment.loadingUrl);
+                        ZogUtils.e("activity.webFragment.loadingUrl:" + activity.webFragment.loadingUrl);
                         if (!StringUtils.isEmptyOrNullOrNullStr(activity.webFragment.loadingUrl))
                             BrowserUtils.gotoBrowser(activity, activity.webFragment.loadingUrl);
                         return true;
@@ -59,7 +59,7 @@ public class MoreActionWebProvider extends ActionProvider {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
 
-                        ZogUtils.e(MoreActionWebProvider.class, "activity.webFragment.loadingUrl:" + activity.webFragment.loadingUrl);
+                        ZogUtils.e("activity.webFragment.loadingUrl:" + activity.webFragment.loadingUrl);
                         if (!StringUtils.isEmptyOrNullOrNullStr(activity.webFragment.loadingUrl)) {
                             ClipboardUtils.copy(activity, activity.webFragment.loadingUrl);
                             ToastUtils.mkShortTimeToast(activity, activity.getResources().getString(R.string.copy_ok_default));

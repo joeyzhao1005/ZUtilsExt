@@ -17,7 +17,7 @@ import com.kit.extend.ui.web.WebActivity;
 import com.kit.utils.DensityUtils;
 import com.kit.utils.MessageUtils;
 import com.kit.utils.StringUtils;
-import com.kit.utils.ZogUtils;
+import com.kit.utils.log.ZogUtils;
 import com.kit.utils.intentutils.BundleData;
 import com.kit.utils.intentutils.IntentUtils;
 
@@ -136,7 +136,7 @@ public class VideoPlayWebActivity extends WebActivity {
     }
 
     @Override
-    public boolean initWidget() {
+    public void initWidget() {
 
 
         VideoInfo videoInfo = new VideoInfo();
@@ -150,7 +150,6 @@ public class VideoPlayWebActivity extends WebActivity {
         javascriptInterface = new VideoJavascriptInterface(this, videoInfo, handler);
 
 
-        return super.initWidget();
     }
 
 
@@ -162,7 +161,7 @@ public class VideoPlayWebActivity extends WebActivity {
         webFragment.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ZogUtils.i(VideoPlayWebActivity.class, "top refresh");
+                ZogUtils.i( "top refresh");
                 refreshData();
             }
         });
@@ -194,7 +193,6 @@ public class VideoPlayWebActivity extends WebActivity {
     }
 
     private void refreshData() {
-        ZogUtils.e(VideoPlayWebActivity.class,"videoPlayUrl:"+videoPlayUrl+" videoUrl:"+videoUrl);
 
         if (!StringUtils.isEmptyOrNullOrNullStr(videoPlayUrl)) {
             webFragment.getWebView().loadUrl("file:///android_asset/www/video.html");

@@ -1,4 +1,4 @@
-package com.kit.app.model;
+package com.kit.imagelib;
 
 import java.io.Serializable;
 

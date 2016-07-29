@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.webkit.JavascriptInterface;
 
 import com.kit.utils.GsonUtils;
-import com.kit.utils.ZogUtils;
+import com.kit.utils.log.ZogUtils;
 
 public class VideoJavascriptInterface {
 
@@ -21,12 +21,12 @@ public class VideoJavascriptInterface {
 
     @JavascriptInterface
     public String getVideoInfo() {
-        ZogUtils.e(VideoJavascriptInterface.class, "getBBS getBBS getBBS getBBS getBBS");
+        ZogUtils.e("getBBS getBBS getBBS getBBS getBBS");
 
 
 
         Object o = GsonUtils.toJson(videoInfo);
-        ZogUtils.e(VideoJavascriptInterface.class, "BBS BBS BBS:" + o);
+        ZogUtils.e("BBS BBS BBS:" + o);
 
 
         return o.toString();
@@ -37,7 +37,7 @@ public class VideoJavascriptInterface {
 
     @JavascriptInterface
     public void showSource(String html) {
-        ZogUtils.e(VideoJavascriptInterface.class, "HTML::::" + html);
+        ZogUtils.e("HTML::::" + html);
     }
 
 

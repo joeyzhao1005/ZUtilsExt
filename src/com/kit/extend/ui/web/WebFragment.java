@@ -32,7 +32,7 @@ import com.kit.utils.ListUtils;
 import com.kit.utils.ResourceUtils;
 import com.kit.utils.StringUtils;
 import com.kit.utils.WebViewUtils;
-import com.kit.utils.ZogUtils;
+import com.kit.utils.log.ZogUtils;
 
 import org.apache.http.cookie.Cookie;
 
@@ -99,7 +99,7 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
         switch (message.what) {
 
             case WEB_LOAD_END:
-                ZogUtils.i(WebFragment.class, "WEB_LOAD_END WEB_LOAD_END");
+                ZogUtils.i( "WEB_LOAD_END WEB_LOAD_END");
                 webView.getSettings().setBlockNetworkImage(false);
                 pb.setVisibility(View.GONE);
                 break;
@@ -152,7 +152,7 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                ZogUtils.i(WebFragment.class, "top refresh content:" + content);
+//                ZogUtils.i( "top refresh content:" + content);
                 webView.reload();
                 refreshLayout.setLoading(false);
             }
@@ -226,7 +226,7 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
             public void onProgressChanged(WebView view, int progress) {
                 super.onProgressChanged(view, progress);
 
-                ZogUtils.i(WebFragment.class, progress + "");
+                ZogUtils.i( progress + "");
                 pb.setProgress(progress);
                 if (progress >= 100) {
                     cancelTimer();
@@ -347,7 +347,6 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
             return;
         }
 
-        ZogUtils.e(WebFragment.class, "loadContent:" + cont);
 
         switch (UrlScheme.ofUri(cont)) {
             case HTTP:
@@ -374,11 +373,11 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
                 Method method = WebView.class.getMethod(name);
                 method.invoke(webView);
             } catch (NoSuchMethodException e) {
-                ZogUtils.i(WebFragment.class, "No such method: " + name + e.toString());
+                ZogUtils.i( "No such method: " + name + e.toString());
             } catch (IllegalAccessException e) {
-                ZogUtils.i(WebFragment.class, "Illegal Access: " + name + e.toString());
+                ZogUtils.i( "Illegal Access: " + name + e.toString());
             } catch (InvocationTargetException e) {
-                ZogUtils.i(WebFragment.class, "Invocation Target Exception: " + name + e.toString());
+                ZogUtils.i( "Invocation Target Exception: " + name + e.toString());
             }
         }
     }

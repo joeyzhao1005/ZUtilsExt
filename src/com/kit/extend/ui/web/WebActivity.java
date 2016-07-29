@@ -9,11 +9,10 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.kit.extend.R;
-import com.kit.ui.BaseActivity;
+import com.kit.ui.BaseAppCompatActivity;
 import com.kit.utils.ActionBarUtils;
 import com.kit.utils.ResourceUtils;
 import com.kit.utils.StringUtils;
-import com.kit.utils.ZogUtils;
 import com.kit.utils.intentutils.BundleData;
 import com.kit.utils.intentutils.IntentUtils;
 
@@ -21,7 +20,7 @@ import org.apache.http.cookie.Cookie;
 
 import java.util.List;
 
-public class WebActivity extends BaseActivity implements WebFragment.IInitWeb {
+public class WebActivity extends BaseAppCompatActivity implements WebFragment.IInitWeb {
 
     public static final int WEB_INITOK_START_LOAD = 999 + 0;
     public static final int WEB_LOAD_SUCCESS = 999 + 1;
@@ -64,7 +63,7 @@ public class WebActivity extends BaseActivity implements WebFragment.IInitWeb {
     }
 
     @Override
-    public boolean initWidget() {
+    public void initWidget() {
         setContentView(ResourceUtils.getResId(getApplication(), contentViewName, "layout"));
         ActionBarUtils.setHomeActionBar(this, R.drawable.ic_back);
 
@@ -83,15 +82,14 @@ public class WebActivity extends BaseActivity implements WebFragment.IInitWeb {
 
 //        setCookieFromCookieStore(this, content);
 
-        return super.initWidget();
     }
 
 
     @Override
-    public boolean initWidgetWithData() {
+    public void initWidgetWithExtra() {
+
         if (!StringUtils.isEmptyOrNullOrNullStr(title))
             setTitle(title);
-        return super.initWidgetWithData();
     }
 
 
@@ -107,6 +105,16 @@ public class WebActivity extends BaseActivity implements WebFragment.IInitWeb {
      */
     public void loadWeb() {
     }
+
+
+    public void setRefreshing(boolean isRefreshing) {
+        webFragment.setRefreshing(isRefreshing);
+    }
+
+    public boolean isRefreshing() {
+        return webFragment.isRefreshing();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -167,7 +175,6 @@ public class WebActivity extends BaseActivity implements WebFragment.IInitWeb {
      * @param content
      */
     public static void gotoWeb(Context context, Class clazz, String title, String content) {
-        ZogUtils.e(WebActivity.class, "content:" + content);
 
         if (context instanceof WebActivity) {
             ((WebActivity) context).webFragment.getWebView().loadUrl(content);

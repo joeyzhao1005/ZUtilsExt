@@ -8,8 +8,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.webkit.WebView;
 
-import com.kit.utils.ZogUtils;
-
 @SuppressLint("SetJavaScriptEnabled")
 public class BridgeWebView extends WebView implements WebViewJavascriptBridge {
 

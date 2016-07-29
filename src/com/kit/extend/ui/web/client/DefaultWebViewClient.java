@@ -7,7 +7,6 @@ import com.github.lzyzsd.jsbridge.BridgeWebViewClient;
 import com.kit.extend.R;
 import com.kit.extend.ui.web.WebFragment;
 import com.kit.utils.ToastUtils;
-import com.kit.utils.ZogUtils;
 
 public class DefaultWebViewClient extends BridgeWebViewClient {
     private WebFragment webFragment;
