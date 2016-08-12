@@ -34,7 +34,7 @@ import com.kit.utils.StringUtils;
 import com.kit.utils.WebViewUtils;
 import com.kit.utils.log.ZogUtils;
 
-import org.apache.http.cookie.Cookie;
+import org.apache.commons.httpclient.Cookie;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

@@ -2,7 +2,7 @@ package com.kit.extend.ui.web;
 
 import android.content.Context;
 
-import org.apache.http.cookie.Cookie;
+import org.apache.commons.httpclient.Cookie;
 
 import java.util.List;
 

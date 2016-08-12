@@ -16,7 +16,7 @@ import com.kit.utils.StringUtils;
 import com.kit.utils.intentutils.BundleData;
 import com.kit.utils.intentutils.IntentUtils;
 
-import org.apache.http.cookie.Cookie;
+import org.apache.commons.httpclient.Cookie;
 
 import java.util.List;
 
