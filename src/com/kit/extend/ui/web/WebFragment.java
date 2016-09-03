@@ -1,6 +1,7 @@
 package com.kit.extend.ui.web;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -99,7 +100,7 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
         switch (message.what) {
 
             case WEB_LOAD_END:
-                ZogUtils.i( "WEB_LOAD_END WEB_LOAD_END");
+                ZogUtils.i("WEB_LOAD_END WEB_LOAD_END");
                 webView.getSettings().setBlockNetworkImage(false);
                 pb.setVisibility(View.GONE);
                 break;
@@ -120,7 +121,7 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
         super.onActivityCreated(savedInstanceState);
         if (iInitWeb != null) {
             iInitWeb.initWebView();
-            iInitWeb.loadWeb();
+            iInitWeb.onLoadWeb();
         }
     }
 
@@ -226,12 +227,17 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
             public void onProgressChanged(WebView view, int progress) {
                 super.onProgressChanged(view, progress);
 
-                ZogUtils.i( progress + "");
+                ZogUtils.i("progress:" + progress);
                 pb.setProgress(progress);
                 if (progress >= 100) {
                     cancelTimer();
                     pb.setVisibility(View.GONE);
                     webView.getSettings().setBlockNetworkImage(false);
+
+                    if (iInitWeb != null) {
+                        iInitWeb.onLoadOver();
+                    }
+
                 } else {
                     webView.getSettings().setBlockNetworkImage(true);
                     pb.setVisibility(View.VISIBLE);
@@ -265,6 +271,12 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
                 if (webChromeClient != null)
                     webChromeClient.onReceivedTitle(view, title);
 
+            }
+
+
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                super.onCompletion(mp);
             }
         };
 
@@ -373,11 +385,11 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
                 Method method = WebView.class.getMethod(name);
                 method.invoke(webView);
             } catch (NoSuchMethodException e) {
-                ZogUtils.i( "No such method: " + name + e.toString());
+                ZogUtils.i("No such method: " + name + e.toString());
             } catch (IllegalAccessException e) {
-                ZogUtils.i( "Illegal Access: " + name + e.toString());
+                ZogUtils.i("Illegal Access: " + name + e.toString());
             } catch (InvocationTargetException e) {
-                ZogUtils.i( "Invocation Target Exception: " + name + e.toString());
+                ZogUtils.i("Invocation Target Exception: " + name + e.toString());
             }
         }
     }
@@ -513,8 +525,11 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
     }
 
     public interface IInitWeb {
-        public void initWebView();
+        void initWebView();
 
-        public void loadWeb();
+        void onLoadWeb();
+
+        void onLoadOver();
+
     }
 }

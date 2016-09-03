@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.kit.extend.R;
-import com.kit.ui.BaseAppCompatActivity;
+import com.kit.ui.BaseActivity;
 import com.kit.utils.ActionBarUtils;
 import com.kit.utils.ResourceUtils;
 import com.kit.utils.StringUtils;
@@ -20,7 +20,7 @@ import org.apache.commons.httpclient.Cookie;
 
 import java.util.List;
 
-public class WebActivity extends BaseAppCompatActivity implements WebFragment.IInitWeb {
+public class WebActivity extends BaseActivity implements WebFragment.IInitWeb {
 
     public static final int WEB_INITOK_START_LOAD = 999 + 0;
     public static final int WEB_LOAD_SUCCESS = 999 + 1;
@@ -63,10 +63,14 @@ public class WebActivity extends BaseAppCompatActivity implements WebFragment.II
     }
 
     @Override
+    public void initTheme() {
+        super.initTheme();
+        ActionBarUtils.setHomeActionBar(this, R.drawable.ic_back);
+    }
+
+    @Override
     public void initWidget() {
         setContentView(ResourceUtils.getResId(getApplication(), contentViewName, "layout"));
-        ActionBarUtils.setHomeActionBar(this, R.drawable.ic_back);
-
 
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -76,7 +80,6 @@ public class WebActivity extends BaseAppCompatActivity implements WebFragment.II
         webFragment.setArguments(bundle);
         fragmentTransaction.add(ResourceUtils.getViewId(this, "container"), webFragment, "web");
         fragmentTransaction.commit();
-
 
         webFragment.setInitWeb(this);
 
@@ -96,16 +99,21 @@ public class WebActivity extends BaseAppCompatActivity implements WebFragment.II
     /**
      * 初始化webview
      */
+    @Override
     public void initWebView() {
-
     }
 
     /**
      * webview初始化完成，可以开始加载页面
      */
-    public void loadWeb() {
+    @Override
+    public void onLoadWeb() {
     }
 
+    @Override
+    public void onLoadOver() {
+        webFragment.setRefreshing(false);
+    }
 
     public void setRefreshing(boolean isRefreshing) {
         webFragment.setRefreshing(isRefreshing);

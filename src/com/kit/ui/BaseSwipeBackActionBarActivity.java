@@ -28,8 +28,7 @@ public class BaseSwipeBackActionBarActivity extends SwipeBackActionBarActivity
     /**
      * 初始化界面
      */
-    public boolean initWidget() {
-        return true;
+    public void initWidget() {
     }
 
     /**

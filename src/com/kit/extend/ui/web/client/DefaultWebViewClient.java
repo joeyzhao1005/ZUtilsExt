@@ -11,7 +11,7 @@ import com.kit.utils.ToastUtils;
 public class DefaultWebViewClient extends BridgeWebViewClient {
     private WebFragment webFragment;
 
-    public DefaultWebViewClient( WebFragment webFragment) {
+    public DefaultWebViewClient(WebFragment webFragment) {
         super(webFragment.getWebView());
         this.webFragment = webFragment;
     }
@@ -21,7 +21,7 @@ public class DefaultWebViewClient extends BridgeWebViewClient {
         //重写此方法表明点击网页里面的链接还是在当前的webview里跳转，不跳到浏览器那边
 //        ZogUtils.e(DefaultWebViewClient.class, "shouldOverrideUrlLoading:" + url);
 
-        if(super.shouldOverrideUrlLoading(view, url)){
+        if (super.shouldOverrideUrlLoading(view, url)) {
             return true;
         }
 
@@ -32,16 +32,12 @@ public class DefaultWebViewClient extends BridgeWebViewClient {
     }
 
 
-
-
-
-
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 //                // Handle the error
-        super.onReceivedError(view,errorCode,description,failingUrl);
+        super.onReceivedError(view, errorCode, description, failingUrl);
 
-        ToastUtils.mkShortTimeToast(view.getContext(), view.getContext().getString(R.string.load_error));
+        ToastUtils.mkShortTimeToast(view.getContext().getString(R.string.load_error));
     }
 
     @Override
@@ -55,11 +51,18 @@ public class DefaultWebViewClient extends BridgeWebViewClient {
     }
 
 
+    @Override
+    public void onPageFinished(WebView view, String url) {
+        super.onPageFinished(view, url);
+        if (webFragment != null && webFragment.iInitWeb != null)
+            webFragment.iInitWeb.onLoadOver();
+    }
+
     /**
      * 页面点击url或自动重定向时候，所做的动作
      *
      * @param view
-     * @param url 页面点击url或自动重定向时候的链接
+     * @param url  页面点击url或自动重定向时候的链接
      * @return
      */
     public void loadingUrl(WebView view, String url) {

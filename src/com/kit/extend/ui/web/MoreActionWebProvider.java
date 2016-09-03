@@ -19,8 +19,6 @@ public class MoreActionWebProvider extends ActionProvider {
     //    private Context context;
     WebActivity activity;
 
-    private OnMenuItemClickListener mListener;
-
     public MoreActionWebProvider(Context context) {
         super(context);
     }
@@ -54,15 +52,15 @@ public class MoreActionWebProvider extends ActionProvider {
                 });
 
         subMenu.add(activity.getString(R.string.menu_web_copy_url))
-                .setIcon(R.drawable.abc_ic_menu_copy_mtrl_am_alpha)
+                .setIcon(R.drawable.ic_menu_copy)
                 .setOnMenuItemClickListener(new OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
 
                         ZogUtils.e("activity.webFragment.loadingUrl:" + activity.webFragment.loadingUrl);
                         if (!StringUtils.isEmptyOrNullOrNullStr(activity.webFragment.loadingUrl)) {
-                            ClipboardUtils.copy(activity, activity.webFragment.loadingUrl);
-                            ToastUtils.mkShortTimeToast(activity, activity.getResources().getString(R.string.copy_ok_default));
+                            ClipboardUtils.copy(activity.webFragment.loadingUrl);
+                            ToastUtils.mkShortTimeToast(activity.getResources().getString(R.string.copy_ok_default));
                         }
                         return true;
                     }

@@ -186,10 +186,15 @@ public class VideoPlayWebActivity extends WebActivity {
     }
 
     @Override
-    public void loadWeb() {
-        super.loadWeb();
+    public void onLoadWeb() {
+        super.onLoadWeb();
         MessageUtils.sendMessage(handler, WEB_INITOK_START_LOAD);
 
+    }
+
+    @Override
+    public void onLoadOver() {
+        super.onLoadOver();
     }
 
     private void refreshData() {
