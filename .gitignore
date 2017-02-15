@@ -28,6 +28,7 @@ proguard-project.txt
 *.iml
 *.ipr
 .idea/
+.svn/
 
 # Gradle files
 .gradle
@@ -35,10 +36,9 @@ gradle
 build
 
 # Mac system files
-.DS_Store
+.DS_Store/
 
 # others
 ant.properties
 build.xml
 META-INF
-/.settings/
