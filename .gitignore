@@ -37,6 +37,6 @@ gradle/
 ant.properties
 build.xml
 META-INF
-Zhao
+*.keystore
 .svn/
 
