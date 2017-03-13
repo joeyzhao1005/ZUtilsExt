@@ -10,7 +10,7 @@ import java.io.File;
  * Created by Zhao on 16/7/3.
  */
 public interface IImageLoader {
-    void display(ImageView iv, Integer drawableIId);
+    void display(ImageView iv, Integer drawableId);
 
 
     void display(ImageView iv, String url);
