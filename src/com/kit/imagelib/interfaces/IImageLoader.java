@@ -10,6 +10,9 @@ import java.io.File;
  * Created by Zhao on 16/7/3.
  */
 public interface IImageLoader {
+    void display(ImageView iv, byte[] bytes);
+
+
     void display(ImageView iv, Integer drawableId);
 
 
