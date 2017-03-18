@@ -10,7 +10,6 @@ import java.io.File;
  * Created by Zhao on 16/7/3.
  */
 public interface IImageLoader {
-    void display(ImageView iv, byte[] bytes);
 
 
     void display(ImageView iv, Integer drawableId);
@@ -19,8 +18,8 @@ public interface IImageLoader {
     void display(ImageView iv, String url);
     void display(ImageView iv, String url, ImageView.ScaleType scaleType);
 
-    void display(ImageView iv, File file);
-    void display(ImageView iv, File file, ImageView.ScaleType scaleType);
+    void displayFile(ImageView iv, String filename);
+    void displayFile(ImageView iv, String filename, ImageView.ScaleType scaleType);
 
     Bitmap loadImageSync(String url);
 
