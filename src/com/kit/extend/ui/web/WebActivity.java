@@ -54,7 +54,7 @@ public class WebActivity extends BaseActivity implements WebFragment.IInitWeb {
 
         }
 
-        if (StringUtils.isEmptyOrNullOrNullStr(contentViewName)) {
+        if (StringUtils.isEmptyOrNullStr(contentViewName)) {
             contentViewName = "activity_web";
         }
 
@@ -91,7 +91,7 @@ public class WebActivity extends BaseActivity implements WebFragment.IInitWeb {
     @Override
     public void initWidgetWithExtra() {
 
-        if (!StringUtils.isEmptyOrNullOrNullStr(title))
+        if (!StringUtils.isEmptyOrNullStr(title))
             setTitle(title);
     }
 

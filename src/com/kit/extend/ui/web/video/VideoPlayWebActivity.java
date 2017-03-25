@@ -127,7 +127,7 @@ public class VideoPlayWebActivity extends WebActivity {
         } catch (Exception e) {
         }
 
-        if (StringUtils.isEmptyOrNullOrNullStr(contentViewName)) {
+        if (StringUtils.isEmptyOrNullStr(contentViewName)) {
             contentViewName = "activity_video_web";
         }
 
@@ -199,7 +199,7 @@ public class VideoPlayWebActivity extends WebActivity {
 
     private void refreshData() {
 
-        if (!StringUtils.isEmptyOrNullOrNullStr(videoPlayUrl)) {
+        if (!StringUtils.isEmptyOrNullStr(videoPlayUrl)) {
             webFragment.getWebView().loadUrl("file:///android_asset/www/video.html");
             MessageUtils.sendMessage(handler, WEB_LOAD_SUCCESS);
         } else {

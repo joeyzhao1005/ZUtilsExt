@@ -1,6 +1,7 @@
 package com.kit.imagelib.interfaces;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
@@ -16,9 +17,11 @@ public interface IImageLoader {
 
 
     void display(ImageView iv, String url);
+
     void display(ImageView iv, String url, ImageView.ScaleType scaleType);
 
     void displayFile(ImageView iv, String filename);
+
     void displayFile(ImageView iv, String filename, ImageView.ScaleType scaleType);
 
     Bitmap loadImageSync(String url);
@@ -32,4 +35,7 @@ public interface IImageLoader {
             , @Nullable ImageLoadingProgressListener imageLoadingProgressListener);
 
 
+    void clearCache(Uri uri);
+
+    void clearFileCache(String path);
 }

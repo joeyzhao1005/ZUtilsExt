@@ -263,7 +263,7 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
                 setWebTitle(title);
 
                 if (isUseWebTitle
-                        && !StringUtils.isEmptyOrNullOrNullStr(webTitle)
+                        && !StringUtils.isEmptyOrNullStr(webTitle)
                         && getActivity() != null) {
                     getActivity().setTitle(webTitle);
                 }
@@ -345,7 +345,7 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
 
         }
 
-        if (StringUtils.isEmptyOrNullOrNullStr(contentViewName)) {
+        if (StringUtils.isEmptyOrNullStr(contentViewName)) {
             contentViewName = "fragment_web";
         }
 
@@ -354,7 +354,7 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
     }
 
     public void loadContent(String cont) {
-        if (StringUtils.isEmptyOrNullOrNullStr(cont)) {
+        if (StringUtils.isEmptyOrNullStr(cont)) {
 //            ToastUtils.mkLongTimeToast(getActivity(),getString(ResourceUtils.getStringId(getApplication(),"empty_url")));
             return;
         }

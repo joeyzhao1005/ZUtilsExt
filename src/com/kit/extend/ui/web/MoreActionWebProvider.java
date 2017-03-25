@@ -45,7 +45,7 @@ public class MoreActionWebProvider extends ActionProvider {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         ZogUtils.e("activity.webFragment.loadingUrl:" + activity.webFragment.loadingUrl);
-                        if (!StringUtils.isEmptyOrNullOrNullStr(activity.webFragment.loadingUrl))
+                        if (!StringUtils.isEmptyOrNullStr(activity.webFragment.loadingUrl))
                             BrowserUtils.gotoBrowser(activity, activity.webFragment.loadingUrl);
                         return true;
                     }
@@ -58,7 +58,7 @@ public class MoreActionWebProvider extends ActionProvider {
                     public boolean onMenuItemClick(MenuItem item) {
 
                         ZogUtils.e("activity.webFragment.loadingUrl:" + activity.webFragment.loadingUrl);
-                        if (!StringUtils.isEmptyOrNullOrNullStr(activity.webFragment.loadingUrl)) {
+                        if (!StringUtils.isEmptyOrNullStr(activity.webFragment.loadingUrl)) {
                             ClipboardUtils.copy(activity.webFragment.loadingUrl);
                             ToastUtils.mkShortTimeToast(activity.getResources().getString(R.string.copy_ok_default));
                         }
