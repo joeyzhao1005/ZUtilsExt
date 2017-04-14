@@ -40,6 +40,9 @@
     <color name="transparent_black13">#DD000000</color>
     <color name="transparent_black14">#EE000000</color>
     <color name="transparent_black15">#FF000000</color>
+    <color name="transparent_white0_5">#05FFFFFF</color>
+    <color name="transparent_white0_8">#08FFFFFF</color>
+    <color name="transparent_white0_9">#09FFFFFF</color>
     <color name="transparent_white1">#10FFFFFF</color>
     <color name="transparent_white2">#20FFFFFF</color>
     <color name="transparent_white3">#30FFFFFF</color>
