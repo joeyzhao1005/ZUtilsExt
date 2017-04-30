@@ -20,9 +20,9 @@ public interface IImageLoader {
 
     void display(ImageView iv, String url, ImageView.ScaleType scaleType);
 
-    void displayFile(ImageView iv, String filename);
+    void displayFile(ImageView iv, String filePath);
 
-    void displayFile(ImageView iv, String filename, ImageView.ScaleType scaleType);
+    void displayFile(ImageView iv, String filePath, ImageView.ScaleType scaleType);
 
     Bitmap loadImageSync(String url);
 
