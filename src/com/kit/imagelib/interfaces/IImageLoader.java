@@ -38,4 +38,8 @@ public interface IImageLoader {
     void clearCache(Uri uri);
 
     void clearFileCache(String path);
+
+    void resume();
+
+    void pause();
 }
