@@ -45,11 +45,11 @@ public class WebActivity extends BaseActivity implements WebFragment.IInitWeb {
     @Override
     public boolean getExtra() {
         super.getExtra();
-        BundleData bundleData = IntentUtils.getData(getIntent());
+        BundleData bundleData = IntentUtils.getData("where2go");
         try {
-            content = bundleData.getObject("content", String.class);
-            title = bundleData.getObject("title", String.class);
-            contentViewName = bundleData.getObject("contentViewName", String.class);
+            content = bundleData.getObject("content");
+            title = bundleData.getObject("title");
+            contentViewName = bundleData.getObject("contentViewName");
         } catch (Exception e) {
 
         }
@@ -187,7 +187,7 @@ public class WebActivity extends BaseActivity implements WebFragment.IInitWeb {
         if (context instanceof WebActivity) {
             ((WebActivity) context).webFragment.getWebView().loadUrl(content);
         } else {
-            BundleData bundleData = new BundleData();
+            BundleData bundleData = new BundleData("web");
             bundleData.put("title", title);
             bundleData.put("content", content);
 //        bundleData.put("cookie", cookie);

@@ -118,12 +118,12 @@ public class VideoPlayWebActivity extends WebActivity {
         super.getExtra();
         BundleData bundleData = IntentUtils.getData(getIntent());
         try {
-            videoUrl = bundleData.getObject("videoUrl", String.class);
+            videoUrl = bundleData.getObject("videoUrl");
             content = videoUrl;
-            videoPlayUrl = bundleData.getObject("videoPlayUrl", String.class);
+            videoPlayUrl = bundleData.getObject("videoPlayUrl");
 //            content = "<body><div style=\"margin: 0px auto;\"> <center><iframe style=\"margin: 0px auto;\"  height=\"900px\" width=\"1000px\" src=\"" + content + "\" border=\"0\"  frameborder=\"0\" allowfullscreen=\"true\"></iframe></center></div></body>";
-            title = bundleData.getObject("title", String.class);
-            contentViewName = bundleData.getObject("contentViewName", String.class);
+            title = bundleData.getObject("title");
+            contentViewName = bundleData.getObject("contentViewName");
         } catch (Exception e) {
         }
 
@@ -215,7 +215,7 @@ public class VideoPlayWebActivity extends WebActivity {
      * @param url     视频页面的地址
      */
     public static void gotoVideo(Context context, Class clazz, String title, String url) {
-        BundleData bundleData = new BundleData();
+        BundleData bundleData = new BundleData("video");
         bundleData.put("title", title);
         bundleData.put("videoUrl", url);
 
@@ -232,7 +232,7 @@ public class VideoPlayWebActivity extends WebActivity {
      * @param url     视频的真实地址
      */
     public static void play(Context context, Class clazz, String title, String url) {
-        BundleData bundleData = new BundleData();
+        BundleData bundleData = new BundleData("play");
         bundleData.put("title", title);
         bundleData.put("videoPlayUrl", url);
 
