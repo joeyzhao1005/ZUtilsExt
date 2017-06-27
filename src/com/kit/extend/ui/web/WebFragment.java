@@ -336,8 +336,8 @@ public class WebFragment extends BaseFragment implements CookieKit, Handler.Call
     }
 
     @Override
-    public boolean getExtra() {
-        super.getExtra();
+    public boolean getExtra(Bundle b) {
+        super.getExtra(b);
         try {
             content = getArguments().getString("content");
             contentViewName = getArguments().getString("contentViewName");
