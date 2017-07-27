@@ -32,6 +32,7 @@
     <string name="tips_exit">再按一次，就退出咯~</string>
     <string name="more">更多</string>
 
+    <string name="tap_to_input_sth">输入点什么吧~</string>
 
     <string name="menu_web_open_in_bowser">浏览器中打开</string>
     <string name="menu_web_copy_url">复制链接</string>
@@ -39,7 +40,6 @@
     <string name="default_value">--</string>
 
     <string name="copy_ok_default">已复制到剪切板</string>
-
 
 
 </resources>
