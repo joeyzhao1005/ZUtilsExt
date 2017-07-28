@@ -11,10 +11,7 @@ import java.io.File;
  * Created by Zhao on 16/7/3.
  */
 public interface IImageLoader {
-
-
     void display(ImageView iv, Integer drawableId);
-
 
     void display(ImageView iv, String url);
 
@@ -28,12 +25,10 @@ public interface IImageLoader {
 
     File getCacheImage(String url);
 
-
     void cancelDisplayTask(ImageView iv);
 
     void loadImage(String url, @Nullable ImageLoadingListener imageLoadingListener
             , @Nullable ImageLoadingProgressListener imageLoadingProgressListener);
-
 
     void clearCache(Uri uri);
 
