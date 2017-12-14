@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.kit.app.ActivityManager;
+import com.kit.ui.base.BaseV4Fragment;
 import com.kit.ui.swipebacklayout.lib.app.SwipeBackActionBarActivity;
 
 public class BaseSwipeBackActionBarActivity extends SwipeBackActionBarActivity

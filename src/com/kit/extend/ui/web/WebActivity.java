@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.kit.extend.R;
-import com.kit.ui.BaseActivity;
+import com.kit.ui.base.BaseActivity;
 import com.kit.utils.ActionBarUtils;
 import com.kit.utils.ResourceUtils;
 import com.kit.utils.StringUtils;

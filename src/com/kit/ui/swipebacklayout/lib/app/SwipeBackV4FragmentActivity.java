@@ -4,7 +4,7 @@ package com.kit.ui.swipebacklayout.lib.app;
 import android.os.Bundle;
 import android.view.View;
 
-import com.kit.ui.BaseV4FragmentActivity;
+import com.kit.ui.base.BaseV4FragmentActivity;
 import com.kit.ui.swipebacklayout.lib.SwipeBackLayout;
 import com.kit.ui.swipebacklayout.lib.Utils;
 

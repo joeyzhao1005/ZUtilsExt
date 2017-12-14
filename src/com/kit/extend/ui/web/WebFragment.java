@@ -26,7 +26,7 @@ import com.kit.extend.ui.web.client.VideoEnabledWebChromeClient;
 import com.kit.extend.ui.web.model.WebviewGoToTop;
 import com.kit.extend.ui.web.view.RefreshLayout;
 import com.kit.extend.ui.web.webview.LoadMoreWebView;
-import com.kit.ui.BaseFragment;
+import com.kit.ui.base.BaseFragment;
 import com.kit.utils.AnimUtils;
 import com.kit.utils.CookieUtils;
 import com.kit.utils.ListUtils;

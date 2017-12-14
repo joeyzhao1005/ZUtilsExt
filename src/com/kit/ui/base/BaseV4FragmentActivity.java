@@ -1,34 +1,42 @@
-package com.kit.ui;
+package com.kit.ui.base;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.kit.app.ActivityManager;
-import com.kit.ui.base.BaseV4Fragment;
-import com.kit.ui.swipebacklayout.lib.app.SwipeBackV4FragmentActivity;
 
-public class BaseSwipeBackV4FragmentActivity extends SwipeBackV4FragmentActivity
-        implements BaseV4Fragment.OnFragmentInteractionListener {
+public class BaseV4FragmentActivity extends FragmentActivity implements BaseV4Fragment.OnFragmentInteractionListener{
 
+
+//    public Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//        mContext = this;
 
-//        getExtra();
-//        initWidget();
-//        loadData();
+        getExtra();
+        initWidget();
 
-//        ActivityManager.getInstance().pushActivity(this);
+        ActivityManager.getInstance().pushActivity(this);
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadData();
+        initWidgetWithData();
     }
 
     /**
      * 获得上一个Activity传过来的值
-     */
+     * */
     public boolean getExtra() {
 
         return true;
@@ -36,15 +44,20 @@ public class BaseSwipeBackV4FragmentActivity extends SwipeBackV4FragmentActivity
 
     /**
      * 初始化界面
-     */
+     * */
     public boolean initWidget() {
         return true;
     }
 
     /**
      * 去网络或者本地加载数据
-     */
+     * */
     public boolean loadData() {
+        return true;
+    }
+
+
+    public boolean initWidgetWithData(){
         return true;
     }
 
@@ -72,6 +85,7 @@ public class BaseSwipeBackV4FragmentActivity extends SwipeBackV4FragmentActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         ActivityManager.getInstance().popActivity(this);
     }
 }
