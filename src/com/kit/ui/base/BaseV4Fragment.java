@@ -68,8 +68,8 @@ public class BaseV4Fragment extends Fragment implements IDoFragmentInit {
 
     @Override
     public void onDestroy() {
-        destory();
         super.onDestroy();
+        destory();
     }
 
     @Override
