@@ -8,7 +8,7 @@ import android.view.MenuItem;
 
 import com.kit.app.ActivityManager;
 import com.kit.app.UIHandler;
-import com.kit.utils.log.ZogUtils;
+import com.kit.utils.log.Zog;
 
 public class BaseAppCompatActivity extends AppCompatActivity implements BaseV4Fragment.OnFragmentInteractionListener {
 
@@ -126,7 +126,7 @@ public class BaseAppCompatActivity extends AppCompatActivity implements BaseV4Fr
         try {
             super.onDestroy();
         } catch (RuntimeException e) {
-            ZogUtils.showException(e);
+            Zog.showException(e);
         }
     }
 }

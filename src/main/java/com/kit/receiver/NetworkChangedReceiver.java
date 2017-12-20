@@ -8,7 +8,7 @@ import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 
 import com.kit.app.enums.ConnectedType;
-import com.kit.utils.log.ZogUtils;
+import com.kit.utils.log.Zog;
 
 public class NetworkChangedReceiver extends BroadcastReceiver {
     State wifiState = null;
@@ -23,7 +23,7 @@ public class NetworkChangedReceiver extends BroadcastReceiver {
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkinfo = cm.getActiveNetworkInfo();
             if (networkinfo == null) {
-                ZogUtils.i("网络全部断开!");
+                Zog.i("网络全部断开!");
                 onDisconnected(ConnectedType.ALL);
                 return;
             }
@@ -32,15 +32,15 @@ public class NetworkChangedReceiver extends BroadcastReceiver {
                 wifiState = networkinfo.getState();
                 if (wifiState != null) {
                     if (State.CONNECTED != wifiState) {
-                        ZogUtils.i("无线网络连接断开！");
+                        Zog.i("无线网络连接断开！");
                         onDisconnected(ConnectedType.WIFI);
 
                     } else if (State.CONNECTED == wifiState) {
-                        ZogUtils.i("无线网络连接成功！");
+                        Zog.i("无线网络连接成功！");
                         onConnected(ConnectedType.WIFI);
                     }
                 } else {
-                    ZogUtils.i("无法获取网络状态");
+                    Zog.i("无法获取网络状态");
                 }
             } else if (networkinfo.getType() == ConnectivityManager.TYPE_MOBILE) {
                 //MOBILE
@@ -48,14 +48,14 @@ public class NetworkChangedReceiver extends BroadcastReceiver {
 
                 if (mobileState != null) {
                     if (State.CONNECTED != mobileState) {
-                        ZogUtils.i("无线网络连接断开！");
+                        Zog.i("无线网络连接断开！");
                         onDisconnected(ConnectedType.MOBILE);
                     } else if (State.CONNECTED == mobileState) {
-                        ZogUtils.i("手机网络连接成功！");
+                        Zog.i("手机网络连接成功！");
                         onConnected(ConnectedType.MOBILE);
                     }
                 } else {
-                    ZogUtils.i("无法获取网络状态");
+                    Zog.i("无法获取网络状态");
                 }
             }
         }

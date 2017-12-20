@@ -11,7 +11,7 @@ import android.media.session.MediaSession;
 import android.os.Build;
 import android.view.KeyEvent;
 
-import com.kit.utils.log.ZogUtils;
+import com.kit.utils.log.Zog;
 
 public class MediaButtonReceiver extends BroadcastReceiver {
     AudioManager mAudioManager;
@@ -25,19 +25,19 @@ public class MediaButtonReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (onHeadset(context, intent)) {
-            ZogUtils.i("onHeadset");
+            Zog.i("onHeadset");
         } else if (onMediaButton(context, intent)) {
-            ZogUtils.i("onMediaButton");
+            Zog.i("onMediaButton");
         }
     }
 
 
     protected boolean onHeadset(Context context, Intent intent) {
-        ZogUtils.i(intent.getAction());
+        Zog.i(intent.getAction());
 
         switch (intent.getAction()) {
             case AudioManager.ACTION_AUDIO_BECOMING_NOISY:
-                ZogUtils.i("ACTION_AUDIO_BECOMING_NOISY");
+                Zog.i("ACTION_AUDIO_BECOMING_NOISY");
                 onHeadsetPlugOff(context);
                 return true;
 
@@ -46,7 +46,7 @@ public class MediaButtonReceiver extends BroadcastReceiver {
 
                 int state = intent.getIntExtra("state", -1);
 
-                ZogUtils.i("ACTION_HEADSET_PLUG state:" + state);
+                Zog.i("ACTION_HEADSET_PLUG state:" + state);
 
                 switch (state) {
                     case 0:
@@ -60,7 +60,7 @@ public class MediaButtonReceiver extends BroadcastReceiver {
 
 
                     default:
-                        ZogUtils.i("未知状态");
+                        Zog.i("未知状态");
                         return false;
 
                 }
@@ -116,7 +116,7 @@ public class MediaButtonReceiver extends BroadcastReceiver {
      */
     public void registerMediaButton(final Context context) {
 
-        ZogUtils.i("registerMediaButton:" + getClass().getName());
+        Zog.i("registerMediaButton:" + getClass().getName());
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
@@ -144,14 +144,14 @@ public class MediaButtonReceiver extends BroadcastReceiver {
                 @Override
                 public boolean onMediaButtonEvent(Intent intent) {
                     if (!Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())) {
-                        ZogUtils.i("xxxxxxxxxxxxx");
+                        Zog.i("xxxxxxxxxxxxx");
                         return super.onMediaButtonEvent(intent);
                     }
 
                     KeyEvent event = intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
                     if (event == null || event.getAction() != KeyEvent.ACTION_UP) {
                         super.onMediaButtonEvent(intent);
-                        ZogUtils.i("ooooooooooooooo");
+                        Zog.i("ooooooooooooooo");
                         return onMediaButton(context, intent);
                     }
 

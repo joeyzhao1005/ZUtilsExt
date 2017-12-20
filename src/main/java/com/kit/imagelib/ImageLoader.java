@@ -1,7 +1,7 @@
 package com.kit.imagelib;
 
 import com.kit.imagelib.interfaces.IImageLoader;
-import com.kit.utils.log.ZogUtils;
+import com.kit.utils.log.Zog;
 
 /**
  * Created by Zhao on 16/7/3.
@@ -12,7 +12,7 @@ public class ImageLoader {
 
     public static IImageLoader getInstance() {
         if(iImageLoader ==null ){
-            ZogUtils.e("You must called setImageLoader(IImageLoader iImageLoader) before.");
+            Zog.e("You must called setImageLoader(IImageLoader iImageLoader) before.");
         }
         return iImageLoader;
     }
