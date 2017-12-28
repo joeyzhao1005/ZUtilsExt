@@ -1,6 +1,8 @@
 *.apk
 *.ap_
 
+
+
 # files for the dex VM
 *.dex
 
@@ -31,6 +33,7 @@ local.properties
 gradle/
 
 # Mac system files
+.DS_Store
 .DS_Store/
 
 # others
