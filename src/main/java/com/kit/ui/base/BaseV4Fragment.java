@@ -3,6 +3,8 @@ package com.kit.ui.base;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,19 +74,21 @@ public class BaseV4Fragment extends Fragment implements IDoFragmentInit {
         destory();
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = initWidget(inflater, container,
+        return createView(inflater, container,
                 savedInstanceState);
-
-        initWidgetWithExtra();
-
-        return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getExtra(savedInstanceState);
+        initWidgetWithExtra();
+        loadData();
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -141,7 +145,6 @@ public class BaseV4Fragment extends Fragment implements IDoFragmentInit {
     }
 
 
-
     /**
      * 去网络或者本地加载数据
      */
@@ -152,7 +155,7 @@ public class BaseV4Fragment extends Fragment implements IDoFragmentInit {
     /**
      * 初始化界面
      */
-    public View initWidget(LayoutInflater inflater, ViewGroup container,
+    public View createView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
         return null;
     }

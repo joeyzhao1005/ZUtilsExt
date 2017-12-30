@@ -12,19 +12,19 @@ public interface IDoFragmentInit {
 
     /**
      * 获得Activity传过来的值
-     * */
-    public boolean getExtra(Bundle savedInstanceState) ;
+     */
+    boolean getExtra(Bundle savedInstanceState);
 
 
     /**
      * 初始化界面
      */
-    public View initWidget(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState);
+    View createView(LayoutInflater inflater, ViewGroup container,
+                    Bundle savedInstanceState);
 
     /**
      * 去网络或者本地加载数据
      */
-    public boolean loadData();
+    boolean loadData();
 
 }
