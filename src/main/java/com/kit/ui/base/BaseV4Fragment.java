@@ -17,29 +17,14 @@ import com.kit.utils.ResWrapper;
  * Activities that contain this fragment must implement the
  * {@link BaseV4Fragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link BaseV4Fragment#newInstance} factory method to
+ * Use the newInstance() factory method to
  * create an instance of this fragment.
  */
-public class BaseV4Fragment extends Fragment implements IDoFragmentInit {
+public abstract class BaseV4Fragment extends Fragment implements IDoFragmentInit {
 
 
     public OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment BaseFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BaseV4Fragment newInstance() {
-        BaseV4Fragment fragment = new BaseV4Fragment();
-        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     public BaseV4Fragment() {
         // Required empty public constructor
@@ -47,17 +32,12 @@ public class BaseV4Fragment extends Fragment implements IDoFragmentInit {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        getExtra(savedInstanceState);
         if (getActivity() != null) {
             ResWrapper.getInstance().setContext(getActivity());
         }
+
         super.onCreate(savedInstanceState);
 
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-        loadData();
     }
 
     @Override
@@ -152,12 +132,20 @@ public class BaseV4Fragment extends Fragment implements IDoFragmentInit {
         return true;
     }
 
+    protected abstract int  layoutResID();
+
+    public void initWidget(@NonNull View layout){}
+
+
     /**
      * 初始化界面
      */
     public View createView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-        return null;
+
+        View layout = inflater.inflate(layoutResID(), container, false);
+        initWidget(layout);
+        return layout;
     }
 
     /**
