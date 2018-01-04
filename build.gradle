@@ -22,7 +22,11 @@ android {
         targetSdkVersion 26
     }
 
-    sourceSets {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
+    sourceSets {
     }
 }
