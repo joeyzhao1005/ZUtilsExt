@@ -8,7 +8,7 @@ import android.view.MenuItem;
 
 import com.kit.app.ActivityManager;
 import com.kit.app.UIHandler;
-import com.kit.utils.intentutils.IntentManager;
+import com.kit.utils.intent.IntentManager;
 import com.kit.utils.log.Zog;
 
 public class BaseAppCompatActivity extends AppCompatActivity implements BaseV4Fragment.OnFragmentInteractionListener {
