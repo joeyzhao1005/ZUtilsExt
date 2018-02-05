@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kit.utils.ResWrapper;
+import com.kit.utils.intent.ArgumentsManager;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -154,7 +155,15 @@ public abstract class BaseV4Fragment extends Fragment implements IDoFragmentInit
     public void initWidgetWithExtra() {
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        destory();
+    }
+
     public void destory() {
+        ArgumentsManager.get().destory(this);
+
 //        onPause();
 //        onStop();
 //        onDestroyView();
