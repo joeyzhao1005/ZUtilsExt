@@ -36,9 +36,8 @@ public abstract class BaseV4Fragment extends Fragment implements IDoFragmentInit
         if (getActivity() != null) {
             ResWrapper.getInstance().setContext(getActivity());
         }
-
         super.onCreate(savedInstanceState);
-
+        getExtra(savedInstanceState);
     }
 
     @Override
@@ -66,7 +65,6 @@ public abstract class BaseV4Fragment extends Fragment implements IDoFragmentInit
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getExtra(savedInstanceState);
         initWidgetWithExtra();
         loadData();
     }
