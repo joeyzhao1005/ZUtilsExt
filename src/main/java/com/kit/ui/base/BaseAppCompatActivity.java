@@ -10,8 +10,9 @@ import com.kit.app.ActivityManager;
 import com.kit.app.UIHandler;
 import com.kit.utils.intent.IntentManager;
 import com.kit.utils.log.Zog;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
-public class BaseAppCompatActivity extends AppCompatActivity implements BaseV4Fragment.OnFragmentInteractionListener {
+public class BaseAppCompatActivity extends RxAppCompatActivity implements BaseV4Fragment.OnFragmentInteractionListener {
 
 
     private boolean isShowing = false;
@@ -41,6 +42,13 @@ public class BaseAppCompatActivity extends AppCompatActivity implements BaseV4Fr
         isShowing = true;
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (isFinishing()) {
+            destory();
+        }
+    }
 
     public boolean isShowing() {
         return isShowing;
@@ -72,6 +80,10 @@ public class BaseAppCompatActivity extends AppCompatActivity implements BaseV4Fr
         isShowing = false;
     }
 
+
+    public void destory() {
+
+    }
 
     /**
      * 去网络或者本地加载数据

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.kit.utils.ResWrapper;
 import com.kit.utils.intent.ArgumentsManager;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -21,7 +22,8 @@ import com.kit.utils.intent.ArgumentsManager;
  * Use the newInstance() factory method to
  * create an instance of this fragment.
  */
-public abstract class BaseV4Fragment extends Fragment implements IDoFragmentInit {
+public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentInit {
+
 
 
     public OnFragmentInteractionListener mListener;
@@ -37,6 +39,7 @@ public abstract class BaseV4Fragment extends Fragment implements IDoFragmentInit
             ResWrapper.getInstance().setContext(getActivity());
         }
         super.onCreate(savedInstanceState);
+
         getExtra(savedInstanceState);
     }
 
@@ -131,9 +134,10 @@ public abstract class BaseV4Fragment extends Fragment implements IDoFragmentInit
         return true;
     }
 
-    protected abstract int  layoutResID();
+    protected abstract int layoutResID();
 
-    public void initWidget(@NonNull View layout){}
+    public void initWidget(@NonNull View layout) {
+    }
 
 
     /**
@@ -141,10 +145,13 @@ public abstract class BaseV4Fragment extends Fragment implements IDoFragmentInit
      */
     public View createView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-
-        View layout = inflater.inflate(layoutResID(), container, false);
+        layout = inflater.inflate(layoutResID(), container, false);
         initWidget(layout);
         return layout;
+    }
+
+    public final <T extends View> T findViewById(int id) {
+        return layout.findViewById(id);
     }
 
     /**
@@ -169,4 +176,5 @@ public abstract class BaseV4Fragment extends Fragment implements IDoFragmentInit
 //        onDetach();
     }
 
+    View layout;
 }
