@@ -40,7 +40,7 @@ public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentIn
         }
         super.onCreate(savedInstanceState);
 
-        getExtra(savedInstanceState);
+        getExtra();
     }
 
     @Override
@@ -121,7 +121,7 @@ public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentIn
         public void onFragmentInteraction(Uri uri);
     }
 
-    public boolean getExtra(Bundle savedInstanceState) {
+    public boolean getExtra() {
 
         return true;
     }

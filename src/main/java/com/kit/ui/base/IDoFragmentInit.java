@@ -13,7 +13,7 @@ public interface IDoFragmentInit {
     /**
      * 获得Activity传过来的值
      */
-    boolean getExtra(Bundle savedInstanceState);
+    boolean getExtra();
 
 
     /**
