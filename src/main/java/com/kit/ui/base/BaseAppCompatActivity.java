@@ -80,17 +80,19 @@ public class BaseAppCompatActivity extends RxAppCompatActivity implements BaseV4
         isShowing = false;
     }
 
-
-    public void destory() {
-        ActivityManager.getInstance().popActivity(this);
-        IntentManager.get().destory(this);
-        isShowing = false;
-
+    @Override
+    protected void onDestroy() {
         try {
             super.onDestroy();
         } catch (RuntimeException e) {
             Zog.showException(e);
         }
+    }
+
+    public void destory() {
+        ActivityManager.getInstance().popActivity(this);
+        IntentManager.get().destory(this);
+        isShowing = false;
     }
 
     /**
