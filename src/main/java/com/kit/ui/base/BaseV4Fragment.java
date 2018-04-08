@@ -22,7 +22,7 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
  * Use the newInstance() factory method to
  * create an instance of this fragment.
  */
-public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentInit {
+public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentInit, View.OnClickListener {
 
 
     public OnFragmentInteractionListener mListener;
@@ -159,6 +159,30 @@ public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentIn
 
     public final <T extends View> T findViewById(int id) {
         return layout.findViewById(id);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == null || view.getId() == 0) {
+            return;
+        }
+
+        onViewClick(view);
+    }
+
+    public void onViewClick(@NonNull  View view) {
+    }
+
+    protected void setOnClickListener(View... views) {
+        if (views == null || views.length <= 0) {
+            return;
+        }
+
+        for (View v : views) {
+            if (v == null)
+                continue;
+            v.setOnClickListener(this);
+        }
     }
 
     /**
