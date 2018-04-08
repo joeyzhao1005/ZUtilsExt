@@ -39,7 +39,7 @@ public class RxUtils {
         if (provider != null) {
             if (provider instanceof RxAppCompatActivity) {
                 observable.compose(provider.<T>bindUntilEvent(ActivityEvent.DESTROY));
-            }else if (provider instanceof RxFragment) {
+            } else if (provider instanceof RxFragment) {
                 observable.compose(provider.<T>bindUntilEvent(FragmentEvent.DESTROY));
             }
         }
@@ -84,7 +84,7 @@ public class RxUtils {
         if (provider != null) {
             if (provider instanceof RxAppCompatActivity) {
                 observable.compose(provider.<T>bindUntilEvent(ActivityEvent.DESTROY));
-            }else if (provider instanceof RxFragment) {
+            } else if (provider instanceof RxFragment) {
                 observable.compose(provider.<T>bindUntilEvent(FragmentEvent.DESTROY));
             }
         }
@@ -127,7 +127,7 @@ public class RxUtils {
         if (provider != null) {
             if (provider instanceof RxAppCompatActivity) {
                 observable.compose(provider.<T>bindUntilEvent(ActivityEvent.DESTROY));
-            }else if (provider instanceof RxFragment) {
+            } else if (provider instanceof RxFragment) {
                 observable.compose(provider.<T>bindUntilEvent(FragmentEvent.DESTROY));
             }
         }
