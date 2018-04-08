@@ -25,7 +25,6 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
 public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentInit {
 
 
-
     public OnFragmentInteractionListener mListener;
 
 
@@ -61,6 +60,7 @@ public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentIn
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return createView(inflater, container,
                 savedInstanceState);
     }
@@ -145,6 +145,13 @@ public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentIn
      */
     public View createView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
+        if (layout != null) {
+            ViewGroup parent = (ViewGroup) layout.getParent();
+            if (parent != null) {
+                parent.removeView(layout);
+            }
+            return layout;
+        }
         layout = inflater.inflate(layoutResID(), container, false);
         initWidget(layout);
         return layout;
@@ -160,11 +167,6 @@ public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentIn
     public void initWidgetWithExtra() {
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        destory();
-    }
 
     public void destory() {
         ArgumentsManager.get().destory(this);
