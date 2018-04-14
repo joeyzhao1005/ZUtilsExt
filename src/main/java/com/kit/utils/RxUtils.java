@@ -18,9 +18,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RxUtils {
 
-    private RxUtils() {
-    }
-
 
     public static <T> void computation(LifecycleProvider provider, final RxUtils.RxSimpleTask task, Object... objects) {
 
@@ -155,6 +152,8 @@ public class RxUtils {
         });
     }
 
+    private RxUtils() {
+    }
 
     public abstract static class RxSimpleTask<T> {
 
