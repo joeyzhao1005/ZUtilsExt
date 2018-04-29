@@ -24,11 +24,14 @@ public class RxUtils {
 
     public static <T> void computation(LifecycleProvider provider, long delayMilliseconds, final RxUtils.RxSimpleTask task, Object... objects) {
 
+        if (task == null) {
+            return;
+        }
         Observable observable = Observable.create((e) -> {
-            Zog.i("newThread subscribe");
+//            Zog.i("newThread subscribe");
             Object obj = task.doSth(objects);
             if (obj == null) {
-                obj = new Object();
+                obj = task.getDefault();
             }
 
             e.onNext(obj);
@@ -48,7 +51,7 @@ public class RxUtils {
             @Override
             public void onNext(T o) {
                 if (!this.isDisposed()) {
-                    Zog.i("newThread onNext");
+//                    Zog.i("newThread onNext");
                     task.onNext(o);
                 }
             }
@@ -56,7 +59,7 @@ public class RxUtils {
             @Override
             public void onError(Throwable e) {
                 if (!this.isDisposed()) {
-                    Zog.i("newThread onError");
+//                    Zog.i("newThread onError");
                     task.onError(e);
                 }
             }
@@ -64,7 +67,7 @@ public class RxUtils {
             @Override
             public void onComplete() {
                 if (!this.isDisposed()) {
-                    Zog.i("newThread onComplete");
+//                    Zog.i("newThread onComplete");
                     task.onComplete();
                 }
             }
@@ -78,10 +81,10 @@ public class RxUtils {
     public static <T> void newThread(LifecycleProvider provider, long delayMilliseconds, final RxUtils.RxSimpleTask task, Object... objects) {
 
         Observable observable = Observable.create((e) -> {
-            Zog.i("newThread subscribe");
+//            Zog.i("newThread subscribe");
             Object obj = task.doSth(objects);
             if (obj == null) {
-                obj = new Object();
+                obj = task.getDefault();
             }
 
             e.onNext(obj);
@@ -102,7 +105,7 @@ public class RxUtils {
             @Override
             public void onNext(T o) {
                 if (!this.isDisposed()) {
-                    Zog.i("newThread onNext");
+//                    Zog.i("newThread onNext");
                     task.onNext(o);
                 }
             }
@@ -110,7 +113,7 @@ public class RxUtils {
             @Override
             public void onError(Throwable e) {
                 if (!this.isDisposed()) {
-                    Zog.i("newThread onError");
+//                    Zog.i("newThread onError");
                     task.onError(e);
                 }
             }
@@ -118,7 +121,7 @@ public class RxUtils {
             @Override
             public void onComplete() {
                 if (!this.isDisposed()) {
-                    Zog.i("newThread onComplete");
+//                    Zog.i("newThread onComplete");
                     task.onComplete();
                 }
             }
@@ -134,7 +137,7 @@ public class RxUtils {
         Observable observable = Observable.create((e) -> {
             Object obj = task.doSth(new Object[0]);
             if (obj == null) {
-                obj = new <T>Object();
+                obj = task.getDefault();
             }
 
             e.onNext(obj);
@@ -154,7 +157,7 @@ public class RxUtils {
             @Override
             public void onNext(T o) {
                 if (!this.isDisposed()) {
-                    Zog.i("onNext");
+//                    Zog.i("onNext");
                     task.onNext(o);
                 }
             }
@@ -162,7 +165,7 @@ public class RxUtils {
             @Override
             public void onError(Throwable e) {
                 if (!this.isDisposed()) {
-                    Zog.i("onError");
+//                    Zog.i("onError");
                     task.onError(e);
                 }
             }
@@ -170,7 +173,7 @@ public class RxUtils {
             @Override
             public void onComplete() {
                 if (!this.isDisposed()) {
-                    Zog.i("onComplete");
+//                    Zog.i("onComplete");
                     task.onComplete();
                 }
             }
