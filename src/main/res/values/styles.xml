@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2018.
+  ~ Author：Zhao
+  ~ Email：joeyzhao1005@gmail.com
+  -->
+
+<resources>
+    <style name="ThemeNoDisplay" parent="Theme.AppCompat.NoActionBar" >
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+
+</resources>

@@ -14,8 +14,9 @@ public class ScreenBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        if (intent == null)
+        if (intent == null) {
             return;
+        }
 
         action = intent.getAction();
         if (Intent.ACTION_SCREEN_ON.equals(action)) {

@@ -179,8 +179,9 @@ public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentIn
         }
 
         for (View v : views) {
-            if (v == null)
+            if (v == null) {
                 continue;
+            }
             v.setOnClickListener(this);
         }
     }

@@ -130,8 +130,9 @@ public class ZShortcutInfo implements Cloneable {
     }
 
     public void putExtra(Extra extra) {
-        if (extra == null)
+        if (extra == null) {
             return;
+        }
 
         if (this.extras == null) {
             this.extras = new HashSet<>();

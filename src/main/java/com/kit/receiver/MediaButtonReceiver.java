@@ -173,8 +173,9 @@ public class MediaButtonReceiver extends BroadcastReceiver {
 //            mediaSession.setPlaybackState(state);
 
             mediaSession.setMediaButtonReceiver(pendingIntent);
-            if (!mediaSession.isActive())
+            if (!mediaSession.isActive()) {
                 mediaSession.setActive(true);
+            }
         }
     }
 
@@ -210,11 +211,13 @@ public class MediaButtonReceiver extends BroadcastReceiver {
     public void unregisterMediaButton() {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            if (mAudioManager != null)
+            if (mAudioManager != null) {
                 mAudioManager.unregisterMediaButtonEventReceiver(mReceiverComponent);
+            }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (mediaSession != null)
+            if (mediaSession != null) {
                 mediaSession.release();
+            }
         }
 
 

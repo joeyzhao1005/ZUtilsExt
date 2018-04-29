@@ -23,8 +23,9 @@ public class ShortcutManager {
 
 
     public static ArrayList<ZShortcutInfo> getShortcuts(ComponentName componentName, XmlResourceParser xmlParser) {
-        if (xmlParser == null)
+        if (xmlParser == null) {
             return null;
+        }
 
         ArrayList<ZShortcutInfo> shortcutInfos = new ArrayList<>();
 
@@ -42,8 +43,9 @@ public class ShortcutManager {
                         //一般都是获取标签的属性值，所以在这里数据你需要的数据
                         String startTag = xmlParser.getName();
 
-                        if (StringUtils.isEmptyOrNullStr(startTag))
+                        if (StringUtils.isEmptyOrNullStr(startTag)) {
                             continue;
+                        }
                         //Zog.d("标签：" + xmlParser.getName() + "开始");
                         if ("shortcut".equals(startTag)) {
                             ZShortcutInfo info = null;
@@ -70,8 +72,9 @@ public class ShortcutManager {
 
                     case XmlPullParser.END_TAG:
                         String endTag = xmlParser.getName();
-                        if (StringUtils.isEmptyOrNullStr(endTag))
+                        if (StringUtils.isEmptyOrNullStr(endTag)) {
                             continue;
+                        }
 
                         switch (endTag) {
                             case "shortcut":
@@ -108,8 +111,9 @@ public class ShortcutManager {
 
 
     private static void parseTag(String tag, ZShortcutInfo shortcutInfo, XmlResourceParser xmlParser) {
-        if (StringUtils.isEmptyOrNullStr(tag))
+        if (StringUtils.isEmptyOrNullStr(tag)) {
             return;
+        }
 
         switch (tag) {
             case "shortcuts":
@@ -131,14 +135,16 @@ public class ShortcutManager {
 
                         String attrName = xmlParser.getAttributeName(i);
 
-                        if (StringUtils.isEmptyOrNullStr(attrName))
+                        if (StringUtils.isEmptyOrNullStr(attrName)) {
                             continue;
+                        }
 
                         switch (attrName) {
                             case "icon":
                                 String icon = xmlParser.getAttributeValue(i);
-                                if (icon != null && icon.startsWith("@"))
+                                if (icon != null && icon.startsWith("@")) {
                                     shortcutInfo.setIcon(Integer.parseInt(icon.substring(1)));
+                                }
                                 break;
 
                             case "enabled":
@@ -153,21 +159,24 @@ public class ShortcutManager {
 
                             case "shortcutShortLabel":
                                 String shortcutShortLabel = xmlParser.getAttributeValue(i);
-                                if (shortcutShortLabel != null && shortcutShortLabel.startsWith("@"))
+                                if (shortcutShortLabel != null && shortcutShortLabel.startsWith("@")) {
                                     shortcutInfo.setShortcutShortLabel(Integer.parseInt(shortcutShortLabel.substring(1)));
+                                }
                                 break;
 
                             case "shortcutLongLabel":
                                 String shortcutLongLabel = xmlParser.getAttributeValue(i);
-                                if (shortcutLongLabel != null && shortcutLongLabel.startsWith("@"))
+                                if (shortcutLongLabel != null && shortcutLongLabel.startsWith("@")) {
                                     shortcutInfo.setShortcutLongLabel(Integer.parseInt(shortcutLongLabel.substring(1)));
+                                }
                                 break;
 
 
                             case "shortcutDisabledMessage":
                                 String shortcutDisabledMessage = xmlParser.getAttributeValue(i);
-                                if (shortcutDisabledMessage != null && shortcutDisabledMessage.startsWith("@"))
+                                if (shortcutDisabledMessage != null && shortcutDisabledMessage.startsWith("@")) {
                                     shortcutInfo.setShortcutDisabledMessage(Integer.parseInt(shortcutDisabledMessage.substring(1)));
+                                }
                                 break;
 
 
@@ -191,8 +200,9 @@ public class ShortcutManager {
 
                         String attrName = xmlParser.getAttributeName(i);
 
-                        if (StringUtils.isEmptyOrNullStr(attrName))
+                        if (StringUtils.isEmptyOrNullStr(attrName)) {
                             continue;
+                        }
 
                         switch (attrName) {
                             case "name":
@@ -224,8 +234,9 @@ public class ShortcutManager {
 
                         String attrName = xmlParser.getAttributeName(i);
                         //Zog.d("intent 属性:" + attrName);
-                        if (StringUtils.isEmptyOrNullStr(attrName))
+                        if (StringUtils.isEmptyOrNullStr(attrName)) {
                             continue;
+                        }
 
                         switch (attrName) {
                             case "action":
@@ -276,8 +287,9 @@ public class ShortcutManager {
                             //Zog.d("categories 属性：" + xmlParser.getAttributeName(0)
 //                                    + ": " + xmlParser.getAttributeValue(0));
                             String cat = xmlParser.getAttributeValue(j);
-                            if (StringUtils.isEmptyOrNullStr(cat))
+                            if (StringUtils.isEmptyOrNullStr(cat)) {
                                 continue;
+                            }
 
                             cats.add(cat);
                         }
