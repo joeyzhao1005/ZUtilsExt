@@ -1,8 +1,5 @@
 package com.kit.utils;
 
-import android.content.Context;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
 
 import com.kit.utils.log.Zog;
 import com.trello.rxlifecycle2.LifecycleProvider;
@@ -10,6 +7,8 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle2.components.support.RxFragment;
+
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -20,6 +19,10 @@ public class RxUtils {
 
 
     public static <T> void computation(LifecycleProvider provider, final RxUtils.RxSimpleTask task, Object... objects) {
+        computation(provider, 0, task, objects);
+    }
+
+    public static <T> void computation(LifecycleProvider provider, long delayMilliseconds, final RxUtils.RxSimpleTask task, Object... objects) {
 
         Observable observable = Observable.create((e) -> {
             Zog.i("newThread subscribe");
@@ -31,6 +34,7 @@ public class RxUtils {
             e.onNext(obj);
             e.onComplete();
         })
+                .delay(delayMilliseconds, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         if (provider != null) {
@@ -41,6 +45,7 @@ public class RxUtils {
             }
         }
         observable.subscribe(new DisposableObserver<T>() {
+            @Override
             public void onNext(T o) {
                 if (!this.isDisposed()) {
                     Zog.i("newThread onNext");
@@ -48,6 +53,7 @@ public class RxUtils {
                 }
             }
 
+            @Override
             public void onError(Throwable e) {
                 if (!this.isDisposed()) {
                     Zog.i("newThread onError");
@@ -55,6 +61,7 @@ public class RxUtils {
                 }
             }
 
+            @Override
             public void onComplete() {
                 if (!this.isDisposed()) {
                     Zog.i("newThread onComplete");
@@ -65,6 +72,10 @@ public class RxUtils {
     }
 
     public static <T> void newThread(LifecycleProvider provider, final RxUtils.RxSimpleTask task, Object... objects) {
+        newThread(provider, 0, task, objects);
+    }
+
+    public static <T> void newThread(LifecycleProvider provider, long delayMilliseconds, final RxUtils.RxSimpleTask task, Object... objects) {
 
         Observable observable = Observable.create((e) -> {
             Zog.i("newThread subscribe");
@@ -75,7 +86,9 @@ public class RxUtils {
 
             e.onNext(obj);
             e.onComplete();
-        }).subscribeOn(Schedulers.newThread())
+        })
+                .delay(delayMilliseconds, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
 
         if (provider != null) {
@@ -86,6 +99,7 @@ public class RxUtils {
             }
         }
         observable.subscribe(new DisposableObserver<T>() {
+            @Override
             public void onNext(T o) {
                 if (!this.isDisposed()) {
                     Zog.i("newThread onNext");
@@ -93,6 +107,7 @@ public class RxUtils {
                 }
             }
 
+            @Override
             public void onError(Throwable e) {
                 if (!this.isDisposed()) {
                     Zog.i("newThread onError");
@@ -100,6 +115,7 @@ public class RxUtils {
                 }
             }
 
+            @Override
             public void onComplete() {
                 if (!this.isDisposed()) {
                     Zog.i("newThread onComplete");
@@ -110,16 +126,22 @@ public class RxUtils {
     }
 
     public static <T> void io(LifecycleProvider provider, final RxUtils.RxSimpleTask task) {
+        io(provider, 0, task);
+    }
+
+    public static <T> void io(LifecycleProvider provider, long delayMilliseconds, final RxUtils.RxSimpleTask task) {
 
         Observable observable = Observable.create((e) -> {
             Object obj = task.doSth(new Object[0]);
             if (obj == null) {
-                obj = new Object();
+                obj = new <T>Object();
             }
 
             e.onNext(obj);
             e.onComplete();
-        }).subscribeOn(Schedulers.io())
+        })
+                .delay(delayMilliseconds, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         if (provider != null) {
             if (provider instanceof RxAppCompatActivity) {
@@ -129,6 +151,7 @@ public class RxUtils {
             }
         }
         observable.subscribe(new DisposableObserver<T>() {
+            @Override
             public void onNext(T o) {
                 if (!this.isDisposed()) {
                     Zog.i("onNext");
@@ -136,6 +159,7 @@ public class RxUtils {
                 }
             }
 
+            @Override
             public void onError(Throwable e) {
                 if (!this.isDisposed()) {
                     Zog.i("onError");
@@ -143,6 +167,7 @@ public class RxUtils {
                 }
             }
 
+            @Override
             public void onComplete() {
                 if (!this.isDisposed()) {
                     Zog.i("onComplete");
@@ -155,8 +180,12 @@ public class RxUtils {
     private RxUtils() {
     }
 
+
     public abstract static class RxSimpleTask<T> {
 
+        public T getDefault() {
+            return null;
+        }
 
         public T doSth(Object... objects) {
             return null;
