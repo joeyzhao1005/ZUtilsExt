@@ -4,4 +4,10 @@
     android:versionCode="1"
     android:versionName="1.0">
 
+    <application>
+        <activity
+            android:name="com.kit.permission.PermissionActivity"
+            android:theme="@style/ThemeNoDisplay" />
+
+    </application>
 </manifest>
