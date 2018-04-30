@@ -89,6 +89,7 @@ public class BaseAppCompatActivity extends RxAppCompatActivity implements BaseV4
         }
     }
 
+
     public void destory() {
         ActivityManager.getInstance().popActivity(this);
         IntentManager.get().destory(this);
