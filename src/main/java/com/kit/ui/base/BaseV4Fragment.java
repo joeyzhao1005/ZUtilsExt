@@ -3,12 +3,21 @@ package com.kit.ui.base;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.kit.utils.ResWrapper;
 import com.kit.utils.intent.ArgumentsManager;
@@ -25,15 +34,51 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
 public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentInit, View.OnClickListener {
 
 
-    public OnFragmentInteractionListener mListener;
-
-
-    public BaseV4Fragment() {
-        // Required empty public constructor
+    public TextView getTextView(@IdRes int viewId) {
+        return getView(viewId);
     }
+
+    public ImageView getImageView(@IdRes int viewId) {
+        return getView(viewId);
+    }
+
+    public ImageButton getImageButton(@IdRes int viewId) {
+        return getView(viewId);
+    }
+
+    public Button getButton(@IdRes int viewId) {
+        return getView(viewId);
+    }
+
+    public EditText getEditText(@IdRes int viewId) {
+        return getView(viewId);
+    }
+
+    public RatingBar getRatingBar(@IdRes int viewId) {
+        return getView(viewId);
+    }
+
+    public ProgressBar getProgressBar(@IdRes int viewId) {
+        return getView(viewId);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T extends View> T getView(@IdRes int viewId) {
+        View view = views.get(viewId);
+        if (view == null) {
+            view = layout.findViewById(viewId);
+            views.put(viewId, view);
+        }
+        return (T) view;
+    }
+
+    private SparseArray<View> views;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        views = new SparseArray<>();
         if (getActivity() != null) {
             ResWrapper.getInstance().setContext(getActivity());
         }
@@ -143,6 +188,7 @@ public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentIn
     /**
      * 初始化界面
      */
+    @Override
     public View createView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
         if (layout != null) {
@@ -195,12 +241,20 @@ public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentIn
 
     public void destory() {
         ArgumentsManager.get().destory(this);
+        views.clear();
 
 //        onPause();
 //        onStop();
 //        onDestroyView();
 //        onDestroy();
 //        onDetach();
+    }
+
+    public OnFragmentInteractionListener mListener;
+
+
+    public BaseV4Fragment() {
+        // Required empty public constructor
     }
 
     View layout;
