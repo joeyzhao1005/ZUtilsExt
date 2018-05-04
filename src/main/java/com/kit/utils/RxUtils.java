@@ -140,6 +140,9 @@ public class RxUtils {
                 obj = task.getDefault();
             }
 
+            if(obj==null){
+                Zog.e("task:"+task+" default is null");
+            }
             e.onNext(obj);
             e.onComplete();
         })
