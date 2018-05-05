@@ -31,7 +31,7 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
  * Use the newInstance() factory method to
  * create an instance of this fragment.
  */
-public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentInit, View.OnClickListener {
+public abstract class BaseV4Fragment extends RxFragment implements View.OnClickListener {
 
 
     public TextView getTextView(@IdRes int viewId) {
@@ -165,18 +165,14 @@ public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentIn
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
-
-    public boolean getExtra() {
-
-        return true;
+    protected void getExtra() {
     }
 
 
     /**
      * 去网络或者本地加载数据
      */
-    public boolean loadData() {
-        return true;
+    protected void loadData(){
     }
 
     protected abstract int layoutResID();
@@ -188,8 +184,7 @@ public abstract class BaseV4Fragment extends RxFragment implements IDoFragmentIn
     /**
      * 初始化界面
      */
-    @Override
-    public View createView(LayoutInflater inflater, ViewGroup container,
+    protected View createView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
         if (layout != null) {
             ViewGroup parent = (ViewGroup) layout.getParent();

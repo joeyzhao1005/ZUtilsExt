@@ -48,8 +48,7 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity implemen
     /**
      * 去网络或者本地加载数据
      */
-    protected boolean loadData() {
-        return true;
+    protected void loadData(){
     }
 
 
@@ -60,9 +59,7 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity implemen
      * i
      * 获得上一个Activity传过来的值
      */
-    protected boolean getExtra() {
-
-        return true;
+    protected void getExtra() {
     }
 
     /**
