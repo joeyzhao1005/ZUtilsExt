@@ -24,6 +24,8 @@ import com.kit.utils.intent.ArgumentsManager;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 /**
+ * @author Zhao
+ * <p>
  * A simple {@link android.support.v4.app.Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link BaseV4Fragment.OnFragmentInteractionListener} interface
@@ -31,7 +33,7 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
  * Use the newInstance() factory method to
  * create an instance of this fragment.
  */
-public abstract class BaseV4Fragment extends RxFragment implements View.OnClickListener {
+public abstract class BaseV4Fragment extends RxFragment implements View.OnClickListener, View.OnLongClickListener {
 
 
     public TextView getTextView(@IdRes int viewId) {
@@ -73,7 +75,6 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
     }
 
     private SparseArray<View> views;
-
 
 
     @Override
@@ -165,6 +166,7 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
+
     protected void getExtra() {
     }
 
@@ -172,7 +174,7 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
     /**
      * 去网络或者本地加载数据
      */
-    protected void loadData(){
+    protected void loadData() {
     }
 
     protected abstract int layoutResID();
@@ -185,7 +187,7 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
      * 初始化界面
      */
     protected View createView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
+                              Bundle savedInstanceState) {
         if (layout != null) {
             ViewGroup parent = (ViewGroup) layout.getParent();
             if (parent != null) {
@@ -211,7 +213,7 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
         onViewClick(view);
     }
 
-    public void onViewClick(@NonNull  View view) {
+    public void onViewClick(@NonNull View view) {
     }
 
     protected void setOnClickListener(View... views) {
@@ -226,6 +228,35 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
             v.setOnClickListener(this);
         }
     }
+
+
+    @Override
+    public boolean onLongClick(View view) {
+        if (view == null || view.getId() == 0) {
+            return false;
+        }
+
+        onViewLongClick(view);
+
+        return true;
+    }
+
+    public void onViewLongClick(@NonNull View view) {
+    }
+
+    protected void setOnLongClickListener(View... views) {
+        if (views == null || views.length <= 0) {
+            return;
+        }
+
+        for (View v : views) {
+            if (v == null) {
+                continue;
+            }
+            v.setOnLongClickListener(this);
+        }
+    }
+
 
     /**
      * 去网络或者本地加载数据
