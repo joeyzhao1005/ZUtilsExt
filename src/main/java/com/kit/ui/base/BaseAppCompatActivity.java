@@ -36,7 +36,6 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity implemen
         loadData();
         initWidgetWithExtra();
 
-        UIHandler.prepare();
 
         ActivityManager.getInstance().pushActivity(this);
     }

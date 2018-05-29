@@ -8,6 +8,8 @@ import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -49,7 +51,7 @@ public class RxUtils {
         }
         observable.subscribe(new DisposableObserver<T>() {
             @Override
-            public void onNext(T o) {
+            public void onNext(@NotNull T o) {
                 if (!this.isDisposed()) {
 //                    Zog.i("newThread onNext");
                     task.onNext(o);
@@ -103,7 +105,7 @@ public class RxUtils {
         }
         observable.subscribe(new DisposableObserver<T>() {
             @Override
-            public void onNext(T o) {
+            public void onNext(@NotNull T o) {
                 if (!this.isDisposed()) {
 //                    Zog.i("newThread onNext");
                     task.onNext(o);
@@ -158,7 +160,7 @@ public class RxUtils {
         }
         observable.subscribe(new DisposableObserver<T>() {
             @Override
-            public void onNext(T o) {
+            public void onNext(@NotNull T o) {
                 if (!this.isDisposed()) {
 //                    Zog.i("onNext");
                     task.onNext(o);
