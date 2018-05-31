@@ -283,5 +283,7 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
         // Required empty public constructor
     }
 
+
+
     View layout;
 }
