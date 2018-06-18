@@ -10,6 +10,7 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -25,6 +26,7 @@ public class RxUtils {
     }
 
     public static <T> void computation(LifecycleProvider provider, long delayMilliseconds, final RxUtils.RxSimpleTask task, Object... objects) {
+        WeakReference lifecycleProviderWeakReference = new WeakReference<LifecycleProvider>(provider);
 
         if (task == null) {
             return;
@@ -42,11 +44,11 @@ public class RxUtils {
                 .delay(delayMilliseconds, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
-        if (provider != null) {
-            if (provider instanceof RxAppCompatActivity) {
-                observable.compose(provider.<T>bindUntilEvent(ActivityEvent.DESTROY));
-            } else if (provider instanceof RxFragment) {
-                observable.compose(provider.<T>bindUntilEvent(FragmentEvent.DESTROY));
+        if (lifecycleProviderWeakReference.get() != null) {
+            if (lifecycleProviderWeakReference.get() instanceof RxAppCompatActivity) {
+                observable.compose(((RxAppCompatActivity) lifecycleProviderWeakReference.get()).bindUntilEvent(ActivityEvent.DESTROY));
+            } else if (lifecycleProviderWeakReference.get() instanceof RxFragment) {
+                observable.compose(((RxFragment) lifecycleProviderWeakReference.get()).bindUntilEvent(FragmentEvent.DESTROY));
             }
         }
         observable.subscribe(new DisposableObserver<T>() {
@@ -81,6 +83,7 @@ public class RxUtils {
     }
 
     public static <T> void newThread(LifecycleProvider provider, long delayMilliseconds, final RxUtils.RxSimpleTask task, Object... objects) {
+        WeakReference lifecycleProviderWeakReference = new WeakReference<LifecycleProvider>(provider);
 
         Observable observable = Observable.create((e) -> {
 //            Zog.i("newThread subscribe");
@@ -96,11 +99,11 @@ public class RxUtils {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
 
-        if (provider != null) {
-            if (provider instanceof RxAppCompatActivity) {
-                observable.compose(provider.<T>bindUntilEvent(ActivityEvent.DESTROY));
-            } else if (provider instanceof RxFragment) {
-                observable.compose(provider.<T>bindUntilEvent(FragmentEvent.DESTROY));
+        if (lifecycleProviderWeakReference.get() != null) {
+            if (lifecycleProviderWeakReference.get() instanceof RxAppCompatActivity) {
+                observable.compose(((RxAppCompatActivity) lifecycleProviderWeakReference.get()).bindUntilEvent(ActivityEvent.DESTROY));
+            } else if (lifecycleProviderWeakReference.get() instanceof RxFragment) {
+                observable.compose(((RxFragment) lifecycleProviderWeakReference.get()).bindUntilEvent(FragmentEvent.DESTROY));
             }
         }
         observable.subscribe(new DisposableObserver<T>() {
@@ -135,6 +138,7 @@ public class RxUtils {
     }
 
     public static <T> void io(LifecycleProvider provider, long delayMilliseconds, final RxUtils.RxSimpleTask task) {
+        WeakReference lifecycleProviderWeakReference = new WeakReference<LifecycleProvider>(provider);
 
         Observable observable = Observable.create((e) -> {
             Object obj = task.doSth(new Object[0]);
@@ -151,11 +155,11 @@ public class RxUtils {
                 .delay(delayMilliseconds, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-        if (provider != null) {
-            if (provider instanceof RxAppCompatActivity) {
-                observable.compose(provider.<T>bindUntilEvent(ActivityEvent.DESTROY));
-            } else if (provider instanceof RxFragment) {
-                observable.compose(provider.<T>bindUntilEvent(FragmentEvent.DESTROY));
+        if (lifecycleProviderWeakReference.get() != null) {
+            if (lifecycleProviderWeakReference.get() instanceof RxAppCompatActivity) {
+                observable.compose(((RxAppCompatActivity) lifecycleProviderWeakReference.get()).bindUntilEvent(ActivityEvent.DESTROY));
+            } else if (lifecycleProviderWeakReference.get() instanceof RxFragment) {
+                observable.compose(((RxFragment) lifecycleProviderWeakReference.get()).bindUntilEvent(FragmentEvent.DESTROY));
             }
         }
         observable.subscribe(new DisposableObserver<T>() {
