@@ -13,14 +13,12 @@ public abstract class BaseActivity extends BaseAppCompatActivity  implements Bas
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ResWrapper.getInstance().setContext(this);
         initTheme();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        ResWrapper.getInstance().setContext(this);
     }
 
     public void initTheme() {

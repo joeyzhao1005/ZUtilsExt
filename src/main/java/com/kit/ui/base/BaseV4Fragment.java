@@ -80,21 +80,11 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         views = new SparseArray<>();
-        if (getActivity() != null) {
-            ResWrapper.getInstance().setContext(getActivity());
-        }
         super.onCreate(savedInstanceState);
 
         getExtra();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getActivity() != null) {
-            ResWrapper.getInstance().setContext(getActivity());
-        }
-    }
 
     @Override
     public void onDestroy() {
@@ -135,9 +125,6 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
     public void onAttach(Context activity) {
         super.onAttach(activity);
 
-        if (getActivity() != null) {
-            ResWrapper.getInstance().setContext(getActivity());
-        }
         try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
