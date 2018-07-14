@@ -1,8 +1,10 @@
 package com.kit.imagelib.interfaces;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -30,13 +32,16 @@ public interface IImageLoader {
     void loadImage(String url, @Nullable ImageLoadingListener imageLoadingListener
             , @Nullable ImageLoadingProgressListener imageLoadingProgressListener);
 
-    void clearCache(Uri uri);
 
     void clearFileCache(String path);
 
     void clearCaches();
 
-    void resume();
+    void resume(Activity activity);
+    void resume(Fragment fragment);
+
 
     void pause();
+    void pause(Activity activity);
+    void pause(Fragment fragment);
 }
