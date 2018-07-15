@@ -66,6 +66,9 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
 
     @SuppressWarnings("unchecked")
     public <T extends View> T getView(@IdRes int viewId) {
+        if (views == null) {
+            return null;
+        }
         View view = views.get(viewId);
         if (view == null) {
             view = layout.findViewById(viewId);
@@ -269,7 +272,6 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
     public BaseV4Fragment() {
         // Required empty public constructor
     }
-
 
 
     View layout;
