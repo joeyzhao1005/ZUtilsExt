@@ -39,12 +39,7 @@ android {
     }
 
     flavorDimensions "default"
-    productFlavors {
-        zhao {}
-//        yingyongbao {}
-//        baidu {}
-//        xiaomi {}
-    }
+
     buildTypes {
         debug {}
         prePublish {}
