@@ -22,7 +22,7 @@ import com.kit.utils.intent.IntentManager;
 import com.kit.utils.log.Zog;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
-public abstract class BaseAppCompatActivity extends RxAppCompatActivity implements BaseV4Fragment.OnFragmentInteractionListener {
+public abstract class BaseAppCompatActivity extends RxAppCompatActivity implements BaseV4Fragment.OnFragmentInteractionListener , View.OnClickListener {
 
 
     @Override
@@ -103,6 +103,34 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity implemen
     public ProgressBar getProgressBar(@IdRes int viewId) {
         return getView(viewId);
     }
+
+    protected void onViewClick(View view) {
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == null || view.getId() == 0) {
+            return;
+        }
+
+        onViewClick(view);
+
+    }
+
+    protected void setOnClickListener(View... views) {
+        if (views == null || views.length <= 0) {
+            return;
+        }
+
+        for (View v : views) {
+            if (v == null) {
+                continue;
+            }
+            v.setOnClickListener(this);
+        }
+    }
+
 
     @SuppressWarnings("unchecked")
     public <T extends View> T getView(@IdRes int viewId) {
