@@ -19,7 +19,6 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.kit.utils.ResWrapper;
 import com.kit.utils.intent.ArgumentsManager;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
@@ -99,7 +98,6 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         return createView(inflater, container,
                 savedInstanceState);
     }
