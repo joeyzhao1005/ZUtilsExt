@@ -8,13 +8,13 @@ import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -53,7 +53,7 @@ public class RxUtils {
         }
         observable.subscribe(new DisposableObserver<T>() {
             @Override
-            public void onNext(@NotNull T o) {
+            public void onNext(@NonNull T o) {
                 if (!this.isDisposed()) {
 //                    Zog.i("newThread onNext");
                     task.onNext(o);
@@ -108,7 +108,7 @@ public class RxUtils {
         }
         observable.subscribe(new DisposableObserver<T>() {
             @Override
-            public void onNext(@NotNull T o) {
+            public void onNext(@NonNull T o) {
                 if (!this.isDisposed()) {
 //                    Zog.i("newThread onNext");
                     task.onNext(o);
@@ -164,7 +164,7 @@ public class RxUtils {
         }
         observable.subscribe(new DisposableObserver<T>() {
             @Override
-            public void onNext(@NotNull T o) {
+            public void onNext(@NonNull T o) {
                 if (!this.isDisposed()) {
 //                    Zog.i("onNext");
                     task.onNext(o);
