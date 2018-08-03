@@ -105,6 +105,7 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initWidget(layout);
         initWidgetWithExtra();
         loadData();
     }
@@ -184,7 +185,6 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
             return layout;
         }
         layout = inflater.inflate(layoutResID(), container, false);
-        initWidget(layout);
         return layout;
     }
 
