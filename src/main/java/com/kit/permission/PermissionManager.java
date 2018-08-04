@@ -16,12 +16,31 @@ import android.os.Parcelable;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.PermissionChecker;
 import android.util.Log;
+
+import com.kit.app.application.AppMaster;
+import com.kit.utils.PermissionCallback;
+import com.kit.utils.PermissionUtils;
 
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PermissionManager {
+    public static boolean check(Context context, @NonNull String permission) {
+        return PermissionUtils.check(context, permission);
+    }
 
+    public static void check(Context context, @NonNull String permission, PermissionCallback callback) {
+        PermissionUtils.check(context, permission, callback);
+
+    }
+    public static boolean check(@NonNull String permission) {
+        return check(AppMaster.getInstance().getAppContext(), permission);
+    }
+
+    public static void check(@NonNull String permission, PermissionCallback callback) {
+        check(AppMaster.getInstance().getAppContext(), permission, callback);
+    }
 
 //    /**
 //     * 检查用户是否登录 是否有权限做事情
@@ -80,8 +99,8 @@ public class PermissionManager {
      * @param context
      * @param listener
      * @param permissions 需要申请授权的权限
-     * @param showTip    当用户拒绝授权时，是否显示提示
-     * @param tip        当用户拒绝时要显示Dialog设置
+     * @param showTip     当用户拒绝授权时，是否显示提示
+     * @param tip         当用户拒绝时要显示Dialog设置
      */
     public static void requestPermission(@NonNull Context context, @NonNull PermissionListener listener
             , @NonNull String[] permissions, boolean showTip, @Nullable TipInfo tip) {
