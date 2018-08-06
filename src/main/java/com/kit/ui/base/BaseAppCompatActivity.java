@@ -131,6 +131,14 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity implemen
         }
     }
 
+    public View view(@IdRes int viewId) {
+        View view = views.get(viewId);
+        if (view == null) {
+            view = findViewById(viewId);
+            views.put(viewId, view);
+        }
+        return  view;
+    }
 
     @SuppressWarnings("unchecked")
     public <T extends View> T getView(@IdRes int viewId) {
