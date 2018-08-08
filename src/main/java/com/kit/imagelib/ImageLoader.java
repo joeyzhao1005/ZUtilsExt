@@ -20,6 +20,4 @@ public class ImageLoader {
     public static void setImageLoader(IImageLoader yourImageLoader) {
         iImageLoader = yourImageLoader;
     }
-
-
 }
