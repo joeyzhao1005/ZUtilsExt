@@ -85,7 +85,7 @@ public class PermissionManager {
      * @param listener
      * @param permissions 要申请的权限
      */
-    public static void requestPermission(Context context, PermissionListener listener, String... permissions) {
+    public static void requestPermission(@NonNull Context context, PermissionListener listener, String... permissions) {
         if (permissions == null || permissions.length <= 0) {
             Log.e(TAG, "permission cannot be null or empty");
             return;
