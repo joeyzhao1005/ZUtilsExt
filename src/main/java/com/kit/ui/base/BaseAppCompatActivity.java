@@ -25,6 +25,8 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 public abstract class BaseAppCompatActivity extends RxAppCompatActivity implements BaseV4Fragment.OnFragmentInteractionListener , View.OnClickListener {
 
 
+    private boolean isShowing;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +40,17 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity implemen
 
 
         ActivityManager.getInstance().pushActivity(this);
+        isShowing = true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isShowing = true;
     }
 
     public boolean isShowing() {
-        return !isFinishing();
+        return isShowing;
     }
 
     /**
@@ -159,6 +168,7 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity implemen
         if (isFinishing()) {
             destory();
         }
+        isShowing = false;
     }
 
 
