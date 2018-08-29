@@ -1,6 +1,8 @@
 package com.kit.utils;
 
 
+import android.support.annotation.NonNull;
+
 import com.kit.utils.log.Zog;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -14,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -164,7 +165,7 @@ public class RxUtils {
         }
         observable.subscribe(new DisposableObserver<T>() {
             @Override
-            public void onNext(@NonNull T o) {
+            public void onNext(@android.support.annotation.NonNull T o) {
                 if (!this.isDisposed()) {
 //                    Zog.i("onNext");
                     task.onNext(o);
