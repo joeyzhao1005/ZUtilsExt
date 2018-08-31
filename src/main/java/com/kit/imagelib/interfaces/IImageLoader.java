@@ -45,6 +45,7 @@ public interface IImageLoader {
 
 
     void clearFileCache(String path);
+    void clearFileMemoryCache(String path);
 
     void clearCaches();
 
