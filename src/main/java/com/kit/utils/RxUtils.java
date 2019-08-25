@@ -1,7 +1,7 @@
 package com.kit.utils;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.kit.utils.log.Zog;
 import com.trello.rxlifecycle2.LifecycleProvider;
@@ -165,7 +165,7 @@ public class RxUtils {
         }
         observable.subscribe(new DisposableObserver<T>() {
             @Override
-            public void onNext(@android.support.annotation.NonNull T o) {
+            public void onNext(@androidx.annotation.NonNull T o) {
                 if (!this.isDisposed()) {
 //                    Zog.i("onNext");
                     task.onNext(o);

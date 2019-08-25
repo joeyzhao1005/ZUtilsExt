@@ -14,9 +14,9 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.PermissionChecker;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.PermissionChecker;
 import android.util.Log;
 
 import com.kit.app.application.AppMaster;
@@ -146,8 +146,8 @@ public class PermissionManager {
         }
 
         for (String per : permissions) {
-            int result = android.support.v4.content.PermissionChecker.checkSelfPermission(context, per);
-            if (result != android.support.v4.content.PermissionChecker.PERMISSION_GRANTED) {
+            int result = androidx.core.content.PermissionChecker.checkSelfPermission(context, per);
+            if (result != androidx.core.content.PermissionChecker.PERMISSION_GRANTED) {
                 return false;
             }
         }

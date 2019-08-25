@@ -2,8 +2,8 @@ package com.kit.ui.base;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.IdRes;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +17,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.kit.app.ActivityManager;
-import com.kit.app.UIHandler;
 import com.kit.utils.intent.IntentManager;
 import com.kit.utils.log.Zog;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
