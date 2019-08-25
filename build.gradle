@@ -7,10 +7,11 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${android_sdk_version}"
     implementation "com.android.support:support-annotations:${android_sdk_version}"
 
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation "com.google.code.gson:gson:${gson}"
+
 
 // If you want pre-written Activities and Fragments you can subclass as providers
-    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
+    implementation "com.trello.rxlifecycle2:rxlifecycle-components:${rxlifecycle}"
 
     implementation project(':ZUtils')
 
