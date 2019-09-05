@@ -1,14 +1,14 @@
 package com.kit.utils;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.kit.utils.log.Zog;
-import com.trello.rxlifecycle2.LifecycleProvider;
-import com.trello.rxlifecycle2.android.ActivityEvent;
-import com.trello.rxlifecycle2.android.FragmentEvent;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
-import com.trello.rxlifecycle2.components.support.RxFragment;
+import com.trello.rxlifecycle3.LifecycleProvider;
+import com.trello.rxlifecycle3.android.ActivityEvent;
+import com.trello.rxlifecycle3.android.FragmentEvent;
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle3.components.support.RxFragment;
 
 
 import java.lang.ref.WeakReference;
@@ -165,7 +165,7 @@ public class RxUtils {
         }
         observable.subscribe(new DisposableObserver<T>() {
             @Override
-            public void onNext(@android.support.annotation.NonNull T o) {
+            public void onNext(@androidx.annotation.NonNull T o) {
                 if (!this.isDisposed()) {
 //                    Zog.i("onNext");
                     task.onNext(o);
