@@ -20,7 +20,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.kit.utils.intent.ArgumentsManager;
-import com.trello.rxlifecycle2.components.support.RxFragment;
+import com.trello.rxlifecycle3.components.support.RxFragment;
 
 /**
  * @author Zhao

@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.kit.app.ActivityManager;
 import com.kit.utils.intent.IntentManager;
 import com.kit.utils.log.Zog;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
 public abstract class BaseAppCompatActivity extends RxAppCompatActivity implements BaseV4Fragment.OnFragmentInteractionListener , View.OnClickListener {
 
