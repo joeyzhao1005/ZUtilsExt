@@ -183,7 +183,7 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity implemen
 
     public void destory() {
         ActivityManager.getInstance().popActivity(this);
-        IntentManager.get().destory(this);
+        IntentManager.get().destory(getIntent());
         views.clear();
     }
 
