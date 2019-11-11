@@ -17,6 +17,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.kit.app.ActivityManager;
+import com.kit.extend.R;
+import com.kit.utils.DarkMode;
 import com.kit.utils.intent.IntentManager;
 import com.kit.utils.log.Zog;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
@@ -30,6 +32,7 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity implemen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initWindow();
+        darkMode();
         setContentView(layoutResID());
         this.views = new SparseArray<>();
         getExtra();
@@ -40,6 +43,14 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity implemen
 
         ActivityManager.getInstance().pushActivity(this);
         isShowing = true;
+    }
+
+    protected void darkMode(){
+//        if (DarkMode.isDarkMode()) {
+//            setTheme(R.style.main_theme_dark);
+//        }else {
+//            setTheme(R.style.main_theme_light);
+//        }
     }
 
     @Override
