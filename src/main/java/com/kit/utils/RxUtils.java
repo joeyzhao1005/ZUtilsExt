@@ -19,6 +19,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * @author Zhao
+ */
 public class RxUtils {
 
 
@@ -87,7 +90,6 @@ public class RxUtils {
         WeakReference lifecycleProviderWeakReference = new WeakReference<LifecycleProvider>(provider);
 
         Observable observable = Observable.create((e) -> {
-//            Zog.i("newThread subscribe");
             Object obj = task.doSth(objects);
             if (obj == null) {
                 obj = task.getDefault();
