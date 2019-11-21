@@ -94,7 +94,9 @@ public class RxUtils {
             if (obj == null) {
                 obj = task.getDefault();
             }
-
+            if (obj == null) {
+                Zog.e("I will crash");
+            }
             e.onNext(obj);
             e.onComplete();
         })
@@ -149,8 +151,8 @@ public class RxUtils {
                 obj = task.getDefault();
             }
 
-            if(obj==null){
-                Zog.e("task:"+task+" default is null");
+            if (obj == null) {
+                Zog.e("task:" + task + " default is null");
             }
             e.onNext(obj);
             e.onComplete();
