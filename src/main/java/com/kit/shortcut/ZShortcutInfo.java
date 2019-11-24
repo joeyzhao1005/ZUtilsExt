@@ -310,8 +310,15 @@ public class ZShortcutInfo implements Cloneable {
      * 耗时操作 外部使用请在线程中使用
      */
     public void deal() {
-        PathDrawable pathDrawable = new PathDrawable(iconDrawablePathData, Color.parseColor(iconDrawableFillColor));
-        Bitmap bitmap = DrawableUtils.drawableToBitmap(pathDrawable, DensityUtils.dip2px(20),DensityUtils.dip2px(20));
+        if (StringUtils.isEmptyOrNullStr(iconDrawablePathData)) {
+            return;
+        }
+        int color = Color.parseColor(iconDrawableFillColor);
+        if (color == Color.TRANSPARENT) {
+            return;
+        }
+        PathDrawable pathDrawable = new PathDrawable(iconDrawablePathData, color);
+        Bitmap bitmap = DrawableUtils.drawableToBitmap(pathDrawable, DensityUtils.dip2px(20), DensityUtils.dip2px(20));
         iconDrawable = new BitmapDrawable(bitmap);
     }
 
