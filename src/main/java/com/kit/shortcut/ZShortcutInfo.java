@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.kit.app.application.AppMaster;
 import com.kit.utils.ColorUtils;
 import com.kit.utils.DensityUtils;
@@ -270,40 +271,77 @@ public class ZShortcutInfo implements Cloneable {
     @Expose(serialize = false)
     Intent intent;
 
+    @SerializedName("intentStr")
     String intentStr;
 
+    @SerializedName("isPinned")
     boolean isPinned;
+
+    @SerializedName("isDynamic")
     boolean isDynamic;
 
+    @SerializedName("rank")
     int rank;
 
+    @SerializedName("componentName")
     ComponentName componentName;
 
+    @SerializedName("shortcutId")
     String shortcutId;
+
+    @SerializedName("enabled")
     boolean enabled;
 
+    @SerializedName("iconDrawable")
     Drawable iconDrawable;
+
+    @SerializedName("shortLabel")
     String shortLabel;
+
+    @SerializedName("longLabel")
     String longLabel;
+
+    @SerializedName("disabledMessage")
     String disabledMessage;
+
+    @SerializedName("icon")
     int icon;
+
+    @SerializedName("shortcutShortLabel")
     int shortcutShortLabel;
+
+    @SerializedName("shortcutLongLabel")
     int shortcutLongLabel;
+
+    @SerializedName("shortcutDisabledMessage")
     int shortcutDisabledMessage;
 
 
+    @SerializedName("action")
     String action;
+
+    @SerializedName("targetPackage")
     String targetPackage;
+
+    @SerializedName("targetClass")
     String targetClass;
 
+    @SerializedName("categories")
     Set<String> categories;
+
+    @SerializedName("extras")
     Set<Extra> extras;
 
+    @SerializedName("data")
     String data;
 
+    @SerializedName("iconDrawablePathData")
     String iconDrawablePathData;
+
+    @SerializedName("iconDrawableFillColor")
     String iconDrawableFillColor;
 
+    @SerializedName("isRootLaunch")
     boolean isRootLaunch;
 
     /**
