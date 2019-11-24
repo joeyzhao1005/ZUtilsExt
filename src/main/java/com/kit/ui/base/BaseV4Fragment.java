@@ -3,10 +3,6 @@ package com.kit.ui.base;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +13,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.Fragment;
+
 import com.kit.utils.intent.ArgumentsManager;
+import com.kit.utils.log.Zog;
 import com.trello.rxlifecycle3.components.support.RxFragment;
 
 /**
@@ -34,6 +38,13 @@ import com.trello.rxlifecycle3.components.support.RxFragment;
  */
 public abstract class BaseV4Fragment extends RxFragment implements View.OnClickListener, View.OnLongClickListener {
 
+    public SwitchCompat getSwitchCompat(@IdRes int viewId) {
+        return getView(viewId);
+    }
+
+    public Spinner getSpinner(@IdRes int viewId) {
+        return getView(viewId);
+    }
 
     public TextView getTextView(@IdRes int viewId) {
         return getView(viewId);
@@ -66,10 +77,15 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
     @SuppressWarnings("unchecked")
     public <T extends View> T getView(@IdRes int viewId) {
         if (views == null) {
+            Zog.e("views is null");
             return null;
         }
+
         View view = views.get(viewId);
         if (view == null) {
+            if (layout == null) {
+                return null;
+            }
             view = layout.findViewById(viewId);
             views.put(viewId, view);
         }
@@ -78,6 +94,17 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
 
     private SparseArray<View> views;
 
+    public boolean isAlive() {
+        return !isDead() && isAdded();
+    }
+
+    public boolean isDead() {
+        return isRemoving() || isDetached();
+    }
+
+    public boolean isCreated() {
+        return layout != null;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
