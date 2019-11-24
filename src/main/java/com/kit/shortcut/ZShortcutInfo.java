@@ -1,11 +1,29 @@
 package com.kit.shortcut;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
+import android.os.Build;
+
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.gson.annotations.Expose;
+import com.kit.app.application.AppMaster;
+import com.kit.utils.ColorUtils;
+import com.kit.utils.DensityUtils;
+import com.kit.utils.DrawableUtils;
 import com.kit.utils.StringUtils;
+import com.kit.utils.VectorDrawableUtils;
+import com.kit.utils.log.Zog;
+import com.kit.vector.PathDrawable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -229,6 +247,23 @@ public class ZShortcutInfo implements Cloneable {
         this.serialNumberForUser = serialNumberForUser;
     }
 
+    public String getIconDrawablePathData() {
+        return iconDrawablePathData;
+    }
+
+    public void setIconDrawablePathData(String iconDrawablePathData) {
+        this.iconDrawablePathData = iconDrawablePathData;
+    }
+
+    public String getIconDrawableFillColor() {
+        return iconDrawableFillColor;
+    }
+
+    public void setIconDrawableFillColor(String iconDrawableFillColor) {
+        this.iconDrawableFillColor = iconDrawableFillColor;
+    }
+
+
     long serialNumberForUser;
 
 
@@ -266,7 +301,20 @@ public class ZShortcutInfo implements Cloneable {
 
     String data;
 
+    String iconDrawablePathData;
+    String iconDrawableFillColor;
+
     boolean isRootLaunch;
+
+    /**
+     * 耗时操作 外部使用请在线程中使用
+     */
+    public void deal() {
+        PathDrawable pathDrawable = new PathDrawable(iconDrawablePathData, Color.parseColor(iconDrawableFillColor));
+        Bitmap bitmap = DrawableUtils.drawableToBitmap(pathDrawable, DensityUtils.dip2px(20),DensityUtils.dip2px(20));
+        iconDrawable = new BitmapDrawable(bitmap);
+    }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -277,7 +325,7 @@ public class ZShortcutInfo implements Cloneable {
     }
 
     @Override
-    public ZShortcutInfo clone() throws CloneNotSupportedException {
+    public ZShortcutInfo clone() {
         ZShortcutInfo zShortcutInfo = new ZShortcutInfo();
         zShortcutInfo.setComponentName(this.componentName);
         zShortcutInfo.setShortcutId(this.shortcutId);
@@ -303,6 +351,8 @@ public class ZShortcutInfo implements Cloneable {
         zShortcutInfo.setPinned(this.isPinned);
         zShortcutInfo.setRank(this.rank);
         zShortcutInfo.setSerialNumberForUser(this.serialNumberForUser);
+        zShortcutInfo.setIconDrawablePathData(this.iconDrawablePathData);
+        zShortcutInfo.setIconDrawableFillColor(this.iconDrawableFillColor);
         return zShortcutInfo;
     }
 }

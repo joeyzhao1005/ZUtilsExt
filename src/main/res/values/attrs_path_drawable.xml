@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="PathDrawable">
+    <!-- path bounds width -->
+    <attr name="path_width" format="float"/>
+    <!-- path bounds height -->
+    <attr name="path_height" format="float"/>
+    <!-- background drawable -->
+    <attr name="android:background" />
+    <!-- xml drawable resource -->
+    <attr name="xml_drawable" format="reference"/>
+    <!-- viewport padding -->
+    <attr name="android:padding" />
+    <attr name="android:paddingLeft" />
+    <attr name="android:paddingTop" />
+    <attr name="android:paddingRight" />
+    <attr name="android:paddingBottom" />
+    <attr name="scale_type">
+      <enum name="fill" value="0" />
+      <enum name="start" value="1" />
+      <enum name="center" value="2" />
+      <enum name="end" value="3" />
+    </attr>
+
+    <!-- layer tag -->
+    <attr name="android:tag" />
+    <!-- path data -->
+    <attr name="data" format="string" />
+    <!-- stroke color -->
+    <attr name="stroke_color" format="color" />
+    <!-- stroke width -->
+    <attr name="stroke_width" format="dimension" />
+    <!-- path stroke style -->
+    <attr name="stroke_style">
+      <flag name="stroke" value="1" />
+      <flag name="fill" value="2" />
+    </attr>
+    <!-- path cap type -->
+    <attr name="cap_type">
+      <enum name="butt" value="0" />
+      <enum name="round" value="1" />
+      <enum name="square" value="2" />
+    </attr>
+  </declare-styleable>
+</resources>
