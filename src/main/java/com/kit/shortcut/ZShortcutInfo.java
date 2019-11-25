@@ -264,6 +264,13 @@ public class ZShortcutInfo implements Cloneable {
         this.iconDrawableFillColor = iconDrawableFillColor;
     }
 
+    public int getIconDrawableSize() {
+        return iconDrawableSize;
+    }
+
+    public void setIconDrawableSize(int iconDrawableSize) {
+        this.iconDrawableSize = iconDrawableSize;
+    }
 
     long serialNumberForUser;
 
@@ -344,6 +351,9 @@ public class ZShortcutInfo implements Cloneable {
     @SerializedName("isRootLaunch")
     boolean isRootLaunch;
 
+    @SerializedName("iconDrawableSize")
+    int iconDrawableSize = 32;
+
     /**
      * 耗时操作 外部使用请在线程中使用
      */
@@ -355,8 +365,9 @@ public class ZShortcutInfo implements Cloneable {
         if (color == Color.TRANSPARENT) {
             return;
         }
-        PathDrawable pathDrawable = new PathDrawable(iconDrawablePathData, color);
-        Bitmap bitmap = DrawableUtils.drawableToBitmap(pathDrawable, DensityUtils.dip2px(20), DensityUtils.dip2px(20));
+        int size = iconDrawableSize == 0 ? 32 : iconDrawableSize;
+        PathDrawable pathDrawable = new PathDrawable(iconDrawablePathData, color, size, size);
+        Bitmap bitmap = DrawableUtils.drawableToBitmap(pathDrawable, size, size);
         iconDrawable = new BitmapDrawable(bitmap);
     }
 
@@ -398,6 +409,7 @@ public class ZShortcutInfo implements Cloneable {
         zShortcutInfo.setSerialNumberForUser(this.serialNumberForUser);
         zShortcutInfo.setIconDrawablePathData(this.iconDrawablePathData);
         zShortcutInfo.setIconDrawableFillColor(this.iconDrawableFillColor);
+        zShortcutInfo.setIconDrawableSize(this.iconDrawableSize);
         return zShortcutInfo;
     }
 }

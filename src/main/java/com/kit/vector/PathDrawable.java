@@ -97,6 +97,16 @@ public class PathDrawable extends Drawable {
         init(pathData, 32, 32, color, 5, Style.FILL, Cap.SQUARE);
     }
 
+
+    /**
+     * Create a new PathDrawable based on XML file
+     * <p>
+     * 默认是fill样式
+     */
+    public PathDrawable(String pathData, int color, int width, int height) {
+        init(pathData, width, height, color, 5, Style.FILL, Cap.SQUARE);
+    }
+
     /**
      * Create a new PathDrawable based on XML file
      * 默认是方形样式
