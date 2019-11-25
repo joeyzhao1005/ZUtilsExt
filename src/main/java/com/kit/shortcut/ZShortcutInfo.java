@@ -21,6 +21,7 @@ import com.kit.app.application.AppMaster;
 import com.kit.utils.ColorUtils;
 import com.kit.utils.DensityUtils;
 import com.kit.utils.DrawableUtils;
+import com.kit.utils.ResWrapper;
 import com.kit.utils.StringUtils;
 import com.kit.utils.VectorDrawableUtils;
 import com.kit.utils.log.Zog;
@@ -368,7 +369,7 @@ public class ZShortcutInfo implements Cloneable {
         int size = iconDrawableSize == 0 ? 32 : iconDrawableSize;
         PathDrawable pathDrawable = new PathDrawable(iconDrawablePathData, color, size, size);
         Bitmap bitmap = DrawableUtils.drawableToBitmap(pathDrawable, DensityUtils.dip2px(20), DensityUtils.dip2px(20));
-        iconDrawable = new BitmapDrawable(bitmap);
+        iconDrawable = new BitmapDrawable(ResWrapper.getResources(), bitmap);
     }
 
 
