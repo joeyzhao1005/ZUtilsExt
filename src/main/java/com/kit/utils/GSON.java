@@ -128,6 +128,9 @@ public class GSON {
 
 
     public GSON data(String jsonStr) {
+        if (jsonStr == null) {
+            jsonStr = "";
+        }
         this.jsonStr = jsonStr;
         return this;
     }
