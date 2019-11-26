@@ -1,5 +1,7 @@
 package com.kit.shortcut;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Extra {
 
     public String getName() {
@@ -18,7 +20,10 @@ public class Extra {
         this.value = value;
     }
 
+    @SerializedName("name")
     String name;
+
+    @SerializedName("value")
     Object value;
 
 

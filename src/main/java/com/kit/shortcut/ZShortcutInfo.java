@@ -291,7 +291,7 @@ public class ZShortcutInfo implements Cloneable {
     @SerializedName("rank")
     int rank;
 
-    @SerializedName("componentName")
+    @Expose(serialize = false)
     ComponentName componentName;
 
     @SerializedName("shortcutId")
