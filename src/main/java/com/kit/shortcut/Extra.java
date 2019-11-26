@@ -2,6 +2,9 @@ package com.kit.shortcut;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * @author joeyzhao
+ */
 public class Extra {
 
     public String getName() {
@@ -25,7 +28,4 @@ public class Extra {
 
     @SerializedName("value")
     Object value;
-
-
-
 }
