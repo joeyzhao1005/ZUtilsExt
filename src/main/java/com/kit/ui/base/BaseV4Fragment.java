@@ -117,8 +117,8 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         destory();
+        super.onDestroy();
     }
 
     @Nullable
