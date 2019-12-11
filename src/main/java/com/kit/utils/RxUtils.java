@@ -208,7 +208,7 @@ public class RxUtils {
             return null;
         }
 
-        public void onNext(T returnData) {
+        public void onNext(@NonNull T returnData) {
         }
 
         public void onError(Throwable e) {
