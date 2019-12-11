@@ -1,5 +1,7 @@
 package com.kit.utils;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kit.app.Callback;
@@ -285,6 +287,7 @@ public class GSON {
      * @param <T>
      * @return
      */
+    @Nullable
     public <T> T getSync(Class<T> clazz) {
         if (jsonStr == null || clazz == null) {
             return null;
@@ -298,6 +301,7 @@ public class GSON {
      * @param <T>
      * @return
      */
+    @Nullable
     public <T> T getSync(Type typeOfT) {
         if (jsonStr == null || typeOfT == null) {
             return null;
