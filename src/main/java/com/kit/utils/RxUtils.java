@@ -1,6 +1,8 @@
 package com.kit.utils;
 
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 
 import com.kit.utils.log.Zog;
@@ -22,6 +24,8 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * @author Zhao
  */
+@SuppressWarnings({"ALL", "AlibabaAbstractClassShouldStartWithAbstractNaming"})
+@SuppressLint({"CheckResult", "unchecked"})
 public class RxUtils {
 
 
@@ -89,7 +93,7 @@ public class RxUtils {
     public static <T> void newThread(LifecycleProvider provider, long delayMilliseconds, final RxUtils.RxSimpleTask task, Object... objects) {
         WeakReference lifecycleProviderWeakReference = new WeakReference<LifecycleProvider>(provider);
 
-        Observable observable = Observable.create((e) -> {
+        Observable<Object> iWillCrash = Observable.create((e) -> {
             Object obj = task.doSth(objects);
             if (obj == null) {
                 obj = task.getDefault();
@@ -99,10 +103,11 @@ public class RxUtils {
             }
             e.onNext(obj);
             e.onComplete();
-        })
-                .delay(delayMilliseconds, TimeUnit.MILLISECONDS)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread());
+        });
+        iWillCrash.delay(delayMilliseconds, TimeUnit.MILLISECONDS);
+        iWillCrash.subscribeOn(Schedulers.newThread());
+        iWillCrash.observeOn(AndroidSchedulers.mainThread());
+        Observable observable = iWillCrash;
 
         if (lifecycleProviderWeakReference.get() != null) {
             if (lifecycleProviderWeakReference.get() instanceof RxAppCompatActivity) {
