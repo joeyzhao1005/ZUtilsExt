@@ -368,7 +368,7 @@ public class ZShortcutInfo implements Cloneable {
         }
         int size = iconDrawableSize == 0 ? 32 : iconDrawableSize;
         PathDrawable pathDrawable = new PathDrawable(iconDrawablePathData, color, size, size);
-        Bitmap bitmap = DrawableUtils.drawableToBitmap(pathDrawable, DensityUtils.dip2px(20), DensityUtils.dip2px(20));
+        Bitmap bitmap = DrawableUtils.drawableToBitmap(pathDrawable);
         iconDrawable = new BitmapDrawable(ResWrapper.getResources(), bitmap);
     }
 
