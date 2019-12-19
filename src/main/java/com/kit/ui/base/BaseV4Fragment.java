@@ -111,9 +111,20 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
         views = new SparseArray<>();
         super.onCreate(savedInstanceState);
 
-        getExtra();
+        getExtras();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        isShowing = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        isShowing = false;
+    }
 
     @Override
     public void onDestroy() {
@@ -134,16 +145,12 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
         super.onViewCreated(view, savedInstanceState);
         initWidget(layout);
         initWidgetWithExtra();
-        loadData();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
     }
-
 
     @Override
     public void onAttachFragment(Fragment childFragment) {
@@ -183,14 +190,7 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
         public void onFragmentInteraction(Uri uri);
     }
 
-    protected void getExtra() {
-    }
-
-
-    /**
-     * 去网络或者本地加载数据
-     */
-    protected void loadData() {
+    protected void getExtras() {
     }
 
     protected abstract int layoutResID();
@@ -299,5 +299,7 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
     }
 
 
-    View layout;
+    protected View layout;
+
+    protected boolean isShowing;
 }

@@ -3,7 +3,7 @@ package com.kit.ui.base;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.IdRes;
-import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,8 +17,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.kit.app.ActivityManager;
-import com.kit.extend.R;
-import com.kit.utils.DarkMode;
 import com.kit.utils.intent.IntentManager;
 import com.kit.utils.log.Zog;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
@@ -35,7 +33,7 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity implemen
         darkMode();
         setContentView(layoutResID());
         this.views = new SparseArray<>();
-        getExtra();
+        getExtras();
         initWidget();
         loadData();
         initWidgetWithExtra();
@@ -77,7 +75,7 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity implemen
      * i
      * 获得上一个Activity传过来的值
      */
-    protected void getExtra() {
+    protected void getExtras() {
     }
 
     /**
