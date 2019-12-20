@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <drawable name="light_gray">#ffeeeeee</drawable>
-    <drawable name="light_gray1">#ffefeff0</drawable>
-    <drawable name="light_gray2">#ffe3e3e4</drawable>
-    <drawable name="light_gray3">#ffd8d8d8</drawable>
-    <drawable name="light_gray4">#ffc3c3c3</drawable>
-    <drawable name="light_gray5">#ffc4c4c5</drawable>
-    <drawable name="light_gray6">#ffc4c4c5</drawable>
-
-    <drawable name="dark_gray">#A9A9A9</drawable>
-
-    <drawable name="holo_blue">#FF33E5B5</drawable>
-
-    <drawable name="green_gray">#FF2B6188</drawable>
-    <drawable name="gray_half_2">#20808080</drawable>
-    <drawable name="gray_half_5">#50808080</drawable>
-    <drawable name="gray_half">#80808080</drawable>
     <drawable name="transparent">#00000000</drawable>
     <drawable name="transparent_black1">#10000000</drawable>
     <drawable name="transparent_black2">#20000000</drawable>
