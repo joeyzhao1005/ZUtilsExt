@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
 
+import com.kit.log.ZogFile;
 import com.kit.utils.log.Zog;
 import com.trello.rxlifecycle3.LifecycleProvider;
 import com.trello.rxlifecycle3.android.ActivityEvent;
@@ -74,6 +75,7 @@ public class RxUtils {
 //                    Zog.i("newThread onError");
                     task.onError(e);
                 }
+                ZogFile.add(ZogFile.ERROR, e.toString());
             }
 
             @Override
@@ -131,6 +133,7 @@ public class RxUtils {
 //                    Zog.i("newThread onError");
                     task.onError(e);
                 }
+                ZogFile.add(ZogFile.ERROR, e.toString());
             }
 
             @Override
@@ -187,6 +190,7 @@ public class RxUtils {
 //                    Zog.i("onError");
                     task.onError(e);
                 }
+                ZogFile.add(ZogFile.ERROR, e.toString());
             }
 
             @Override
