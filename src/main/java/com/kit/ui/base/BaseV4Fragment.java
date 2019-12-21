@@ -102,6 +102,9 @@ public abstract class BaseV4Fragment extends RxFragment implements View.OnClickL
         return isRemoving() || isDetached();
     }
 
+    public boolean isShowing() {
+        return isShowing;
+    }
     public boolean isCreated() {
         return layout != null;
     }
