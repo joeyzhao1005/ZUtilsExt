@@ -18,6 +18,7 @@ import com.kit.utils.DateUtils;
 import com.kit.utils.FileUtils;
 import com.kit.utils.RxUtils;
 import com.kit.utils.StringUtils;
+import com.kit.utils.log.Zog;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -73,7 +74,7 @@ public final class ZogFile {
     }
 
     public static String getLogFilePath() {
-        return getDir() + File.separator + DateUtils.getCurrDateFormat("yyyyMMddHHmmss") + ".log";
+        return getDir() + File.separator + DateUtils.getCurrDateFormat("yyyyMMdd") + ".log";
     }
 
     public static void add(@Priority String priority, String tag, String logStr) {
@@ -109,7 +110,7 @@ public final class ZogFile {
             }
         }
 
-        if (!isCreated) {
+        if (!isCreated && !file.exists()) {
             return;
         }
 
@@ -124,6 +125,7 @@ public final class ZogFile {
                     bw.close();
                     writer.close();
                 } catch (IOException e) {
+                    Zog.showException(e);
                 }
 
                 return getDefault();
