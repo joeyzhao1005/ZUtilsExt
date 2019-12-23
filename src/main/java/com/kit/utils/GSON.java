@@ -129,7 +129,7 @@ public class GSON {
     //////////to json string////////
 
 
-    public GSON data(String jsonStr) {
+    public GSON data(@Nullable String jsonStr) {
         if (jsonStr == null) {
             jsonStr = "";
         }
