@@ -2,8 +2,6 @@ package com.kit.ui.base;
 
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.IdRes;
-
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,11 +14,15 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.IdRes;
+
 import com.kit.app.ActivityManager;
 import com.kit.utils.intent.IntentManager;
 import com.kit.utils.log.Zog;
-import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
+/**
+ * @author joeyzhao
+ */
 public abstract class BaseAppCompatActivity extends RxAppCompatActivity implements BaseV4Fragment.OnFragmentInteractionListener , View.OnClickListener {
 
 

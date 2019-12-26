@@ -24,7 +24,6 @@ import androidx.fragment.app.Fragment;
 
 import com.kit.utils.intent.ArgumentsManager;
 import com.kit.utils.log.Zog;
-import com.trello.rxlifecycle3.components.support.RxFragment;
 
 /**
  * @author Zhao
@@ -36,7 +35,7 @@ import com.trello.rxlifecycle3.components.support.RxFragment;
  * Use the newInstance() factory method to
  * create an instance of this fragment.
  */
-public abstract class BaseV4Fragment extends RxFragment implements View.OnClickListener, View.OnLongClickListener {
+public abstract class BaseV4Fragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
 
     public SwitchCompat getSwitchCompat(@IdRes int viewId) {
         return getView(viewId);
