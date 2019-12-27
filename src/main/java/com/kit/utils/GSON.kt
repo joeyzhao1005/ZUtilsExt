@@ -16,9 +16,9 @@ import java.lang.reflect.Type
  */
 class GSON {
     private lateinit var gsonItem: Gson
-    var jsonStr: String? = null
-    var lifecycleProviderWeakReference: WeakReference<LifecycleCoroutineScope?>? = null
-    var callbackInUI = false
+    private var jsonStr: String? = null
+    private var lifecycleProviderWeakReference: WeakReference<LifecycleCoroutineScope?>? = null
+    private var callbackInUI = false
     //////////to json string////////
     fun json(o: Any?): String {
         return if (o == null) {
@@ -31,12 +31,10 @@ class GSON {
             callback?.call(null)
         }
 
-        var scope = lifecycleProviderWeakReference?.get()
+        val scope = lifecycleProviderWeakReference?.get()
         if (scope != null) {
             scope.launch {
-                var ret = gsonItem.toJson(o);
-
-
+                val ret = gsonItem.toJson(o)
                 if (callbackInUI) {
                     withContext(Dispatchers.Main) {
                         callback?.call(ret)
@@ -48,7 +46,7 @@ class GSON {
             }
         } else {
             AppThread.get().execute {
-                var ret = gsonItem.toJson(o);
+                val ret = gsonItem.toJson(o)
 
                 if (callbackInUI) {
                     callback?.call(ret)
@@ -60,10 +58,6 @@ class GSON {
 
     //////////to json string////////
     fun data(jsonStr: String?): GSON {
-        var jsonStr = jsonStr
-        if (jsonStr == null) {
-            jsonStr = ""
-        }
         this.jsonStr = jsonStr
         return this
     }
@@ -92,10 +86,10 @@ class GSON {
         if (jsonStr == null || clazz == null) {
             callback?.call(null)
         }
-        var scope = lifecycleProviderWeakReference?.get()
+        val scope = lifecycleProviderWeakReference?.get()
         if (scope != null) {
             scope.launch {
-                var ret = gsonItem.fromJson<T>(jsonStr, clazz)
+                val ret = gsonItem.fromJson<T>(jsonStr, clazz)
 
                 if (callbackInUI) {
                     withContext(Dispatchers.Main) {
@@ -108,7 +102,7 @@ class GSON {
             }
         } else {
             AppThread.get().execute {
-                var ret = gsonItem.fromJson<T>(jsonStr, clazz)
+                val ret = gsonItem.fromJson<T>(jsonStr, clazz)
 
                 if (callbackInUI) {
                     callback?.call(ret)
@@ -126,10 +120,10 @@ class GSON {
         if (jsonStr == null || typeOfT == null) {
             callback?.call(null)
         }
-        var scope = lifecycleProviderWeakReference?.get()
+        val scope = lifecycleProviderWeakReference?.get()
         if (scope != null) {
             scope.launch {
-                var ret = gsonItem.fromJson<T>(jsonStr, typeOfT)
+                val ret = gsonItem.fromJson<T>(jsonStr, typeOfT)
 
                 if (callbackInUI) {
                     withContext(Dispatchers.Main) {
@@ -142,7 +136,7 @@ class GSON {
             }
         } else {
             AppThread.get().execute {
-                var ret = gsonItem.fromJson<T>(jsonStr, typeOfT)
+                val ret = gsonItem.fromJson<T>(jsonStr, typeOfT)
 
                 if (callbackInUI) {
                     callback?.call(ret)
