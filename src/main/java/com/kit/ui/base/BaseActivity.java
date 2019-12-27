@@ -7,6 +7,9 @@ import com.kit.utils.ActionBarUtils;
 import com.kit.utils.ResWrapper;
 import com.kit.utils.ResourceUtils;
 
+/**
+ * @author joeyzhao
+ */
 public abstract class BaseActivity extends BaseAppCompatActivity  implements BaseV4Fragment.OnFragmentInteractionListener{
 
 

@@ -35,7 +35,7 @@ import com.kit.utils.log.Zog;
  * Use the newInstance() factory method to
  * create an instance of this fragment.
  */
-public abstract class BaseV4Fragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
+public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment implements View.OnClickListener, View.OnLongClickListener {
 
     public SwitchCompat getSwitchCompat(@IdRes int viewId) {
         return getView(viewId);
@@ -104,6 +104,7 @@ public abstract class BaseV4Fragment extends Fragment implements View.OnClickLis
     public boolean isShowing() {
         return isShowing;
     }
+
     public boolean isCreated() {
         return layout != null;
     }

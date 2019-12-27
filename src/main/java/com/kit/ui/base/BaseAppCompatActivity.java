@@ -23,7 +23,7 @@ import com.kit.utils.log.Zog;
 /**
  * @author joeyzhao
  */
-public abstract class BaseAppCompatActivity extends RxAppCompatActivity implements BaseV4Fragment.OnFragmentInteractionListener , View.OnClickListener {
+public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActivity implements BaseV4Fragment.OnFragmentInteractionListener, View.OnClickListener {
 
 
     private boolean isShowing;

@@ -178,10 +178,16 @@ class GSON {
     }
 
     companion object {
+//        @JvmOverloads
+//        fun create( lifecycleProvider: LifecycleCoroutineScope? = null): GSON {
+//            return create(lifecycleProvider, false)
+//        }
+
         @JvmOverloads
         fun create(lenient: Boolean = false): GSON {
             return create(null, lenient)
         }
+
 
         @JvmOverloads
         fun create(lifecycleProvider: LifecycleCoroutineScope?, lenient: Boolean = false): GSON {

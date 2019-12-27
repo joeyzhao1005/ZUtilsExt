@@ -1,20 +1,11 @@
 package com.kit.ui.base
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
-
-open class RxAppCompatActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) = installCoroutineScope(savedInstanceState) {
-        super.onCreate(savedInstanceState)
-    }
-
-}
 
 
 /**
