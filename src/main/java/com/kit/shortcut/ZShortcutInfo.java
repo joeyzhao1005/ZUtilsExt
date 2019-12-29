@@ -31,9 +31,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Zhao on 2017/5/31.
+ *
+ * @author Zhao
+ * @date 2017/5/31
  */
 
+@SuppressWarnings("ALL")
 public class ZShortcutInfo implements Cloneable {
 
 
