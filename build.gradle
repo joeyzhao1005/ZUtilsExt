@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.legacy:legacy-support-v4:${android_x_legacy_support_v4}"
+//    implementation "androidx.legacy:legacy-support-v4:${android_x_legacy_support_v4}"
     implementation "androidx.appcompat:appcompat:${android_x_appcompat}"
     implementation "androidx.annotation:annotation:${android_x_annotation}"
 
