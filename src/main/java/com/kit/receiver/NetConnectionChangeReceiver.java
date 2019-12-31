@@ -1,5 +1,6 @@
 package com.kit.receiver;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,10 +12,11 @@ public class NetConnectionChangeReceiver extends BroadcastReceiver {
 	String packnameString = null;
 
 		@Override
+		@SuppressLint("MissingPermission")
 		public void onReceive(Context context, Intent intent) {
 			packnameString = context.getPackageName();
 
-			ConnectivityManager connectMgr = (ConnectivityManager) context
+			ConnectivityManager connectMgr = (ConnectivityManager) context.getApplicationContext()
 					.getSystemService(Context.CONNECTIVITY_SERVICE);
 			NetworkInfo mobNetInfo = connectMgr
 					.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);

@@ -119,7 +119,7 @@ public class MediaButtonReceiver extends BroadcastReceiver {
         Zog.i("registerMediaButton:" + getClass().getName());
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+            mAudioManager = (AudioManager) context.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
             mReceiverComponent = new ComponentName(context, getClass());
             mAudioManager.registerMediaButtonEventReceiver(mReceiverComponent);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

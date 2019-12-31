@@ -18,7 +18,6 @@ public class PhoneReceiver extends BroadcastReceiver  {
     public static final String ACTION_NEW_OUTGOING_CALL = "android.intent.action.NEW_OUTGOING_CALL";
 
 
-    //    private String incomingNumber;
     @Override
     public void onReceive(Context context, Intent intent) {
         //拨打电话
@@ -27,7 +26,7 @@ public class PhoneReceiver extends BroadcastReceiver  {
             final String phoneNum = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
             Log.d("PhoneReceiver", "phoneNum: " + phoneNum);
         } else {
-            TelephonyManager tm = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
+            TelephonyManager tm = (TelephonyManager) context.getApplicationContext().getSystemService(Service.TELEPHONY_SERVICE);
             tm.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
         }
     }

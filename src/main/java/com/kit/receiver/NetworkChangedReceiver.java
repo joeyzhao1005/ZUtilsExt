@@ -20,7 +20,7 @@ public class NetworkChangedReceiver extends BroadcastReceiver {
         // TODO Auto-generated method stub  
         if (ACTION.equals(intent.getAction())) {
             //获取手机的连接服务管理器，这里是连接管理器类  
-            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager cm = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkinfo = cm.getActiveNetworkInfo();
             if (networkinfo == null) {
                 Zog.i("网络全部断开!");
