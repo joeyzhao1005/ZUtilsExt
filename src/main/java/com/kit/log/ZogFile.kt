@@ -71,34 +71,38 @@ object ZogFile {
         }
     }
 
-    fun add(logStr: String?) {
+    fun add(logStr: String) {
         Log.e(INFO, logStr)
     }
 
     fun add(@Priority priority: String?, logStr: String?) {
-        val appConfig = AppConfig.getAppConfig()
-        if (appConfig == null || !appConfig.isShowLog) {
-            return
-        }
-        if (!FileUtils.isExists(getDir())) {
-            if (!FileUtils.mkDir(getDir())) {
-                return
-            }
-        }
-        val filePath = logFilePath
-        val file = File(filePath)
-        var isCreated = true
-        if (!file.exists()) {
-            try {
-                isCreated = file.createNewFile()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-        if (!isCreated && !file.exists()) {
-            return
-        }
         GlobalScope.launch(Dispatchers.IO) {
+            val appConfig = AppConfig.getAppConfig()
+            if (appConfig == null || !appConfig.isShowLog) {
+                return@launch
+            }
+
+            if (!FileUtils.isExists(getDir())) {
+                if (!FileUtils.mkDir(getDir())) {
+                    return@launch
+                }
+            }
+
+            val filePath = logFilePath
+            val file = File(filePath)
+            var isCreated = true
+            if (!file.exists()) {
+                try {
+                    isCreated = file.createNewFile()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+
+            if (!isCreated && !file.exists()) {
+                return@launch
+            }
+
             try {
                 val writer = FileWriter(filePath, true)
                 val bw = BufferedWriter(writer)
