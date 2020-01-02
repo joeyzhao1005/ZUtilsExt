@@ -7,6 +7,8 @@ import com.kit.utils.ActionBarUtils;
 import com.kit.utils.ResWrapper;
 import com.kit.utils.ResourceUtils;
 
+import kotlinx.coroutines.CoroutineScope;
+
 /**
  * @author joeyzhao
  */

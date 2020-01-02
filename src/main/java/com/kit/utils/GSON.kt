@@ -4,8 +4,8 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.kit.app.Callback
-import com.kit.thread.AppThread
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.ref.WeakReference
@@ -45,11 +45,13 @@ class GSON {
 
             }
         } else {
-            AppThread.get().execute {
+            GlobalScope.launch {
                 val ret = gsonItem.toJson(o)
 
                 if (callbackInUI) {
-                    callback?.call(ret)
+                    withContext(Dispatchers.Main) {
+                        callback?.call(ret)
+                    }
                 }
             }
         }
@@ -101,11 +103,13 @@ class GSON {
 
             }
         } else {
-            AppThread.get().execute {
+            GlobalScope.launch {
                 val ret = gsonItem.fromJson<T>(jsonStr, clazz)
 
                 if (callbackInUI) {
-                    callback?.call(ret)
+                    withContext(Dispatchers.Main) {
+                        callback?.call(ret)
+                    }
                 }
             }
         }
@@ -135,11 +139,13 @@ class GSON {
 
             }
         } else {
-            AppThread.get().execute {
+            GlobalScope.launch {
                 val ret = gsonItem.fromJson<T>(jsonStr, typeOfT)
 
                 if (callbackInUI) {
-                    callback?.call(ret)
+                    withContext(Dispatchers.Main) {
+                        callback?.call(ret)
+                    }
                 }
             }
         }
