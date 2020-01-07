@@ -131,7 +131,7 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
 
     @Override
     public void onDestroy() {
-        destory();
+        destroy();
         super.onDestroy();
     }
 
@@ -283,7 +283,7 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
     }
 
 
-    public void destory() {
+    public void destroy() {
         ArgumentsManager.get().destory(this);
         views.clear();
 
