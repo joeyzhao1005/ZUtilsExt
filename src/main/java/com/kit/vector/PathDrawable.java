@@ -34,6 +34,9 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author joeyzhao
+ */
 public class PathDrawable extends Drawable {
     private final static String TAG = "PathDrawable";
 

@@ -194,7 +194,6 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
 
     public void destory() {
         ActivityManager.getInstance().popActivity(this);
-        IntentManager.get().destory(getIntent());
         views.clear();
     }
 
