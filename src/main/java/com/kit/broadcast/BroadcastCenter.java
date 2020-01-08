@@ -110,7 +110,14 @@ public class BroadcastCenter {
 
 
     public BroadcastCenter action(String action) {
+        createIntent();
+        if (intent == null) {
+            Zog.e("intent create failed");
+            return this;
+        }
+
         this.action = action;
+        intent.setAction(action);
         return this;
     }
 
@@ -249,8 +256,9 @@ public class BroadcastCenter {
         if (intent == null) {
             if (!StringUtils.isEmptyOrNullStr(action)) {
                 intent = new Intent(action);
+            } else {
+                intent = new Intent();
             }
-//            Zog.d("intent created with action");
         }
 
     }
