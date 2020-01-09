@@ -73,6 +73,14 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
         return getView(viewId);
     }
 
+    @Nullable
+    public ViewGroup getRootLayout() {
+        if (layout instanceof ViewGroup) {
+            return (ViewGroup) layout;
+        }
+        return null;
+    }
+
     @SuppressWarnings("unchecked")
     public <T extends View> T getView(@IdRes int viewId) {
         if (views == null) {
