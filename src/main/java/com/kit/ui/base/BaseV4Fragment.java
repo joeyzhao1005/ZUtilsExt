@@ -25,6 +25,8 @@ import androidx.fragment.app.Fragment;
 import com.kit.utils.intent.ArgumentsManager;
 import com.kit.utils.log.Zog;
 
+import java.lang.ref.WeakReference;
+
 /**
  * @author Zhao
  * <p>
@@ -87,19 +89,22 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
             Zog.e("views is null");
             return null;
         }
-
-        View view = views.get(viewId);
+        View view = null;
+        WeakReference<View> weakReference = views.get(viewId);
+        if (weakReference != null) {
+            view = weakReference.get();
+        }
         if (view == null) {
             if (layout == null) {
                 return null;
             }
             view = layout.findViewById(viewId);
-            views.put(viewId, view);
+            views.put(viewId, new WeakReference(view));
         }
         return (T) view;
     }
 
-    private SparseArray<View> views;
+    private SparseArray<WeakReference<View>> views;
 
     public boolean isAlive() {
         return !isDead() && isAdded();
