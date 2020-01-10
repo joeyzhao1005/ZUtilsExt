@@ -1,5 +1,6 @@
 package com.kit.ui.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
@@ -74,6 +76,18 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
     public ProgressBar getProgressBar(@IdRes int viewId) {
         return getView(viewId);
     }
+
+
+    @Nullable
+    public <T extends Fragment> T getFragment(int id) {
+        Context context = getContext();
+        if (context instanceof AppCompatActivity) {
+            return (T) ((AppCompatActivity) context).getSupportFragmentManager().findFragmentById(id);
+        }
+
+        return null;
+    }
+
 
     @Nullable
     public ViewGroup getRootLayout() {
