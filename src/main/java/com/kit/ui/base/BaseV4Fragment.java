@@ -206,7 +206,10 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
 
     @Override
     public void onDetach() {
-        layout.setOnTouchListener(null);
+        if (layout != null) {
+            layout.setOnTouchListener(null);
+        }
+
         mListener = null;
         super.onDetach();
     }
@@ -234,6 +237,10 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
     public void initWidget(@NonNull View layout) {
     }
 
+    protected boolean isTouchPenetrable() {
+        return true;
+    }
+
 
     /**
      * 初始化界面
@@ -248,7 +255,12 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
             return layout;
         }
         layout = inflater.inflate(layoutResId(), container, false);
-        layout.setOnTouchListener(this);
+
+        if (!isTouchPenetrable()) {
+            layout.setOnTouchListener(this);
+            layout.setClickable(true);
+            layout.findFocus();
+        }
         return layout;
     }
 
