@@ -1,11 +1,11 @@
 package com.kit.ui.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -39,7 +39,7 @@ import java.lang.ref.WeakReference;
  * Use the newInstance() factory method to
  * create an instance of this fragment.
  */
-public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment implements View.OnClickListener, View.OnLongClickListener {
+public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
 
     public SwitchCompat getSwitchCompat(@IdRes int viewId) {
         return getView(viewId);
@@ -178,6 +178,11 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
     }
 
     @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return true;
+    }
+
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
     }
@@ -201,8 +206,9 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
 
     @Override
     public void onDetach() {
-        super.onDetach();
+        layout.setOnTouchListener(null);
         mListener = null;
+        super.onDetach();
     }
 
     /**
@@ -223,7 +229,7 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
     protected void getExtras() {
     }
 
-    protected abstract int layoutResID();
+    protected abstract int layoutResId();
 
     public void initWidget(@NonNull View layout) {
     }
@@ -241,7 +247,8 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
             }
             return layout;
         }
-        layout = inflater.inflate(layoutResID(), container, false);
+        layout = inflater.inflate(layoutResId(), container, false);
+        layout.setOnTouchListener(this);
         return layout;
     }
 
