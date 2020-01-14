@@ -354,6 +354,7 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
     }
 
 
+    protected int navigationBarHeight;
     protected View layout;
 
     protected boolean isShowing;

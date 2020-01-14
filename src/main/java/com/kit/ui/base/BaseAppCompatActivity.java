@@ -28,6 +28,7 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
 
     private boolean isShowing;
 
+    protected int navigationBarHeight = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
