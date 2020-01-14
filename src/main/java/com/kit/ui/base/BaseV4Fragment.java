@@ -99,6 +99,12 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
 
     @SuppressWarnings("unchecked")
     public <T extends View> T getView(@IdRes int viewId) {
+        return getView(layout, viewId);
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public <T extends View> T getView(View layout, @IdRes int viewId) {
         if (views == null) {
             Zog.e("views is null");
             return null;
