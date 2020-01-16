@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Parcelable;
 import android.view.View;
 
 import java.io.Serializable;
@@ -49,7 +50,7 @@ public class PermissionActivity extends AppCompatActivity {
         permission = getIntent().getStringArrayExtra("permission");
         key = getIntent().getStringExtra("key");
         showTip = getIntent().getBooleanExtra("showTip", true);
-        Serializable ser = getIntent().getParcelableExtra("tip");
+        Parcelable ser = getIntent().getParcelableExtra("tip");
 
         if (ser == null) {
             tipInfo = new PermissionManager.TipInfo(defaultTitle, defaultContent, defaultCancel, defaultEnsure);
