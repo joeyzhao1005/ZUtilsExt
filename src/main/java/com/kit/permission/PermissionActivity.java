@@ -7,14 +7,19 @@
 package com.kit.permission;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 
 import java.io.Serializable;
 
+/**
+ * @author joeyzhao
+ */
 public class PermissionActivity extends AppCompatActivity {
 
 
@@ -61,7 +66,8 @@ public class PermissionActivity extends AppCompatActivity {
             if (PermissionManager.hasPermission(this, permission)) {
                 permissionsGranted();
             } else {
-                requestPermissions(permission); // 请求权限,回调时会触发onResume
+                // 请求权限,回调时会触发onResume
+                requestPermissions(permission);
                 isRequireCheck = false;
             }
         } else {
@@ -138,7 +144,9 @@ public class PermissionActivity extends AppCompatActivity {
         finish();
     }
 
-    // 全部权限均已获取
+    /**
+     * 全部权限均已获取
+     */
     private void permissionsGranted() {
         PermissionManager.PermissionListener listener = PermissionManager.fetchListener(key);
         if (listener != null) {
@@ -147,6 +155,7 @@ public class PermissionActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
     protected void onDestroy() {
         PermissionManager.fetchListener(key);
         super.onDestroy();

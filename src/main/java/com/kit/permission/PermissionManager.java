@@ -14,14 +14,18 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.PermissionChecker;
+
 import android.util.Log;
 
 import com.kit.app.application.AppMaster;
+import com.kit.extend.R;
 import com.kit.utils.PermissionCallback;
 import com.kit.utils.PermissionUtils;
+import com.kit.utils.ResWrapper;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -34,6 +38,7 @@ public class PermissionManager {
         PermissionUtils.check(context, permission, callback);
 
     }
+
     public static boolean check(@NonNull String permission) {
         return check(AppMaster.getInstance().getAppContext(), permission);
     }
@@ -42,41 +47,21 @@ public class PermissionManager {
         check(AppMaster.getInstance().getAppContext(), permission, callback);
     }
 
-//    /**
-//     * 检查用户是否登录 是否有权限做事情
-//     */
-//
-//    public void checkPremission(Activity context, Consumer<Boolean> consumer, @NonNull String... permissions) {
-//        try {
-//            boolean isPassed = true;
-//            if (permissions.length > 0) {
-//                for (String permission : permissions) {
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                        if (context == null) {
-//                            isPassed = false;
-//                        } else {
-//                            isPassed = isPassed & (android.support.v4.content.PermissionManager.PERMISSION_GRANTED == android.support.v4.content.PermissionManager.checkSelfPermission(context, permission));
-//                        }
-//                    }
-//                }
-//            }
-//            if (isPassed) {
-//                if (consumer != null) {
-//                    consumer.accept(true);
-//                }
-//            } else {
-//                if (context == null) {
-//                    if (consumer != null) {
-//                        consumer.accept(false);
-//                    }
-//                    return;
-//                }
-//                ActivityCompat.requestPermissions(context, permissions, 0);
-//            }
-//        } catch (Exception e) {
-//            LogUtils.e("checkPremission Exception: " + e);
-//        }
-//    }
+    /**
+     * 申请授权，当用户拒绝时，会显示默认一个默认的Dialog提示用户
+     *
+     * @param context
+     * @param listener
+     * @param permissions 要申请的权限
+     */
+    public static void requestPermission(@NonNull Context context, String tip, PermissionListener listener, String... permissions) {
+        if (permissions == null || permissions.length <= 0) {
+            Log.e(TAG, "permission cannot be null or empty");
+            return;
+        }
+        requestPermission(context, listener, permissions, true, new TipInfo(tip));
+    }
+
 
     /**
      * 申请授权，当用户拒绝时，会显示默认一个默认的Dialog提示用户
@@ -197,6 +182,13 @@ public class PermissionManager {
 
     public static class TipInfo implements Parcelable {
 
+
+        public TipInfo(@Nullable String content) {
+            this.title = ResWrapper.getString(R.string.tips);
+            this.content = content;
+            this.cancel = ResWrapper.getString(R.string.cancel);
+            this.ensure = ResWrapper.getString(R.string.ensure);
+        }
 
         String title;
         String content;

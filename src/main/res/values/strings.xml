@@ -4,5 +4,8 @@
     <!--<string name="app_name">kit</string>-->
     <!--<string name="app_name_en">kit</string>-->
 
+    <string name="tips">提示</string>
+    <string name="cancel">取消</string>
+    <string name="ensure">允许</string>
 
 </resources>
