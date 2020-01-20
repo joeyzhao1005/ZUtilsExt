@@ -12,6 +12,8 @@ import android.widget.*
 import androidx.annotation.IdRes
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
+import com.kit.utils.ApiLevel
+import com.kit.utils.DensityUtils
 import com.kit.utils.intent.ArgumentsManager
 import com.kit.utils.log.Zog
 
@@ -34,6 +36,20 @@ open class LifecycleKotlinCoroutineFragment : Fragment() {
 
 
     /***
+     * showContextMenu
+     * @param delay Long 延迟时间，默认600毫秒
+     * @param block: (T) -> Unit 函数
+     * @return Unit
+     */
+    fun <T : View> T.showContextMenuCompat() {
+        if (ApiLevel.ATLEAST_N) {
+            showContextMenu((width / 2 - DensityUtils.dip2px(200) / 2).toFloat(), (-height / 2).toFloat())
+        } else {
+            showContextMenu()
+        }
+    }
+
+    /***
      * 点击事件的View扩展
      * @param block: (T) -> Unit 函数
      * @return Unit
@@ -41,6 +57,7 @@ open class LifecycleKotlinCoroutineFragment : Fragment() {
     fun <T : View> T.click(block: (T) -> Unit) = setOnClickListener {
         block(it as T)
     }
+
 
     /***
      * 带延迟过滤的点击事件View扩展
