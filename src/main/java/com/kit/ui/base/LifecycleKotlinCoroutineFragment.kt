@@ -43,7 +43,7 @@ open class LifecycleKotlinCoroutineFragment : Fragment() {
      */
     fun <T : View> T.showContextMenuCompat() {
         if (ApiLevel.ATLEAST_N) {
-            showContextMenu((width / 2 - DensityUtils.dip2px(200) / 2).toFloat(), (-height / 2).toFloat())
+            showContextMenu((width / 2 - DensityUtils.dip2px(200) / 2).toFloat(), (height / 3).toFloat())
         } else {
             showContextMenu()
         }
