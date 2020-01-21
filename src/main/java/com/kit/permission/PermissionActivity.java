@@ -162,4 +162,8 @@ public class PermissionActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+
+    }
 }
