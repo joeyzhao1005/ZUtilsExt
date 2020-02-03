@@ -120,6 +120,7 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
         return getView(viewId);
     }
 
+
     public ProgressBar getProgressBar(@IdRes int viewId) {
         return getView(viewId);
     }
