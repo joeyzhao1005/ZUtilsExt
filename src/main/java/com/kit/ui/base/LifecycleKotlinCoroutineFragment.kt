@@ -1,21 +1,10 @@
 package com.kit.ui.base
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import android.util.SparseArray
-import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnLongClickListener
-import android.view.ViewGroup
-import android.widget.*
-import androidx.annotation.IdRes
-import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import com.kit.utils.ApiLevel
 import com.kit.utils.DensityUtils
-import com.kit.utils.intent.ArgumentsManager
-import com.kit.utils.log.Zog
 
 /**
  * @author Zhao

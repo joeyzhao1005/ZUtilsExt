@@ -20,7 +20,7 @@ import kotlin.coroutines.EmptyCoroutineContext
  * }
  * ```
  */
-fun LifecycleOwner.installCoroutineScope(savedInstanceState: Bundle?, onCreate: (savedInstanceState: Bundle?) -> Unit) {
+fun installCoroutineScope(savedInstanceState: Bundle?, onCreate: (savedInstanceState: Bundle?) -> Unit) {
     onCreate(savedInstanceState)
 }
 
