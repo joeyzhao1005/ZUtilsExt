@@ -2,6 +2,7 @@ package com.kit.utils;
 
 import android.graphics.Bitmap;
 
+import androidx.annotation.Nullable;
 import androidx.palette.graphics.Palette;
 
 import com.kit.utils.log.Zog;
@@ -11,7 +12,7 @@ import com.kit.utils.log.Zog;
  */
 public class PaletteUtils {
 
-    public static int getColor(Bitmap bitmap, int defaultColor) {
+    public static int getColor(@Nullable Bitmap bitmap, int defaultColor) {
         if (bitmap == null) {
             return defaultColor;
         }
