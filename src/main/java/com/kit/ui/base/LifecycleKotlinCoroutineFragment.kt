@@ -54,6 +54,7 @@ open class LifecycleKotlinCoroutineFragment : Fragment() {
      * @param block: (T) -> Unit 函数
      * @return Unit
      */
+    @Suppress("UNCHECKED_CAST")
     fun <T : View> T.click(block: (T) -> Unit) = setOnClickListener {
         block(it as T)
     }
@@ -65,6 +66,7 @@ open class LifecycleKotlinCoroutineFragment : Fragment() {
      * @param block: (T) -> Unit 函数
      * @return Unit
      */
+    @Suppress("UNCHECKED_CAST")
     fun <T : View> T.clickWithQuickCheck(time: Int = 600, block: (T) -> Unit) {
         triggerDelay = time
         setOnClickListener {

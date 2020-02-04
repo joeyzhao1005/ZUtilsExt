@@ -20,8 +20,6 @@ import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
 import java.util.*
 
 /**
@@ -121,6 +119,6 @@ object ZogFile {
     const val INFO = "INFO"
 
     @StringDef(ERROR, INFO)
-    @Retention(RetentionPolicy.SOURCE)
+    @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
     internal annotation class Priority
 }
