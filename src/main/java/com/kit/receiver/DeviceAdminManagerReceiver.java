@@ -4,13 +4,17 @@ import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
+
 /**
- * Created by Zhao on 15/2/15.
+ *
+ * @author Zhao
+ * @date 15/2/15
  */
 
 public class DeviceAdminManagerReceiver extends DeviceAdminReceiver {
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(@NonNull Context context, @NonNull Intent intent) {
         super.onReceive(context, intent);
     }
 }

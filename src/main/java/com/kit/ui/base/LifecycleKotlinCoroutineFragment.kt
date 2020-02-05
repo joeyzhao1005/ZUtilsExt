@@ -66,6 +66,24 @@ open class LifecycleKotlinCoroutineFragment : Fragment() {
     }
 
 
+    /***
+     * 带延迟过滤的点击事件View扩展
+     * @param delay Long 延迟时间，默认600毫秒
+     * @param block: (T) -> Unit 函数
+     * @return Unit
+     */
+    @Suppress("UNCHECKED_CAST")
+    fun <T : View> T.doubleClick(time: Int = 600, block: (T) -> Unit) {
+        triggerDelay = time
+        setOnClickListener {
+            val currentClickTime = System.currentTimeMillis()
+            if (currentClickTime - doubleClickLastTime < triggerDelay) {
+                block(it as T)
+            }
+            doubleClickLastTime = currentClickTime
+        }
+    }
+
     private fun <T : View> T.clickEnable(): Boolean {
         var flag = false
         val currentClickTime = System.currentTimeMillis()
@@ -75,6 +93,8 @@ open class LifecycleKotlinCoroutineFragment : Fragment() {
         triggerLastTime = currentClickTime
         return flag
     }
+
+    private var doubleClickLastTime: Long = 600
 
     private var triggerDelay: Int = 600
 
