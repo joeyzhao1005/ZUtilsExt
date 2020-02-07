@@ -301,6 +301,9 @@ public class ShortcutManager {
                     e.printStackTrace();
                 }
                 break;
+
+            default:
+                break;
         }
 
 
