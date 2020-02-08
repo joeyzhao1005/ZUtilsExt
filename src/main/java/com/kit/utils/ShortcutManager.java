@@ -32,9 +32,11 @@ public class ShortcutManager {
         ZShortcutInfo shortcutInfo = null;
 
         try {
-            int event = xmlParser.getEventType();   //先获取当前解析器光标在哪
-            while (event != XmlPullParser.END_DOCUMENT) {    //如果还没到文档的结束标志，那么就继续往下处理
+            int event = xmlParser.getEventType();
+            //先获取当前解析器光标在哪
+            while (event != XmlPullParser.END_DOCUMENT) {
 
+                //如果还没到文档的结束标志，那么就继续往下处理
                 switch (event) {
                     case XmlPullParser.START_DOCUMENT:
                         //Zog.d("xml解析开始");
@@ -179,6 +181,8 @@ public class ShortcutManager {
                                 }
                                 break;
 
+                            default:
+                                break;
 
                         }
 
@@ -213,6 +217,9 @@ public class ShortcutManager {
                             case "value":
                                 String value = xmlParser.getAttributeValue(i);
                                 extra.setValue(value);
+                                break;
+
+                            default:
                                 break;
                         }
 
