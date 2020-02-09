@@ -13,7 +13,7 @@ import com.kit.utils.log.Zog;
 public class PaletteUtils {
 
     public static int getColor(@Nullable Bitmap bitmap, int defaultColor) {
-        if (bitmap == null) {
+        if (bitmap == null || bitmap.isRecycled()) {
             return defaultColor;
         }
         try {
@@ -70,8 +70,10 @@ public class PaletteUtils {
                 themeColor = defaultColor;
             }
             return themeColor;
+        } catch (StackOverflowError e) {
+            e.printStackTrace();
         } catch (Exception e) {
-            Zog.showException(e);
+            e.printStackTrace();
         }
 
         return defaultColor;
