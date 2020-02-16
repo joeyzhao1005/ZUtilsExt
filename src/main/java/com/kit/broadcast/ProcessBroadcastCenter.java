@@ -7,18 +7,19 @@
 package com.kit.broadcast;
 
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Parcelable;
 
 import androidx.annotation.Nullable;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.kit.app.application.AppMaster;
 import com.kit.utils.StringUtils;
 import com.kit.utils.log.Zog;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,42 +29,44 @@ import java.util.concurrent.CopyOnWriteArraySet;
 /**
  * @author joeyzhao
  */
-public class BroadcastCenter {
+public class ProcessBroadcastCenter {
 
     private Intent intent;
     private String action;
     private Bundle data;
     private boolean isUsing = false;
-    private static final Set<BroadcastCenter> BROADCAST_CENTER_POOL = new CopyOnWriteArraySet<>();
 
+    private static final Set<ProcessBroadcastCenter> BROADCAST_CENTER_POOL = new CopyOnWriteArraySet<>();
 
     private static final int MAX = 5;
+    private WeakReference<Context> contextWeakReference;
 
 
-    private static synchronized BroadcastCenter createNew() {
-        BroadcastCenter broadcastCenter = new BroadcastCenter();
+    private static synchronized ProcessBroadcastCenter createNew(Context context) {
+        ProcessBroadcastCenter broadcastCenter = new ProcessBroadcastCenter();
         broadcastCenter.isUsing = true;
+        broadcastCenter.contextWeakReference = new WeakReference<>(context);
         BROADCAST_CENTER_POOL.add(broadcastCenter);
+
 
         //池中大于MAX 移除一个没在使用的
         if (BROADCAST_CENTER_POOL.size() > MAX) {
-            for (BroadcastCenter bc : BROADCAST_CENTER_POOL) {
+            for (ProcessBroadcastCenter bc : BROADCAST_CENTER_POOL) {
                 if (!bc.isUsing) {
                     BROADCAST_CENTER_POOL.remove(bc);
                     break;
                 }
             }
         }
-
         return broadcastCenter;
     }
 
-    public static synchronized BroadcastCenter get() {
+    public static synchronized ProcessBroadcastCenter get(Context context) {
         if (BROADCAST_CENTER_POOL.isEmpty()) {
-            return createNew();
+            return createNew(context);
         } else {
-            BroadcastCenter getOne = null;
-            for (BroadcastCenter broadcastCenter : BROADCAST_CENTER_POOL) {
+            ProcessBroadcastCenter getOne = null;
+            for (ProcessBroadcastCenter broadcastCenter : BROADCAST_CENTER_POOL) {
                 if (!broadcastCenter.isUsing) {
                     getOne = broadcastCenter;
                     break;
@@ -71,18 +74,21 @@ public class BroadcastCenter {
             }
 
             if (getOne == null) {
-                return createNew();
+                return createNew(context);
             } else {
                 getOne.reset();
                 getOne.isUsing = true;
+                getOne.contextWeakReference = new WeakReference<>(context);
+
                 return getOne;
             }
-
         }
+
     }
 
 
     public void reset() {
+        contextWeakReference = null;
         intent = null;
         action = null;
         data = null;
@@ -99,13 +105,13 @@ public class BroadcastCenter {
         return super.equals(obj);
     }
 
-    public BroadcastCenter intent(Intent intent) {
+    public ProcessBroadcastCenter intent(Intent intent) {
         this.intent = intent;
         return this;
     }
 
 
-    public BroadcastCenter action(String action) {
+    public ProcessBroadcastCenter action(String action) {
         createIntent();
         if (intent == null) {
             Zog.e("intent create failed");
@@ -118,7 +124,7 @@ public class BroadcastCenter {
     }
 
 
-    public BroadcastCenter extras(Bundle bundle) {
+    public ProcessBroadcastCenter extras(Bundle bundle) {
         createIntent();
 
         if (intent == null) {
@@ -130,7 +136,7 @@ public class BroadcastCenter {
     }
 
 
-    public BroadcastCenter put(String key, ArrayList<? extends Parcelable> value) {
+    public ProcessBroadcastCenter put(String key, ArrayList<? extends Parcelable> value) {
         createIntent();
 
         if (intent == null) {
@@ -142,80 +148,7 @@ public class BroadcastCenter {
         return this;
     }
 
-    public BroadcastCenter put(String key, Parcelable[] value) {
-        createIntent();
-
-        if (intent == null) {
-            Zog.e("intent create failed");
-            return this;
-        }
-
-        intent.putExtra(key, value);
-        return this;
-    }
-
-
-    public BroadcastCenter put(String key, Parcelable value) {
-        createIntent();
-
-        if (intent == null) {
-            Zog.e("intent create failed");
-            return this;
-        }
-
-        intent.putExtra(key, value);
-        return this;
-    }
-
-    public BroadcastCenter put(String key, float value) {
-        createIntent();
-
-        if (intent == null) {
-            Zog.e("intent create failed");
-            return this;
-        }
-
-        intent.putExtra(key, value);
-        return this;
-    }
-
-    public BroadcastCenter put(String key, double value) {
-        createIntent();
-
-        if (intent == null) {
-            Zog.e("intent create failed");
-            return this;
-        }
-
-        intent.putExtra(key, value);
-        return this;
-    }
-
-    public BroadcastCenter put(String key, long value) {
-        createIntent();
-
-        if (intent == null) {
-            Zog.e("intent create failed");
-            return this;
-        }
-
-        intent.putExtra(key, value);
-        return this;
-    }
-
-    public BroadcastCenter put(String key, boolean value) {
-        createIntent();
-
-        if (intent == null) {
-            Zog.e("intent create failed");
-            return this;
-        }
-
-        intent.putExtra(key, value);
-        return this;
-    }
-
-    public BroadcastCenter put(String key, int value) {
+    public ProcessBroadcastCenter put(String key, Parcelable[] value) {
         createIntent();
 
         if (intent == null) {
@@ -228,7 +161,80 @@ public class BroadcastCenter {
     }
 
 
-    public BroadcastCenter put(String key, String str) {
+    public ProcessBroadcastCenter put(String key, Parcelable value) {
+        createIntent();
+
+        if (intent == null) {
+            Zog.e("intent create failed");
+            return this;
+        }
+
+        intent.putExtra(key, value);
+        return this;
+    }
+
+    public ProcessBroadcastCenter put(String key, float value) {
+        createIntent();
+
+        if (intent == null) {
+            Zog.e("intent create failed");
+            return this;
+        }
+
+        intent.putExtra(key, value);
+        return this;
+    }
+
+    public ProcessBroadcastCenter put(String key, double value) {
+        createIntent();
+
+        if (intent == null) {
+            Zog.e("intent create failed");
+            return this;
+        }
+
+        intent.putExtra(key, value);
+        return this;
+    }
+
+    public ProcessBroadcastCenter put(String key, long value) {
+        createIntent();
+
+        if (intent == null) {
+            Zog.e("intent create failed");
+            return this;
+        }
+
+        intent.putExtra(key, value);
+        return this;
+    }
+
+    public ProcessBroadcastCenter put(String key, boolean value) {
+        createIntent();
+
+        if (intent == null) {
+            Zog.e("intent create failed");
+            return this;
+        }
+
+        intent.putExtra(key, value);
+        return this;
+    }
+
+    public ProcessBroadcastCenter put(String key, int value) {
+        createIntent();
+
+        if (intent == null) {
+            Zog.e("intent create failed");
+            return this;
+        }
+
+        intent.putExtra(key, value);
+        return this;
+    }
+
+
+    public ProcessBroadcastCenter put(String key, String str) {
         createIntent();
 
         if (intent == null) {
@@ -278,14 +284,17 @@ public class BroadcastCenter {
         }
 
         intent.setAction(action);
-        LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(AppMaster.getInstance().getAppContext());
-        if (null != localBroadcastManager) {
-            localBroadcastManager.sendBroadcast(intent);
+
+        Context context = contextWeakReference.get();
+        if (null != context) {
+            context.sendBroadcast(intent);
+        } else {
+            AppMaster.getInstance().getAppContext().sendBroadcast(intent);
         }
         isUsing = false;
     }
 
-    public static void registerReceiver(BroadcastReceiver br, List<String> actions) {
+    public static void registerReceiver(Context context, BroadcastReceiver br, List<String> actions) {
         if (null == br || null == actions) {
             Zog.e("registerReceiver | param is null ");
             return;
@@ -295,29 +304,37 @@ public class BroadcastCenter {
         for (String action : actions) {
             iFilter.addAction(action);
         }
-        LocalBroadcastManager.getInstance(AppMaster.getInstance().getAppContext()).registerReceiver(br, iFilter);
+        if (null != context) {
+            context.registerReceiver(br, iFilter);
+        } else {
+            AppMaster.getInstance().getAppContext().registerReceiver(br, iFilter);
+        }
     }
 
 
-    public static void registerReceiver(BroadcastReceiver br, String... actions) {
+    public static void registerReceiver(Context context, BroadcastReceiver br, String... actions) {
         if (actions == null || actions.length <= 0) {
             return;
         }
-        registerReceiver(br, Arrays.asList(actions));
+        registerReceiver(context, br, Arrays.asList(actions));
     }
 
 
     /**
      * @param br
      */
-    public static void unregisterReceiver(BroadcastReceiver br) {
+    public static void unregisterReceiver(Context context, BroadcastReceiver br) {
         if (null == br) {
             Zog.e("unregisterReceiver | param is null");
             return;
         }
 
         try {
-            LocalBroadcastManager.getInstance(AppMaster.getInstance().getAppContext()).unregisterReceiver(br);
+            if (null != context) {
+                context.unregisterReceiver(br);
+            } else {
+                AppMaster.getInstance().getAppContext().unregisterReceiver(br);
+            }
         } catch (Exception e) {
 
         }
