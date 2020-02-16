@@ -6,6 +6,7 @@
 
 package com.kit.permission;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -162,6 +163,7 @@ public class PermissionActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
 
