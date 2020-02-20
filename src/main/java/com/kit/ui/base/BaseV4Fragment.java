@@ -118,8 +118,16 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
             if (layout == null) {
                 return null;
             }
-            view = layout.findViewById(viewId);
-            views.put(viewId, new WeakReference(view));
+            try {
+                view = layout.findViewById(viewId);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+            if (view != null) {
+                views.put(viewId, new WeakReference(view));
+            } else {
+                return null;
+            }
         }
         return (T) view;
     }
