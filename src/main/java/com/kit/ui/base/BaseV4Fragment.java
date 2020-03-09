@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
+import com.kit.utils.DeviceUtils;
 import com.kit.utils.intent.ArgumentsManager;
 import com.kit.utils.log.Zog;
 
@@ -253,6 +254,13 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
 
     protected boolean isTouchPenetrable() {
         return true;
+    }
+
+    public int getLogicScreenWidth(){
+        return getScreenWidth();
+    }
+    public int getScreenWidth(){
+        return DeviceUtils.getRealScreenWidth(getContext());
     }
 
 
