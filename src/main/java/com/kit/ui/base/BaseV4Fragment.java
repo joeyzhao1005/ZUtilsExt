@@ -260,7 +260,7 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
         return getScreenWidth();
     }
     public int getScreenWidth(){
-        return DeviceUtils.getRealScreenWidth(getContext());
+        return DeviceUtils.getScreenWidth(getContext());
     }
 
 
