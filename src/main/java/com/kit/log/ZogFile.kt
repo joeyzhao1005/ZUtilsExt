@@ -70,7 +70,7 @@ object ZogFile {
     }
 
     fun add(logStr: String) {
-        Log.e(INFO, logStr)
+        add(INFO, logStr)
     }
 
     fun add(@Priority priority: String?, logStr: String?) {
