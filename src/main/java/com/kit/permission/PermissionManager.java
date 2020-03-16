@@ -6,6 +6,7 @@
 
 package com.kit.permission;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,6 +30,9 @@ import com.kit.utils.ResWrapper;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author joeyzhao
+ */
 public class PermissionManager {
     public static boolean check(Context context, @NonNull String permission) {
         return PermissionUtils.check(context, permission);
@@ -54,7 +58,7 @@ public class PermissionManager {
      * @param listener
      * @param permissions 要申请的权限
      */
-    public static void requestPermission(@NonNull Context context, String tip, PermissionListener listener, String... permissions) {
+    public static void requestPermission(@NonNull Context context, String tip, @NonNull PermissionListener listener, String... permissions) {
         if (permissions == null || permissions.length <= 0) {
             Log.e(TAG, "permission cannot be null or empty");
             return;
@@ -70,7 +74,7 @@ public class PermissionManager {
      * @param listener
      * @param permissions 要申请的权限
      */
-    public static void requestPermission(@NonNull Context context, PermissionListener listener, String... permissions) {
+    public static void requestPermission(@NonNull Context context, @NonNull PermissionListener listener, String... permissions) {
         if (permissions == null || permissions.length <= 0) {
             Log.e(TAG, "permission cannot be null or empty");
             return;
@@ -90,12 +94,6 @@ public class PermissionManager {
     public static void requestPermission(@NonNull Context context, @NonNull PermissionListener listener
             , @NonNull String[] permissions, boolean showTip, @Nullable TipInfo tip) {
 
-
-        if (listener == null) {
-            Log.e(TAG, "listener is null");
-            return;
-        }
-
         if (hasPermission(context, permissions)) {
             listener.onPermission(permissions, true);
         } else {
@@ -109,7 +107,11 @@ public class PermissionManager {
                 intent.putExtra("key", key);
                 intent.putExtra("showTip", showTip);
                 intent.putExtra("tip", tip);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                if (context instanceof Activity) {
+                    //从activity中发起 直接启起来
+                } else {
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
 
                 context.startActivity(intent);
             }
