@@ -45,7 +45,7 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
         isShowing = true;
     }
 
-    protected void darkMode(){
+    protected void darkMode() {
 //        if (DarkMode.isDarkMode()) {
 //            setTheme(R.style.main_theme_dark);
 //        }else {
@@ -66,7 +66,7 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
     /**
      * 去网络或者本地加载数据
      */
-    protected void loadData(){
+    protected void loadData() {
     }
 
 
@@ -93,6 +93,10 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
     }
 
     protected abstract int layoutResID();
+
+    public boolean isTranslucentOrFloating() {
+        return false;
+    }
 
 
     public TextView getTextView(@IdRes int viewId) {
@@ -157,7 +161,7 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
             view = findViewById(viewId);
             views.put(viewId, view);
         }
-        return  view;
+        return view;
     }
 
     @SuppressWarnings("unchecked")
