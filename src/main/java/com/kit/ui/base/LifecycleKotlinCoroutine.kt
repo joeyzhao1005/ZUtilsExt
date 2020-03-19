@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.coroutines.intrinsics.suspendCoroutineUninterceptedOrReturn
 
 
 /**
@@ -22,6 +23,30 @@ import kotlin.coroutines.EmptyCoroutineContext
  */
 fun installCoroutineScope(savedInstanceState: Bundle?, onCreate: (savedInstanceState: Bundle?) -> Unit) {
     onCreate(savedInstanceState)
+}
+
+suspend fun <T> withDefault(
+        context: CoroutineContext = EmptyCoroutineContext,
+        start: CoroutineStart = CoroutineStart.DEFAULT,
+        block: suspend CoroutineScope.() -> T
+): T {
+    return withContext(Dispatchers.Default, block)
+}
+
+suspend fun <T> withMain(
+        context: CoroutineContext = EmptyCoroutineContext,
+        start: CoroutineStart = CoroutineStart.DEFAULT,
+        block: suspend CoroutineScope.() -> T
+): T {
+    return withContext(Dispatchers.Main, block)
+}
+
+suspend fun <T> withIO(
+        context: CoroutineContext = EmptyCoroutineContext,
+        start: CoroutineStart = CoroutineStart.DEFAULT,
+        block: suspend CoroutineScope.() -> T
+): T {
+    return withContext(Dispatchers.IO, block)
 }
 
 
