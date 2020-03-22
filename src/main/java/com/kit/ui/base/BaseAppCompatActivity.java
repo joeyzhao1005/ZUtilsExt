@@ -17,7 +17,6 @@ import android.widget.TextView;
 import androidx.annotation.IdRes;
 
 import com.kit.app.ActivityManager;
-import com.kit.utils.intent.IntentManager;
 import com.kit.utils.log.Zog;
 
 /**
@@ -33,7 +32,7 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
         super.onCreate(savedInstanceState);
         initWindow();
         darkMode();
-        setContentView(layoutResID());
+        setContentView(layoutResId());
         this.views = new SparseArray<>();
         getExtras();
         initWidget();
@@ -92,7 +91,7 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
     protected void initWidget() {
     }
 
-    protected abstract int layoutResID();
+    protected abstract int layoutResId();
 
     public boolean isTranslucentOrFloating() {
         return false;

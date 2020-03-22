@@ -19,6 +19,7 @@ class GSON {
     private var jsonStr: String? = null
     private var lifecycleProviderWeakReference: WeakReference<LifecycleCoroutineScope?>? = null
     private var callbackInUI = false
+
     //////////to json string////////
     fun json(o: Any?): String {
         return if (o == null) {
@@ -195,10 +196,12 @@ class GSON {
             if (lenient) {
                 builder = builder.setLenient()
             }
-            val gsonItem = builder.create()
+
             val gson = GSON()
-            gson.lifecycle(lifecycleProvider)
-            gson.gsonItem = gsonItem
+            if (lifecycleProvider != null) {
+                gson.lifecycle(lifecycleProvider)
+            }
+            gson.gsonItem = builder.create()
             return gson
         }
     }
