@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.kit.app.Callback
+import com.kit.ui.base.withMain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -37,7 +38,7 @@ class GSON {
             scope.launch {
                 val ret = gsonItem.toJson(o)
                 if (callbackInUI) {
-                    withContext(Dispatchers.Main) {
+                    withMain {
                         callback?.call(ret)
                     }
                 } else {
@@ -50,7 +51,7 @@ class GSON {
                 val ret = gsonItem.toJson(o)
 
                 if (callbackInUI) {
-                    withContext(Dispatchers.Main) {
+                    withMain {
                         callback?.call(ret)
                     }
                 }
@@ -95,7 +96,7 @@ class GSON {
                 val ret = gsonItem.fromJson<T>(jsonStr, clazz)
 
                 if (callbackInUI) {
-                    withContext(Dispatchers.Main) {
+                    withMain {
                         callback?.call(ret)
                     }
                 } else {
@@ -108,7 +109,7 @@ class GSON {
                 val ret = gsonItem.fromJson<T>(jsonStr, clazz)
 
                 if (callbackInUI) {
-                    withContext(Dispatchers.Main) {
+                    withMain {
                         callback?.call(ret)
                     }
                 }
@@ -131,7 +132,7 @@ class GSON {
                 val ret = gsonItem.fromJson<T>(jsonStr, typeOfT)
 
                 if (callbackInUI) {
-                    withContext(Dispatchers.Main) {
+                    withMain {
                         callback?.call(ret)
                     }
                 } else {
@@ -144,7 +145,7 @@ class GSON {
                 val ret = gsonItem.fromJson<T>(jsonStr, typeOfT)
 
                 if (callbackInUI) {
-                    withContext(Dispatchers.Main) {
+                    withMain {
                         callback?.call(ret)
                     }
                 }
