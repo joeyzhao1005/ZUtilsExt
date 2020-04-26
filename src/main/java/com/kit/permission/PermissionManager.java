@@ -205,30 +205,30 @@ public class PermissionManager {
         }
 
 
+        protected TipInfo(Parcel in) {
+            title = in.readString();
+            content = in.readString();
+            cancel = in.readString();
+            ensure = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(title);
+            dest.writeString(content);
+            dest.writeString(cancel);
+            dest.writeString(ensure);
+        }
+
         @Override
         public int describeContents() {
             return 0;
         }
 
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(this.title);
-            dest.writeString(this.content);
-            dest.writeString(this.cancel);
-            dest.writeString(this.ensure);
-        }
-
-        protected TipInfo(Parcel in) {
-            this.title = in.readString();
-            this.content = in.readString();
-            this.cancel = in.readString();
-            this.ensure = in.readString();
-        }
-
         public static final Creator<TipInfo> CREATOR = new Creator<TipInfo>() {
             @Override
-            public TipInfo createFromParcel(Parcel source) {
-                return new TipInfo(source);
+            public TipInfo createFromParcel(Parcel in) {
+                return new TipInfo(in);
             }
 
             @Override
