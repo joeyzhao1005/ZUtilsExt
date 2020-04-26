@@ -7,17 +7,14 @@
 package com.kit.permission;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Parcelable;
-import android.view.View;
-
-import java.io.Serializable;
+import androidx.core.app.ActivityCompat;
 
 /**
  * @author joeyzhao
@@ -31,7 +28,7 @@ public class PermissionActivity extends AppCompatActivity {
     private String[] permission;
     private String key;
     private boolean showTip;
-    private PermissionManager.TipInfo tipInfo;
+    private TipInfo tipInfo;
 
     private final String defaultTitle = "帮助";
     private final String defaultContent = "当前应用缺少必要权限。\n \n 请点击 \"设置\"-\"权限\"-打开所需权限。";
@@ -48,16 +45,36 @@ public class PermissionActivity extends AppCompatActivity {
         }
 
         isRequireCheck = true;
-        permission = getIntent().getStringArrayExtra("permission");
-        key = getIntent().getStringExtra("key");
-        showTip = getIntent().getBooleanExtra("showTip", true);
-        Parcelable ser = getIntent().getParcelableExtra("tip");
-
-        if (ser == null) {
-            tipInfo = new PermissionManager.TipInfo(defaultTitle, defaultContent, defaultCancel, defaultEnsure);
-        } else {
-            tipInfo = (PermissionManager.TipInfo) ser;
+        Intent intent = getIntent();
+        Bundle extras = null;
+        if (intent != null) {
+            extras = getIntent().getExtras();
         }
+
+        if (extras != null) {
+            if (extras.containsKey("permission")) {
+                permission = extras.getStringArray("permission");
+            }
+
+            if (extras.containsKey("key")) {
+                key = extras.getString("key");
+            }
+
+            if (extras.containsKey("showTip")) {
+                showTip = extras.getBoolean("showTip", true);
+            }
+
+            TipInfo ser = null;
+            if (extras.containsKey("tipInfo")) {
+                ser = extras.getParcelable("tipInfo");
+            }
+            if (ser == null) {
+                tipInfo = new TipInfo(defaultTitle, defaultContent, defaultCancel, defaultEnsure);
+            } else {
+                tipInfo = ser;
+            }
+        }
+
 
     }
 

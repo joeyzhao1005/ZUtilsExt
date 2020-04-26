@@ -106,7 +106,9 @@ public class PermissionManager {
                 intent.putExtra("permission", permissions);
                 intent.putExtra("key", key);
                 intent.putExtra("showTip", showTip);
-                intent.putExtra("tip", tip);
+                if (tip != null) {
+                    intent.putExtra("tipInfo", tip);
+                }
                 if (context instanceof Activity) {
                     //从activity中发起 直接启起来
                 } else {
@@ -179,63 +181,6 @@ public class PermissionManager {
      */
     static PermissionListener fetchListener(String key) {
         return listenerMap.remove(key);
-    }
-
-
-    public static class TipInfo implements Parcelable {
-
-
-        public TipInfo(@Nullable String content) {
-            this.title = ResWrapper.getString(R.string.tips);
-            this.content = content;
-            this.cancel = ResWrapper.getString(R.string.cancel);
-            this.ensure = ResWrapper.getString(R.string.ensure);
-        }
-
-        String title;
-        String content;
-        String cancel;  //取消按钮文本
-        String ensure;  //确定按钮文本
-
-        public TipInfo(@Nullable String title, @Nullable String content, @Nullable String cancel, @Nullable String ensure) {
-            this.title = title;
-            this.content = content;
-            this.cancel = cancel;
-            this.ensure = ensure;
-        }
-
-
-        protected TipInfo(Parcel in) {
-            title = in.readString();
-            content = in.readString();
-            cancel = in.readString();
-            ensure = in.readString();
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(title);
-            dest.writeString(content);
-            dest.writeString(cancel);
-            dest.writeString(ensure);
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        public static final Creator<TipInfo> CREATOR = new Creator<TipInfo>() {
-            @Override
-            public TipInfo createFromParcel(Parcel in) {
-                return new TipInfo(in);
-            }
-
-            @Override
-            public TipInfo[] newArray(int size) {
-                return new TipInfo[size];
-            }
-        };
     }
 
 
