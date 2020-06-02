@@ -1,30 +1,17 @@
 package com.kit.shortcut;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
-import android.os.Build;
-
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.kit.app.application.AppMaster;
-import com.kit.utils.ColorUtils;
-import com.kit.utils.DensityUtils;
 import com.kit.utils.DrawableUtils;
 import com.kit.utils.ResWrapper;
 import com.kit.utils.StringUtils;
-import com.kit.utils.VectorDrawableUtils;
-import com.kit.utils.log.Zog;
 import com.kit.vector.PathDrawable;
 
 import java.util.HashSet;
