@@ -101,6 +101,9 @@ public class PermissionManager {
                 listener.onPermission(permissions, false);
             } else {
                 String key = String.valueOf(System.currentTimeMillis());
+                if (listenerMap == null) {
+                    listenerMap = new ConcurrentHashMap<String, PermissionListener>(10);
+                }
                 listenerMap.put(key, listener);
                 Intent intent = new Intent(context, PermissionActivity.class);
                 intent.putExtra("permission", permissions);
@@ -179,7 +182,14 @@ public class PermissionManager {
      * @param key
      * @return
      */
+    @Nullable
     static PermissionListener fetchListener(String key) {
+        if (key == null) {
+            return null;
+        }
+        if (listenerMap == null) {
+            return null;
+        }
         return listenerMap.remove(key);
     }
 

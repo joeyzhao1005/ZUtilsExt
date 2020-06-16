@@ -7,6 +7,7 @@
 package com.kit.permission;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -96,7 +97,11 @@ public class PermissionActivity extends AppCompatActivity {
 
     // 请求权限兼容低版本
     private void requestPermissions(String[] permission) {
-        ActivityCompat.requestPermissions(this, permission, PERMISSION_REQUEST_CODE);
+        try {
+            ActivityCompat.requestPermissions(this, permission, PERMISSION_REQUEST_CODE);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
