@@ -180,7 +180,7 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
     protected void onStop() {
         super.onStop();
         if (isFinishing()) {
-            destory();
+            destroy();
         }
         isShowing = false;
     }
@@ -196,7 +196,7 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
     }
 
 
-    public void destory() {
+    public void destroy() {
         ActivityManager.getInstance().popActivity(this);
         views.clear();
     }
