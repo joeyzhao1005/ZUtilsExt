@@ -1,39 +1,35 @@
-package com.kit.receiver;
+package com.kit.receiver
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.app.KeyguardManager
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import com.kit.utils.log.Zog
+import com.kit.receiver.ScreenBroadcastReceiver
+import android.content.IntentFilter
+import android.os.Build
+import com.kit.app.application.AppMaster
+import com.kit.utils.ApiLevel
 
-import com.kit.utils.log.Zog;
-
-public class ScreenBroadcastReceiver extends BroadcastReceiver {
-    private String action = null;
-
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-
+abstract class ScreenBroadcastReceiver : BroadcastReceiver() {
+    private var action: String? = null
+    override fun onReceive(context: Context, intent: Intent) {
         if (intent == null) {
-            return;
+            return
         }
-
-        action = intent.getAction();
-        if (Intent.ACTION_SCREEN_ON.equals(action)) {
+        action = intent.action
+        if (Intent.ACTION_SCREEN_ON == action) {
             // 开屏
-            Zog.i("开屏");
-            onScreenOn(context,intent);
-
-        } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
+            Zog.i("开屏")
+            onScreenOn(context, intent)
+        } else if (Intent.ACTION_SCREEN_OFF == action) {
             // 熄屏
-            Zog.i("熄屏");
-            onScreenOff(context,intent);
-
-        } else if (Intent.ACTION_USER_PRESENT.equals(action)) {
+            Zog.i("熄屏")
+            onScreenOff(context, intent)
+        } else if (Intent.ACTION_USER_PRESENT == action) {
             // 解锁
-            Zog.i("解锁");
-            onScreenUnlock(context,intent);
-
+            Zog.i("解锁")
+            onScreenUnlock(context, intent)
         }
 
 //        else if (Intent.ACTION_CLOSE_SYSTEM_DIALOGS.equals(action)) {
@@ -46,35 +42,71 @@ public class ScreenBroadcastReceiver extends BroadcastReceiver {
 //        }
     }
 
+    open fun onScreenOn(context: Context?, intent: Intent?) {}
+    open fun onScreenOff(context: Context?, intent: Intent?) {}
+    open fun onScreenUnlock(context: Context?, intent: Intent?) {}
 
-    public void onScreenOn(Context context,Intent intent) {
 
+    fun attach(context: Context?): ScreenBroadcastReceiver {
+        context?.let {
+            registerScreenBroadcastReceiver(it, this@ScreenBroadcastReceiver)
+        }
+        return this
     }
 
 
-    public void onScreenOff(Context context,Intent intent) {
+    fun detach(context: Context?): ScreenBroadcastReceiver {
+        context?.let {
+            unregisterScreenBroadcastReceiver(it, this@ScreenBroadcastReceiver)
+        }
+        return this
+    }
 
+    private fun registerScreenBroadcastReceiver(
+        context: Context,
+        screenBroadcastReceiver: ScreenBroadcastReceiver?
+    ) {
+        val filter = IntentFilter()
+        filter.addAction(Intent.ACTION_SCREEN_ON)
+        filter.addAction(Intent.ACTION_SCREEN_OFF)
+        filter.addAction(Intent.ACTION_USER_PRESENT)
+        try {
+            context.registerReceiver(screenBroadcastReceiver, filter)
+        } catch (e: IllegalArgumentException) {
+            //empty
+        } catch (e: Exception) {
+            //empty
+        }
     }
 
 
-    public void onScreenUnlock(Context context,Intent intent) {
-
+    private fun unregisterScreenBroadcastReceiver(
+        context: Context,
+        screenBroadcastReceiver: ScreenBroadcastReceiver?
+    ) {
+        try {
+            context.unregisterReceiver(screenBroadcastReceiver)
+        } catch (e: IllegalArgumentException) {
+            //empty
+        } catch (e: Exception) {
+            //empty
+        }
     }
 
-    public void onScreenLock(Context context,Intent intent) {
+    companion object {
 
-    }
-
-    public void registerScreenBroadcastReceiver(Context context, ScreenBroadcastReceiver screenBroadcastReceiver) {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_SCREEN_ON);
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
-        filter.addAction(Intent.ACTION_USER_PRESENT);
-        filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-        context.registerReceiver(screenBroadcastReceiver, filter);
-    }
-
-    public void unregisterScreenBroadcastReceiver(Context context, ScreenBroadcastReceiver screenBroadcastReceiver) {
-        context.unregisterReceiver(screenBroadcastReceiver);
+        /**
+         * 屏幕是否锁定
+         */
+        @JvmStatic
+        fun isKeyguardLocked(): Boolean {
+            val manager =
+                AppMaster.getInstance().appContext.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager?
+            return if (ApiLevel.ATLEAST_JELLY_BEAN) {
+                manager?.isKeyguardLocked ?: false
+            } else {
+                return false
+            }
+        }
     }
 }
