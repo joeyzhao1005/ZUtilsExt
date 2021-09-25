@@ -18,18 +18,24 @@ abstract class ScreenBroadcastReceiver : BroadcastReceiver() {
             return
         }
         action = intent.action
-        if (Intent.ACTION_SCREEN_ON == action) {
-            // 开屏
-            Zog.i("开屏")
-            onScreenOn(context, intent)
-        } else if (Intent.ACTION_SCREEN_OFF == action) {
-            // 熄屏
-            Zog.i("熄屏")
-            onScreenOff(context, intent)
-        } else if (Intent.ACTION_USER_PRESENT == action) {
-            // 解锁
-            Zog.i("解锁")
-            onScreenUnlock(context, intent)
+        when {
+            Intent.ACTION_SCREEN_ON == action -> {
+                // 开屏
+                Zog.i("开屏")
+                onScreenOn(context, intent)
+            }
+
+            Intent.ACTION_SCREEN_OFF == action -> {
+                // 熄屏
+                Zog.i("熄屏")
+                onScreenOff(context, intent)
+            }
+
+            Intent.ACTION_USER_PRESENT == action -> {
+                // 解锁
+                Zog.i("解锁")
+                onScreenUnlock(context, intent)
+            }
         }
 
 //        else if (Intent.ACTION_CLOSE_SYSTEM_DIALOGS.equals(action)) {
