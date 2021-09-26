@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 
+import androidx.viewbinding.ViewBinding;
+
 import com.kit.app.resouce.DrawableId;
 import com.kit.utils.ActionBarUtils;
 import com.kit.utils.ResWrapper;
@@ -15,7 +17,7 @@ import kotlinx.coroutines.CoroutineScope;
 /**
  * @author joeyzhao
  */
-public abstract class BaseActivity extends BaseAppCompatActivity implements BaseV4Fragment.OnFragmentInteractionListener {
+public abstract class BaseActivity<VB extends ViewBinding> extends BaseAppCompatActivity<VB> implements BaseV4Fragment.OnFragmentInteractionListener {
 
 
     @Override

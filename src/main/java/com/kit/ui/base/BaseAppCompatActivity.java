@@ -1,8 +1,12 @@
 package com.kit.ui.base;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,24 +19,36 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.viewbinding.ViewBinding;
 
 import com.kit.app.ActivityManager;
+import com.kit.extend.R;
 import com.kit.utils.log.Zog;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
+import kotlin.Suppress;
 
 /**
  * @author joeyzhao
  */
-public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActivity implements BaseV4Fragment.OnFragmentInteractionListener, View.OnClickListener {
+public abstract class BaseAppCompatActivity<VB extends ViewBinding> extends LifecycleKotlinCoroutineActivity implements BaseV4Fragment.OnFragmentInteractionListener, View.OnClickListener {
 
 
     private boolean isShowing;
+    protected VB bindView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initWindow();
         darkMode();
-        setContentView(layoutResId());
+        viewBinding();
         this.views = new SparseArray<>();
         getExtras();
         initWidget();
@@ -42,6 +58,53 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
 
         ActivityManager.getInstance().pushActivity(this);
         isShowing = true;
+    }
+
+
+    @SuppressWarnings("unchecked")
+    @Nullable
+    private Class<VB> findParameterizedType(@Nullable Class clazz) {
+        if (clazz == null) {
+            return null;
+        }
+        Type superclass = clazz.getGenericSuperclass();
+        Class<VB> aClass = null;
+        if (superclass != null) {
+
+            if (superclass instanceof ParameterizedType) {
+                Type[] types = ((ParameterizedType) superclass).getActualTypeArguments();
+                try {
+                    aClass = (Class<VB>) types[0];
+                } catch (Exception ignore) {
+                }
+            } else {
+                aClass = findParameterizedType(clazz.getSuperclass());
+            }
+
+        }
+        return aClass;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Nullable
+    protected VB viewBinding() {
+        Class<VB> aClass = findParameterizedType(getClass());
+        if (aClass != null) {
+            try {
+                Method method = aClass.getDeclaredMethod("inflate", LayoutInflater.class);
+                bindView = (VB) method.invoke(null, getLayoutInflater());
+                if (bindView != null) {
+                    setContentView(bindView.getRoot());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                setContentView(layoutResId());
+            }
+        } else {
+            setContentView(layoutResId());
+        }
+
+        return bindView;
     }
 
     protected void darkMode() {
@@ -91,38 +154,49 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
     protected void initWidget() {
     }
 
-    protected abstract int layoutResId();
+    @Deprecated
+    protected int layoutResId() {
+        return 0;
+    }
+
 
     public boolean isTranslucentOrFloating() {
         return false;
     }
 
 
+    @Deprecated
     public TextView getTextView(@IdRes int viewId) {
         return getView(viewId);
     }
 
+    @Deprecated
     public ImageView getImageView(@IdRes int viewId) {
         return getView(viewId);
     }
 
+    @Deprecated
     public ImageButton getImageButton(@IdRes int viewId) {
         return getView(viewId);
     }
 
+    @Deprecated
     public Button getButton(@IdRes int viewId) {
         return getView(viewId);
     }
 
+    @Deprecated
     public EditText getEditText(@IdRes int viewId) {
         return getView(viewId);
     }
 
+    @Deprecated
     public RatingBar getRatingBar(@IdRes int viewId) {
         return getView(viewId);
     }
 
 
+    @Deprecated
     public ProgressBar getProgressBar(@IdRes int viewId) {
         return getView(viewId);
     }
@@ -154,6 +228,7 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
         }
     }
 
+    @Deprecated
     public View view(@IdRes int viewId) {
         View view = views.get(viewId);
         if (view == null) {
@@ -163,6 +238,8 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
         return view;
     }
 
+
+    @Deprecated
     @SuppressWarnings("unchecked")
     public <T extends View> T getView(@IdRes int viewId) {
         View view = views.get(viewId);
@@ -238,4 +315,23 @@ public abstract class BaseAppCompatActivity extends LifecycleKotlinCoroutineActi
 
     }
 
+    @SuppressWarnings("unchecked")
+    @Nullable
+    protected <T> T getExtra(String key, T defaultValue) {
+        Intent intent = getIntent();
+        if (intent == null) {
+            return defaultValue;
+        }
+        Bundle bundle = intent.getExtras();
+        if (bundle == null) {
+            return defaultValue;
+        }
+
+        Object o = bundle.get(key);
+        if (o == null) {
+            return defaultValue;
+        }
+
+        return (T) o;
+    }
 }
