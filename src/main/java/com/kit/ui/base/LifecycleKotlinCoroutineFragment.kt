@@ -12,7 +12,7 @@ import com.kit.utils.DensityUtils
  *
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [BaseV4Fragment.OnFragmentInteractionListener] interface
+ * [BaseFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
  * Use the newInstance() factory method to
  * create an instance of this fragment.

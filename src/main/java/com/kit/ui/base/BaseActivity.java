@@ -8,16 +8,13 @@ import androidx.viewbinding.ViewBinding;
 
 import com.kit.app.resouce.DrawableId;
 import com.kit.utils.ActionBarUtils;
-import com.kit.utils.ResWrapper;
 import com.kit.utils.ResourceUtils;
 import com.kit.utils.log.Zog;
-
-import kotlinx.coroutines.CoroutineScope;
 
 /**
  * @author joeyzhao
  */
-public abstract class BaseActivity<VB extends ViewBinding> extends BaseAppCompatActivity<VB> implements BaseV4Fragment.OnFragmentInteractionListener {
+public abstract class BaseActivity<VB extends ViewBinding> extends BaseAppCompatActivity<VB> implements BaseFragment.OnFragmentInteractionListener {
 
 
     @Override

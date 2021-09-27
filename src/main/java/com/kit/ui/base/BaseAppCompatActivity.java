@@ -1,9 +1,7 @@
 package com.kit.ui.base;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -20,24 +18,19 @@ import android.widget.TextView;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.viewbinding.ViewBinding;
 
 import com.kit.app.ActivityManager;
-import com.kit.extend.R;
 import com.kit.utils.log.Zog;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import kotlin.Suppress;
-
 /**
  * @author joeyzhao
  */
-public abstract class BaseAppCompatActivity<VB extends ViewBinding> extends LifecycleKotlinCoroutineActivity implements BaseV4Fragment.OnFragmentInteractionListener, View.OnClickListener {
+public abstract class BaseAppCompatActivity<VB extends ViewBinding> extends LifecycleKotlinCoroutineActivity implements BaseFragment.OnFragmentInteractionListener, View.OnClickListener {
 
 
     private boolean isShowing;

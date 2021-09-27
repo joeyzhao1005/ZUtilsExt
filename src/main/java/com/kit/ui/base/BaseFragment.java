@@ -23,24 +23,29 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
+import androidx.viewbinding.ViewBinding;
 
 import com.kit.utils.DeviceUtils;
 import com.kit.utils.intent.ArgumentsManager;
 import com.kit.utils.log.Zog;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
  * @author Zhao
  * <p>
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BaseV4Fragment.OnFragmentInteractionListener} interface
+ * {@link BaseFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the newInstance() factory method to
  * create an instance of this fragment.
  */
-public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
+public abstract class BaseFragment<VB extends ViewBinding> extends LifecycleKotlinCoroutineFragment implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
+    protected VB bindView;
 
     public SwitchCompat getSwitchCompat(@IdRes int viewId) {
         return getView(viewId);
@@ -76,6 +81,53 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
 
     public ProgressBar getProgressBar(@IdRes int viewId) {
         return getView(viewId);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Nullable
+    private Class<VB> findParameterizedType(@Nullable Class clazz) {
+        if (clazz == null) {
+            return null;
+        }
+        Type superclass = clazz.getGenericSuperclass();
+        Class<VB> aClass = null;
+        if (superclass != null) {
+
+            if (superclass instanceof ParameterizedType) {
+                Type[] types = ((ParameterizedType) superclass).getActualTypeArguments();
+                try {
+                    aClass = (Class<VB>) types[0];
+                } catch (Exception ignore) {
+                }
+            } else {
+                aClass = findParameterizedType(clazz.getSuperclass());
+            }
+
+        }
+        return aClass;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Nullable
+    protected View viewBinding(LayoutInflater inflater, ViewGroup container,
+                               Bundle savedInstanceState) {
+        Class<VB> aClass = findParameterizedType(getClass());
+        if (aClass != null) {
+            try {
+                Method method = aClass.getDeclaredMethod("inflate", LayoutInflater.class, ViewGroup.class, boolean.class);
+                bindView = (VB) method.invoke(null, getLayoutInflater(), container, false);
+                if (bindView != null) {
+                    layout = bindView.getRoot();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                layout = inflater.inflate(layoutResId(), container, false);
+            }
+        } else {
+            layout = inflater.inflate(layoutResId(), container, false);
+        }
+
+        return layout;
     }
 
 
@@ -256,10 +308,11 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
         return true;
     }
 
-    public int getLogicScreenWidth(){
+    public int getLogicScreenWidth() {
         return getScreenWidth();
     }
-    public int getScreenWidth(){
+
+    public int getScreenWidth() {
         return DeviceUtils.getScreenWidth(getContext());
     }
 
@@ -276,7 +329,7 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
             }
             return layout;
         }
-        layout = inflater.inflate(layoutResId(), container, false);
+        layout = viewBinding(inflater, container, savedInstanceState);
 
         if (!isTouchPenetrable()) {
             layout.setOnTouchListener(this);
@@ -365,7 +418,7 @@ public abstract class BaseV4Fragment extends LifecycleKotlinCoroutineFragment im
     public OnFragmentInteractionListener mListener;
 
 
-    public BaseV4Fragment() {
+    public BaseFragment() {
         // Required empty public constructor
     }
 
