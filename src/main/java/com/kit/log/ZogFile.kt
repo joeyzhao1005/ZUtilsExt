@@ -53,7 +53,7 @@ object ZogFile {
 
     fun getDir(): String? {
         if (StringUtils.isEmptyOrNullStr(dir)) {
-            defaultDir = AppMaster.getInstance().appContext.externalCacheDir.toString() + File.separator + "logs"
+            defaultDir = AppMaster.appContext.externalCacheDir.toString() + File.separator + "logs"
             dir = defaultDir
         }
         return dir

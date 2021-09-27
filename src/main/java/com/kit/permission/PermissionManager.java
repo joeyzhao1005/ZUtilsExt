@@ -44,11 +44,11 @@ public class PermissionManager {
     }
 
     public static boolean check(@NonNull String permission) {
-        return check(AppMaster.getInstance().getAppContext(), permission);
+        return check(AppMaster.INSTANCE.getAppContext(), permission);
     }
 
     public static void check(@NonNull String permission, PermissionCallback callback) {
-        check(AppMaster.getInstance().getAppContext(), permission, callback);
+        check(AppMaster.INSTANCE.getAppContext(), permission, callback);
     }
 
     /**

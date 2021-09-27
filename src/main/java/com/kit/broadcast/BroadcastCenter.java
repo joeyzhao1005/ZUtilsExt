@@ -278,7 +278,7 @@ public class BroadcastCenter {
         }
 
         intent.setAction(action);
-        LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(AppMaster.getInstance().getAppContext());
+        LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(AppMaster.INSTANCE.getAppContext());
         if (null != localBroadcastManager) {
             localBroadcastManager.sendBroadcast(intent);
         }
@@ -295,7 +295,7 @@ public class BroadcastCenter {
         for (String action : actions) {
             iFilter.addAction(action);
         }
-        LocalBroadcastManager.getInstance(AppMaster.getInstance().getAppContext()).registerReceiver(br, iFilter);
+        LocalBroadcastManager.getInstance(AppMaster.INSTANCE.getAppContext()).registerReceiver(br, iFilter);
     }
 
 
@@ -317,7 +317,7 @@ public class BroadcastCenter {
         }
 
         try {
-            LocalBroadcastManager.getInstance(AppMaster.getInstance().getAppContext()).unregisterReceiver(br);
+            LocalBroadcastManager.getInstance(AppMaster.INSTANCE.getAppContext()).unregisterReceiver(br);
         } catch (Exception e) {
 
         }

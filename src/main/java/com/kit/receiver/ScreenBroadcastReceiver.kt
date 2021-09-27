@@ -107,7 +107,7 @@ abstract class ScreenBroadcastReceiver : BroadcastReceiver() {
         @JvmStatic
         fun isKeyguardLocked(): Boolean {
             val manager =
-                AppMaster.getInstance().appContext.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager?
+                AppMaster.appContext.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager?
             return if (ApiLevel.ATLEAST_JELLY_BEAN) {
                 manager?.isKeyguardLocked ?: false
             } else {

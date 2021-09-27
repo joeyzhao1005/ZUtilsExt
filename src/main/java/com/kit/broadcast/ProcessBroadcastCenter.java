@@ -289,7 +289,7 @@ public class ProcessBroadcastCenter {
         if (null != context) {
             context.sendBroadcast(intent);
         } else {
-            AppMaster.getInstance().getAppContext().sendBroadcast(intent);
+            AppMaster.INSTANCE.getAppContext().sendBroadcast(intent);
         }
         isUsing = false;
     }
@@ -307,7 +307,7 @@ public class ProcessBroadcastCenter {
         if (null != context) {
             context.registerReceiver(br, iFilter);
         } else {
-            AppMaster.getInstance().getAppContext().registerReceiver(br, iFilter);
+            AppMaster.INSTANCE.getAppContext().registerReceiver(br, iFilter);
         }
     }
 
@@ -333,7 +333,7 @@ public class ProcessBroadcastCenter {
             if (null != context) {
                 context.unregisterReceiver(br);
             } else {
-                AppMaster.getInstance().getAppContext().unregisterReceiver(br);
+                AppMaster.INSTANCE.getAppContext().unregisterReceiver(br);
             }
         } catch (Exception e) {
 
