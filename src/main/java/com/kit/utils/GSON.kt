@@ -161,7 +161,7 @@ class GSON {
      * @param <T>
      * @return
     </T> */
-    fun <T> getSync(clazz: Class<T>?): T? {
+  suspend  fun <T> getSync(clazz: Class<T>?): T? {
         return if (jsonStr == null || clazz == null) {
             null
         } else gsonItem.fromJson(jsonStr, clazz)
@@ -173,7 +173,7 @@ class GSON {
      * @param <T>
      * @return
     </T> */
-    fun <T> getSync(typeOfT: Type?): T? {
+    suspend fun <T> getSync(typeOfT: Type?): T? {
         return if (jsonStr == null || typeOfT == null) {
             null
         } else gsonItem.fromJson(jsonStr, typeOfT)
@@ -185,12 +185,14 @@ class GSON {
 //            return create(lifecycleProvider, false)
 //        }
 
+        @JvmStatic
         @JvmOverloads
         fun create(lenient: Boolean = false): GSON {
             return create(null, lenient)
         }
 
 
+        @JvmStatic
         @JvmOverloads
         fun create(lifecycleProvider: LifecycleCoroutineScope?, lenient: Boolean = false): GSON {
             var builder = GsonBuilder()

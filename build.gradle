@@ -23,8 +23,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycle_version}"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycle_version}"
 
-// If you want pre-written Activities and Fragments you can subclass as providers
-//    //implementation "com.trello.rxlifecycle3:rxlifecycle-components:${rxlifecycle}"
 
     implementation project(':ZUtils')
 
