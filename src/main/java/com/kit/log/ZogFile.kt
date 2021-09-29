@@ -75,7 +75,7 @@ object ZogFile {
 
     fun add(@Priority priority: String?, logStr: String?) {
         GlobalScope.launch(Dispatchers.IO) {
-            val appConfig = AppConfig.getAppConfig()
+            val appConfig = AppConfig.appConfig
             if (appConfig == null || !appConfig.isShowLog) {
                 return@launch
             }

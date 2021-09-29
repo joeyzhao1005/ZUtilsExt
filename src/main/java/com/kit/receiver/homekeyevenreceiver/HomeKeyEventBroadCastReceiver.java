@@ -22,18 +22,12 @@ public class HomeKeyEventBroadCastReceiver extends BroadcastReceiver {
 
 					System.out.println("Home home home");
 
-					Intent intentLOCKNOW = new Intent();
-					intentLOCKNOW.setAction(AppConfig.LOCKNOW);
-					context.sendBroadcast(intentLOCKNOW);
 
 				} else if (reason.equals(SYSTEM_RECENT_APPS)) {
 					// long home key处理点
 
 					System.out.println("Long long Home home home");
 
-					Intent intentLOCKNOW = new Intent();
-					intentLOCKNOW.setAction(AppConfig.LOCKNOW);
-					context.sendBroadcast(intentLOCKNOW);
 				}
 			}
 		}
