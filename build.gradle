@@ -33,7 +33,7 @@ android {
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion targetSdk
+        targetSdkVersion 31
     }
 
     viewBinding {
