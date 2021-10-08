@@ -2,12 +2,14 @@ package com.kit.ui.base;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -139,12 +141,20 @@ public abstract class BaseAppCompatActivity<VB extends ViewBinding> extends Life
      * 初始化界面
      */
     protected void initWindow() {
+        //解决android 9.0水滴屏/刘海屏有黑边的问题
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            getWindow().setAttributes(lp);
+        }
     }
 
     /**
      * 初始化界面
      */
     protected void initWidget() {
+
+
     }
 
     @Deprecated
