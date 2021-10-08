@@ -20,7 +20,6 @@ public abstract class BaseActivity<VB extends ViewBinding> extends BaseAppCompat
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTheme();
     }
 
     @Override
@@ -28,9 +27,6 @@ public abstract class BaseActivity<VB extends ViewBinding> extends BaseAppCompat
         super.onResume();
     }
 
-    public void initTheme() {
-        ActionBarUtils.setHomeActionBar(this, ResourceUtils.getDrawableId(this, DrawableId.ic_back));
-    }
 
     @Override
     public void startActivity(Intent intent) {
