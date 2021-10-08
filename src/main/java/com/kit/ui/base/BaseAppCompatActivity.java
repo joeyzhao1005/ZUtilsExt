@@ -141,12 +141,6 @@ public abstract class BaseAppCompatActivity<VB extends ViewBinding> extends Life
      * 初始化界面
      */
     protected void initWindow() {
-        //解决android 9.0水滴屏/刘海屏有黑边的问题
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            WindowManager.LayoutParams lp = getWindow().getAttributes();
-            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
-            getWindow().setAttributes(lp);
-        }
     }
 
     /**
