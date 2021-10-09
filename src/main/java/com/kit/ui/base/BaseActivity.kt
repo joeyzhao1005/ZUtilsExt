@@ -1,40 +1,45 @@
-package com.kit.ui.base;
+package com.kit.ui.base
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.AndroidRuntimeException;
-
-import androidx.viewbinding.ViewBinding;
-
-import com.kit.app.resouce.DrawableId;
-import com.kit.utils.ActionBarUtils;
-import com.kit.utils.ResourceUtils;
-import com.kit.utils.log.Zog;
+import androidx.viewbinding.ViewBinding
+import com.kit.ui.base.BaseAppCompatActivity
+import com.kit.ui.base.BaseFragment.OnFragmentInteractionListener
+import android.os.Bundle
+import android.content.Intent
+import android.util.AndroidRuntimeException
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
+import com.kit.utils.log.Zog
 
 /**
  * @author joeyzhao
  */
-public abstract class BaseActivity<VB extends ViewBinding> extends BaseAppCompatActivity<VB> implements BaseFragment.OnFragmentInteractionListener {
+abstract class BaseActivity<VB : ViewBinding?> : BaseAppCompatActivity<VB>(),
+    OnFragmentInteractionListener {
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected val FragmentActivity.decorView: ViewGroup?
+        get() = window?.decorView as ViewGroup?
+
+    protected val FragmentActivity.contentView: ViewGroup?
+        get() = decorView?.findViewById(android.R.id.content)
+
+    protected val FragmentActivity.rootView: View?
+        get() = contentView?.getChildAt(0)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    override fun onResume() {
+        super.onResume()
     }
 
-
-    @Override
-    public void startActivity(Intent intent) {
+    override fun startActivity(intent: Intent) {
         try {
-            super.startActivity(intent);
-        } catch (AndroidRuntimeException e) {
-            Zog.showException(e);
+            super.startActivity(intent)
+        } catch (e: AndroidRuntimeException) {
+            Zog.showException(e)
         }
     }
 }
-
