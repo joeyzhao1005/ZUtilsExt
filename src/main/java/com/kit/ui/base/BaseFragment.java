@@ -405,7 +405,7 @@ public abstract class BaseFragment<VB extends ViewBinding> extends LifecycleKotl
 
 
     public void destroy() {
-        ArgumentsManager.get().destory(this);
+        ArgumentsManager.get().destroy(this);
         views.clear();
 
 //        onPause();
